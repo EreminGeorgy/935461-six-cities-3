@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Георгий Ерёмин](https://up.htmlacademy.ru/react/3/user/935461).
-* Наставник: [Евгений Титков](https://htmlacademy.ru/profile/id1274759).
+* Наставник: `Неизвестно`.
 
 ---
 
