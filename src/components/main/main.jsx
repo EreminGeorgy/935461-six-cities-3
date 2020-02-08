@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 
 const Main = (props) => {
-  const {proposalsNumber, placesList} = props;
+  const {proposalsNumber, placesList, titleClickHandler} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -94,7 +94,7 @@ const Main = (props) => {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">{it}</a>
+                    <a href="#" onClick={titleClickHandler}>{it}</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -112,7 +112,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   proposalsNumber: PropTypes.number.isRequired,
-  placesList: PropTypes.array.isRequired
+  placesList: PropTypes.array.isRequired,
+  titleClickHandler: PropTypes.func
 };
 
 
