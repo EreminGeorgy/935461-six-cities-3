@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<WelcomeScreen /> should render Main 1`] = `
+exports[`<Main /> should render Main 1`] = `
 <main
   className="page__main page__main--index"
 >

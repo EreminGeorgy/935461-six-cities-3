@@ -10,7 +10,7 @@ const placesList = [
   `Nice, cozy, warm big bed apartment`
 ];
 
-it(`<WelcomeScreen /> should render Main`, () => {
+it(`<Main /> should render Main`, () => {
   const tree = renderer
     .create(<Main
       proposalsNumber={proposalsNumber}

@@ -7,7 +7,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should title be pressed`, () => {
+it(`Should each title be pressed`, () => {
   const titleClickHandler = jest.fn();
 
   const main = shallow(
