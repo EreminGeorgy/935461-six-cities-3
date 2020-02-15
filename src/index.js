@@ -1,22 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
+import offers from "./mocks/offers.js";
 
-const Settings = {
-  PROPOSALS_NUMBER: 312,
-  PLACES_LIST: [
-    `Beautiful &amp; luxurious apartment at great location`,
-    `Wood and stone place`,
-    `Canal View Prinsengracht`,
-    `Nice, cozy, warm big bed apartment`
-  ]
+const settings = {
+  proposalsNumber: 312,
 };
-
 
 ReactDOM.render(
     <App
-      proposalsNumber={Settings.PROPOSALS_NUMBER}
-      placesList={Settings.PLACES_LIST}
+      proposalsNumber={settings.proposalsNumber}
+      offers={offers}
     />,
     document.querySelector(`#root`)
 );

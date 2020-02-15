@@ -109,7 +109,6 @@ exports[`<Main /> should render Main 1`] = `
         <b
           className="places__found"
         >
-          312
            places to stay in Amsterdam
         </b>
         <form
@@ -171,6 +170,7 @@ exports[`<Main /> should render Main 1`] = `
         >
           <article
             className="cities__place-card place-card"
+            onMouseOver={[Function]}
           >
             <div
               className="place-card__mark"
@@ -206,7 +206,8 @@ exports[`<Main /> should render Main 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €120
+                    €
+                    0
                   </b>
                   <span
                     className="place-card__price-text"
@@ -243,7 +244,7 @@ exports[`<Main /> should render Main 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "0%",
                       }
                     }
                   />
@@ -259,8 +260,9 @@ exports[`<Main /> should render Main 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
-                  Beautiful &amp; luxurious apartment at great location
+                  _
                 </a>
               </h2>
               <p
@@ -272,14 +274,9 @@ exports[`<Main /> should render Main 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
+            onMouseOver={[Function]}
           >
-            <div
-              className="place-card__mark"
-            >
-              <span>
-                Premium
-              </span>
-            </div>
+            
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
@@ -290,7 +287,7 @@ exports[`<Main /> should render Main 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-01.jpg"
+                  src="img/apartment-02.jpg"
                   width="260"
                 />
               </a>
@@ -307,7 +304,8 @@ exports[`<Main /> should render Main 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €120
+                    €
+                    90
                   </b>
                   <span
                     className="place-card__price-text"
@@ -344,7 +342,7 @@ exports[`<Main /> should render Main 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "100%",
                       }
                     }
                   />
@@ -360,6 +358,7 @@ exports[`<Main /> should render Main 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   Wood and stone place
                 </a>
@@ -367,12 +366,13 @@ exports[`<Main /> should render Main 1`] = `
               <p
                 className="place-card__type"
               >
-                Apartment
+                Private room
               </p>
             </div>
           </article>
           <article
             className="cities__place-card place-card"
+            onMouseOver={[Function]}
           >
             <div
               className="place-card__mark"
@@ -391,7 +391,7 @@ exports[`<Main /> should render Main 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-01.jpg"
+                  src="img/apartment-03.jpg"
                   width="260"
                 />
               </a>
@@ -408,7 +408,8 @@ exports[`<Main /> should render Main 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €120
+                    €
+                    80
                   </b>
                   <span
                     className="place-card__price-text"
@@ -445,7 +446,7 @@ exports[`<Main /> should render Main 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "81%",
                       }
                     }
                   />
@@ -461,6 +462,7 @@ exports[`<Main /> should render Main 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   Canal View Prinsengracht
                 </a>
@@ -468,20 +470,15 @@ exports[`<Main /> should render Main 1`] = `
               <p
                 className="place-card__type"
               >
-                Apartment
+                1
               </p>
             </div>
           </article>
           <article
             className="cities__place-card place-card"
+            onMouseOver={[Function]}
           >
-            <div
-              className="place-card__mark"
-            >
-              <span>
-                Premium
-              </span>
-            </div>
+            
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
@@ -492,7 +489,7 @@ exports[`<Main /> should render Main 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-01.jpg"
+                  src="img/room.jpg"
                   width="260"
                 />
               </a>
@@ -509,7 +506,8 @@ exports[`<Main /> should render Main 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €120
+                    €
+                    50
                   </b>
                   <span
                     className="place-card__price-text"
@@ -546,7 +544,7 @@ exports[`<Main /> should render Main 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "33%",
                       }
                     }
                   />
@@ -562,6 +560,7 @@ exports[`<Main /> should render Main 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   Nice, cozy, warm big bed apartment
                 </a>

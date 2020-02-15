@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import PlacesList from "./places-list.jsx";
 
+const proposalsNumber = 312;
 const offers = [
   {
     imageSrc: `img/apartment-01.jpg`,
@@ -37,11 +38,11 @@ const offers = [
   },
 ];
 
-it(`<Main /> should render Main`, () => {
+it(`<PlacesList /> should render PlacesList`, () => {
   const tree = renderer
-    .create(<Main
+    .create(<PlacesList
+      proposalsNumber={proposalsNumber}
       offers={offers}
-      handleCardHover={() => {}}
       handleTitleClick={() => {}}
     />)
     .toJSON();
