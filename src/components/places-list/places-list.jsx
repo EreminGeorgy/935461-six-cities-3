@@ -3,12 +3,19 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 
+
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       activeCard: null,
     };
+  }
+
+  _onHover(offer) {
+    this.setState({
+      activeCard: offer,
+    });
   }
 
   render() {
@@ -34,14 +41,10 @@ class PlacesList extends PureComponent {
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {offers.map((offer, i) => {
+          {offers.map((offer) => {
             return <PlaceCard
-              key={`${i}`}
-              handleCardHover={() => {
-                this.setState({
-                  activeCard: i,
-                });
-              }}
+              key={offer.id}
+              handleCardHover={() => this._onHover(offer)}
               handleTitleClick={handleTitleClick}
               offer={offer}
             />;
@@ -56,7 +59,7 @@ PlacesList.propTypes = {
   proposalsNumber: PropTypes.number,
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    imageSrc: PropTypes.string.isRequired,
+    previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,

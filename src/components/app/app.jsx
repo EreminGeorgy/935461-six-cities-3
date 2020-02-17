@@ -5,9 +5,6 @@ import Main from "../main/main.jsx";
 const handleTitleClick = () => {};
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const {proposalsNumber, offers} = this.props;
@@ -26,7 +23,7 @@ App.propTypes = {
   handleTitleClick: PropTypes.func,
   proposalsNumber: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    imageSrc: PropTypes.string.isRequired,
+    previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,

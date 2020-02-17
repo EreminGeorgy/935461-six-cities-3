@@ -65,7 +65,7 @@ Main.propTypes = {
   proposalsNumber: PropTypes.number,
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    imageSrc: PropTypes.string.isRequired,
+    previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,

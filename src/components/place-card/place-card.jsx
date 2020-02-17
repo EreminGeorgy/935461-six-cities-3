@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const PlaceCard = (props) => {
   const {handleTitleClick, handleCardHover, offer} = props;
   const {
-    imageSrc,
+    previewSrc,
     title,
     price,
     raiting,
@@ -12,13 +12,14 @@ const PlaceCard = (props) => {
     isPremium,
   } = offer;
 
-  const width = `${raiting}%`;
+  const width = `${Math.floor(raiting) * 20}%`;
+
   return (
-    <article className="cities__place-card place-card" onMouseOver={() => handleCardHover(offer)}>
+    <article className="cities__place-card place-card" onMouseOver={()=>handleCardHover(offer)}>
       {isPremium ? (<div className="place-card__mark"><span>Premium</span></div>) : (``)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={previewSrc} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -53,7 +54,7 @@ PlaceCard.propTypes = {
   handleTitleClick: PropTypes.func,
   handleCardHover: PropTypes.func,
   offer: PropTypes.shape({
-    imageSrc: PropTypes.string.isRequired,
+    previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,

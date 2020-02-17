@@ -2,19 +2,12 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import PlaceCard from './place-card.jsx';
+import offer from "../../utils/test-utils/offer.js";
+
 
 Enzyme.configure({
   adapter: new Adapter()
 });
-
-const offer = {
-  imageSrc: `img/apartment-01.jpg`,
-  title: `title`,
-  price: 0,
-  raiting: 100,
-  type: `Apartment`,
-  isPremium: true,
-};
 
 it(`simulates card hover event to set card title`, () => {
   const onHover = jest.fn();

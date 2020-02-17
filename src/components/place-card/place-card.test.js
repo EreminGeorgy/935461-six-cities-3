@@ -1,19 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlaceCard from "./place-card.jsx";
-
-const offer = {
-  imageSrc: `img/apartment-01.jpg`,
-  title: ` `,
-  price: 0,
-  raiting: 100,
-  type: `Apartment`,
-  isPremium: true,
-};
+import offer from "../../utils/test-utils/offer.js";
 
 it(`<PlaceCard /> should render PlaceCard`, () => {
   const tree = renderer
     .create(<PlaceCard
+      key={offer.id}
       offer={offer}
       handleCardHover={() => {}}
       handleTitleClick={() => {}}

@@ -246,7 +246,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             <span
               style={
                 Object {
-                  "width": "100%",
+                  "width": "2000%",
                 }
               }
             />
@@ -350,7 +350,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             <span
               style={
                 Object {
-                  "width": "81%",
+                  "width": "1620%",
                 }
               }
             />
@@ -448,7 +448,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             <span
               style={
                 Object {
-                  "width": "33%",
+                  "width": "660%",
                 }
               }
             />
