@@ -55,6 +55,7 @@ PlaceCard.propTypes = {
   handleTitleClick: PropTypes.func,
   handleCardHover: PropTypes.func,
   offer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

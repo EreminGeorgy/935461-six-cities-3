@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
 
@@ -32,6 +32,7 @@ export const PlacesList = (props) => {
         {offers.map((offer) => {
           return <PlaceCard
             key={offer.id}
+            activeCard={activeCard}
             handleCardHover={setActiveCard}
             handleTitleClick={handleTitleClick}
             offer={offer}
@@ -40,7 +41,7 @@ export const PlacesList = (props) => {
       </div>
     </section>
   );
-}
+};
 
 PlacesList.propTypes = {
   proposalsNumber: PropTypes.number,
