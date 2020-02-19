@@ -343,7 +343,7 @@ exports[`<App /> should render App 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "2000%",
+                        "width": "160%",
                       }
                     }
                   />
@@ -447,7 +447,7 @@ exports[`<App /> should render App 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "1620%",
+                        "width": "160%",
                       }
                     }
                   />
@@ -545,7 +545,7 @@ exports[`<App /> should render App 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "660%",
+                        "width": "60%",
                       }
                     }
                   />

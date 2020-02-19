@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Main from "../main/main.jsx";
+import {Main} from "../main/main.jsx";
 
 const handleTitleClick = () => {};
 
-class App extends PureComponent {
+export class App extends PureComponent {
 
   render() {
     const {proposalsNumber, offers} = this.props;
@@ -31,6 +31,3 @@ App.propTypes = {
     isPremium: PropTypes.bool,
   })).isRequired,
 };
-
-
-export default App;

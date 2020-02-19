@@ -70,6 +70,4 @@ const getMock = () => ({
   }
 });
 
-const offers = new Array(MOCKS_TOTAL).fill(``).map(getMock);
-
-export default offers;
+export const offers = new Array(MOCKS_TOTAL).fill(``).map(getMock);

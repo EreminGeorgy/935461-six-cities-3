@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PlaceCard = (props) => {
+export const PlaceCard = (props) => {
   const {handleTitleClick, handleCardHover, offer} = props;
   const {
+    id,
     previewSrc,
     title,
     price,
@@ -15,7 +16,7 @@ const PlaceCard = (props) => {
   const width = `${Math.floor(raiting) * 20}%`;
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={()=>handleCardHover(offer)}>
+    <article className="cities__place-card place-card" onMouseOver={()=>handleCardHover(id)}>
       {isPremium ? (<div className="place-card__mark"><span>Premium</span></div>) : (``)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -62,7 +63,5 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool,
   }).isRequired,
 };
-
-export default PlaceCard;
 
 

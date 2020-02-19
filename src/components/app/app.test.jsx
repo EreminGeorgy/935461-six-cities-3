@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-import offers from "../../utils/test-utils/offers.js";
+import {App} from "./app.jsx";
+import {offers} from "../../utils/test-utils/offers.js";
 
 
 const proposalsNumber = 312;

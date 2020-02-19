@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PlacesList from "../places-list/places-list.jsx";
+import {PlacesList} from "../places-list/places-list.jsx";
 
 
-const Main = (props) => {
+export const Main = (props) => {
   const {proposalsNumber, handleTitleClick, offers} = props;
 
   return (
@@ -73,5 +73,3 @@ Main.propTypes = {
     isPremium: PropTypes.bool,
   })).isRequired,
 };
-
-export default Main;
