@@ -1,29 +1,25 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Main from "./main";
+import {Main} from "./main";
+import {offers} from "../../utils/test-utils/offers.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
 it(`Should each title be pressed`, () => {
-  const titleClickHandler = jest.fn();
+  const handleTitleClick = jest.fn();
 
-  const main = shallow(
+  const main = mount(
       <Main
         proposalsNumber={312}
-        placesList={[
-          `Beautiful &amp; luxurious apartment at great location`,
-          `Wood and stone place`,
-          `Canal View Prinsengracht`,
-          `Nice, cozy, warm big bed apartment`
-        ]}
-        titleClickHandler={titleClickHandler}
+        offers={offers}
+        handleTitleClick={handleTitleClick}
       />
   );
 
-  main.find(`.place-card__name a`).forEach((node) => node.props().onClick());
+  main.find(`.place-card__name a`).forEach((node) => node.simulate(`click`));
 
-  expect(titleClickHandler.mock.calls.length).toBe(4);
+  expect(handleTitleClick).toHaveBeenCalledTimes(4);
 });

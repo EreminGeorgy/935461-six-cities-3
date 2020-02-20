@@ -1,12 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main.jsx";
-import {offers} from "../../utils/test-utils/offers.js";
+import {PlaceCard} from "./place-card.jsx";
+import {offer} from "../../utils/test-utils/offer.js";
 
-it(`<Main /> should render Main`, () => {
+it(`<PlaceCard /> should render PlaceCard`, () => {
   const tree = renderer
-    .create(<Main
-      offers={offers}
+    .create(<PlaceCard
+      key={offer.id}
+      offer={offer}
       handleCardHover={() => {}}
       handleTitleClick={() => {}}
     />)

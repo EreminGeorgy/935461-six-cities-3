@@ -1,25 +1,33 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Main from "../main/main.jsx";
+import {Main} from "../main/main.jsx";
 
-const titleClickHandler = () => {};
+const handleTitleClick = () => {};
 
-const App = (props) => {
-  const {proposalsNumber, placesList} = props;
+export class App extends PureComponent {
 
-  return (
-    <Main
-      proposalsNumber={proposalsNumber}
-      placesList={placesList}
-      titleClickHandler={titleClickHandler}
-    />
-  );
-};
+  render() {
+    const {proposalsNumber, offers} = this.props;
+
+    return (
+      <Main
+        proposalsNumber={proposalsNumber}
+        handleTitleClick={handleTitleClick}
+        offers={offers}
+      />
+    );
+  }
+}
 
 App.propTypes = {
+  handleTitleClick: PropTypes.func,
   proposalsNumber: PropTypes.number.isRequired,
-  placesList: PropTypes.array.isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    previewSrc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    raiting: PropTypes.number.isRequired,
+    type: PropTypes.string,
+    isPremium: PropTypes.bool,
+  })).isRequired,
 };
-
-
-export default App;
