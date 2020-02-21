@@ -16,7 +16,7 @@ export const PlaceCard = (props) => {
   const width = `${Math.floor(raiting) * 20}%`;
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={()=>handleCardHover(id)}>
+    <article className="cities__place-card place-card" onMouseOver={() => handleCardHover(id)}>
       {isPremium ? (<div className="place-card__mark"><span>Premium</span></div>) : (``)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -43,7 +43,7 @@ export const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick={handleTitleClick}>{title}</a>
+          <a href="#" onClick={() => handleTitleClick(offer)}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
