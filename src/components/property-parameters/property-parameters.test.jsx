@@ -1,15 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {PlaceCard} from "./place-card.jsx";
+import {PropertyParameters} from "./property-parameters.jsx";
 import {offer} from "../../utils/test-utils/offers.js";
 
-it(`<PlaceCard /> should render PlaceCard`, () => {
+it(`<PropertyParameters /> should render PropertyParameters`, () => {
   const tree = renderer
-    .create(<PlaceCard
-      key={offer.id}
+    .create(<PropertyParameters
       offer={offer}
-      handleCardHover={() => {}}
-      handleTitleClick={() => {}}
     />)
     .toJSON();
 

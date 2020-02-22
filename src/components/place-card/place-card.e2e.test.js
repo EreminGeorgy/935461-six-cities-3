@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {PlaceCard} from './place-card.jsx';
-import {offer} from "../../utils/test-utils/offer.js";
+import {offer} from "../../utils/test-utils/offers.js";
 
 
 Enzyme.configure({

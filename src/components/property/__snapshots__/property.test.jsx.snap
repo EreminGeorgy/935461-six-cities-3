@@ -486,6 +486,7 @@ exports[`<Property /> should render Property 1`] = `
       className="property__map map"
     />
   </section>
+  ;
   <div
     className="container"
   >
@@ -567,7 +568,7 @@ exports[`<Property /> should render Property 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "200%",
+                      "width": "80%",
                     }
                   }
                 />
@@ -661,7 +662,7 @@ exports[`<Property /> should render Property 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "200%",
+                      "width": "80%",
                     }
                   }
                 />
@@ -755,7 +756,7 @@ exports[`<Property /> should render Property 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "200%",
+                      "width": "80%",
                     }
                   }
                 />
