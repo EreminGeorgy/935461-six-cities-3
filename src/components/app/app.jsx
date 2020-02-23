@@ -1,23 +1,45 @@
-import React, {PureComponent} from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Main} from "../main/main.jsx";
+import {Property} from "../property/property.jsx";
 
-const handleTitleClick = () => {};
+export const App = (props) => {
 
-export class App extends PureComponent {
+  const [activeOffer, setActiveOffer] = useState(null);
+  const {proposalsNumber, offers} = props;
 
-  render() {
-    const {proposalsNumber, offers} = this.props;
-
-    return (
-      <Main
-        proposalsNumber={proposalsNumber}
-        handleTitleClick={handleTitleClick}
-        offers={offers}
-      />
-    );
-  }
-}
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {() => {
+            if (activeOffer) {
+              return (
+                <Property
+                  offer={activeOffer}
+                />
+              );
+            }
+            return (
+              <Main
+                proposalsNumber={proposalsNumber}
+                handleTitleClick={setActiveOffer}
+                activeOffer={activeOffer}
+                offers={offers}
+              />
+            );
+          }}
+        </Route>
+        <Route exact path="/dev-proprty">
+          <Property
+            offer={offers[0]}
+          />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
   handleTitleClick: PropTypes.func,

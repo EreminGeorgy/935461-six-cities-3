@@ -95,7 +95,7 @@ exports[`<PlaceCard /> should render PlaceCard 1`] = `
         href="#"
         onClick={[Function]}
       >
-         
+        title
       </a>
     </h2>
     <p

@@ -59,8 +59,8 @@ const getMock = () => ({
   isPremium: randomBoolean(),
   type: TYPES[Math.floor(Math.random() * 4)],
   raiting: randomNumber({min: 0, max: 5}),
-  bedrooms: randomNumber({min: 0, max: 3}),
-  guests: randomNumber({min: 0, max: 9}),
+  bedrooms: randomNumber({min: 1, max: 3}),
+  guests: randomNumber({min: 1, max: 9}),
   price: randomNumber({min: 0, max: 999}),
   householdItems: new Set(HOUSEHOLD_ITEMS),
   host: {
