@@ -20,7 +20,9 @@ export class CityMap extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (!this.mapRef.current) {return}
+    if (!this.mapRef.current) {
+      return;
+    }
     const {offers} = this.props;
 
     const city = [52.38333, 4.9];
@@ -42,7 +44,7 @@ export class CityMap extends React.PureComponent {
       }).addTo(this.map);
 
     for (let i = 0; i < offers.length; i++) {
-      this._handleAddPinOnMap(offers[i].location[i]);
+      this._handleAddPinOnMap(offers[i].location);
     }
   }
 
@@ -57,9 +59,8 @@ export class CityMap extends React.PureComponent {
   }
 }
 
-Map.propTypes = {
-  offer: PropTypes.arrayOf(PropTypes.shape({
+CityMap.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.array.isRequired,
   })).isRequired,
-
 };

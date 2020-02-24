@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 
 export const PlaceCard = (props) => {
@@ -44,7 +43,7 @@ export const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="/dev-proprty"  onClick={() => handleTitleClick(offer)}>{title}</Link>
+          <a href="/dev-proprty" onClick={() => handleTitleClick(offer)}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -49,7 +49,7 @@ const LOCATION = [
   [52.369553943508, 4.85309666406198],
   [52.3909553943508, 4.929309666406198],
   [52.3809553943508, 4.939309666406198],
-]
+];
 
 const randomBoolean = () => Boolean(Math.round(Math.random()));
 const randomNumber = ({min = 0, max = 1}) => {
@@ -74,7 +74,12 @@ const getMock = () => ({
     isPro: randomBoolean(),
     avatarUrl: USER_AVATAR_SRC[Math.floor(Math.random() * 2)],
   },
-  location: LOCATION,
 });
 
-export const offers = new Array(MOCKS_TOTAL).fill(``).map(getMock);
+const offers = new Array(MOCKS_TOTAL).fill(``).map(getMock);
+
+LOCATION.forEach((element, index) => {
+  offers[index].location = element;
+});
+
+export {offers};
