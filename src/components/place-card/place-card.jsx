@@ -43,7 +43,7 @@ export const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/dev-proprty" onClick={() => handleTitleClick(offer)}>{title}</a>
+          <a href="/dev-property" onClick={() => handleTitleClick(offer)}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

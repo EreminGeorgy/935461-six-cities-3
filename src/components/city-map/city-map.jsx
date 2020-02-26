@@ -1,63 +1,61 @@
-import React from "react";
+import React, {useEffect} from "react";
 import leaflet from "leaflet";
 import PropTypes from 'prop-types';
 
-export class CityMap extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.mapRef = React.createRef();
-  }
+export const CityMap = (props) => {
 
-  _handleAddPinOnMap(offerCords) {
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 40]
-    });
+  const mapRef = React.createRef();
 
-    leaflet
-      .marker(offerCords, {icon})
-      .addTo(this.map);
-  }
-
-  componentDidMount() {
-    if (!this.mapRef.current) {
+  useEffect(() => {
+    if (!mapRef.current) {
       return;
     }
-    const {offers} = this.props;
 
-    const city = [52.38333, 4.9];
-    const staticZoom = 12;
+    const {offers} = props;
 
-    this.map = leaflet.map(this.mapRef.current, {
-      center: city,
-      zoom: staticZoom,
+    const MAP_CONFIG = {
+      center: [52.38333, 4.9],
+      zoom: 12,
       zoomControl: false,
       marker: true
-    });
+    };
 
-    this.map.setView(city, staticZoom);
+    const handleAddPinOnMap = (offerCords) => {
+      let icon = leaflet.icon({
+        iconUrl: `img/pin.svg`,
+        iconSize: [30, 40]
+      });
+
+      leaflet
+        .marker(offerCords, {icon})
+        .addTo(map);
+    };
+
+    const map = leaflet.map(mapRef.current, MAP_CONFIG);
+
+    map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         detectRetina: true,
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      }).addTo(this.map);
+      }).addTo(map);
 
     for (let i = 0; i < offers.length; i++) {
-      this._handleAddPinOnMap(offers[i].location);
+      handleAddPinOnMap(offers[i].location);
     }
-  }
 
-  componentWillUnmount() {
-    this._map = null;
-  }
+    // return function cleanup() {
+    //   map = null;
+    // };
+  });
 
-  render() {
-    return <section className="cities__map">
-      <div id="map" ref={this.mapRef} style={{height: `800px`}}></div>
-    </section>;
-  }
-}
+  return (
+    <section className="cities__map">
+      <div id="map" ref={mapRef} style={{height: `800px`}}></div>
+    </section>
+  );
+};
 
 CityMap.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({

@@ -259,7 +259,7 @@ exports[`<Main /> should render Main 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/dev-proprty"
+                  href="/dev-property"
                   onClick={[Function]}
                 >
                   _
@@ -357,7 +357,7 @@ exports[`<Main /> should render Main 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/dev-proprty"
+                  href="/dev-property"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -461,7 +461,7 @@ exports[`<Main /> should render Main 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/dev-proprty"
+                  href="/dev-property"
                   onClick={[Function]}
                 >
                   Canal View Prinsengracht
@@ -559,7 +559,7 @@ exports[`<Main /> should render Main 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/dev-proprty"
+                  href="/dev-property"
                   onClick={[Function]}
                 >
                   Nice, cozy, warm big bed apartment
