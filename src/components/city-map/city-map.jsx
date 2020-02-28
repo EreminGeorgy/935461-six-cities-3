@@ -1,39 +1,40 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import leaflet from "leaflet";
 import PropTypes from 'prop-types';
 
+const MAP_CONFIG = {
+  center: [52.38333, 4.9],
+  zoom: 12,
+  zoomControl: false,
+  marker: true
+};
+
+const ICON_CONFIG = {
+  iconUrl: `img/pin.svg`,
+  iconSize: [30, 40]
+};
+
 export const CityMap = (props) => {
 
-  const mapRef = React.createRef();
+  const mapRef = useRef(null);
+  const {offers} = props;
 
   useEffect(() => {
     if (!mapRef.current) {
       return;
     }
 
-    const {offers} = props;
+    const map = leaflet.map(mapRef.current, MAP_CONFIG);
 
-    const MAP_CONFIG = {
-      center: [52.38333, 4.9],
-      zoom: 12,
-      zoomControl: false,
-      marker: true
-    };
+    map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
 
     const handleAddPinOnMap = (offerCords) => {
-      let icon = leaflet.icon({
-        iconUrl: `img/pin.svg`,
-        iconSize: [30, 40]
-      });
+      let icon = leaflet.icon(ICON_CONFIG);
 
       leaflet
         .marker(offerCords, {icon})
         .addTo(map);
     };
-
-    const map = leaflet.map(mapRef.current, MAP_CONFIG);
-
-    map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -45,10 +46,10 @@ export const CityMap = (props) => {
       handleAddPinOnMap(offers[i].location);
     }
 
-    // return function cleanup() {
+    // return () => {
     //   map = null;
     // };
-  });
+  }, [offers]);
 
   return (
     <section className="cities__map">
