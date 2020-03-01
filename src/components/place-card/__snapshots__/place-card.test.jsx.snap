@@ -92,7 +92,7 @@ exports[`<PlaceCard /> should render PlaceCard 1`] = `
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/dev-property"
         onClick={[Function]}
       >
         title

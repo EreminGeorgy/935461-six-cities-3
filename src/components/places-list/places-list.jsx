@@ -1,13 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
 
 
 export const PlacesList = (props) => {
   const [activeCard, setActiveCard] = useState(null);
+  const memoizedCard = useCallback(setActiveCard, []);
   const {proposalsNumber, handleTitleClick, offers} = props;
-
-  // const memoizedValueforOffers = useMemo(() => offers, []);
 
   return (
     <section className="cities__places places">
@@ -33,7 +32,7 @@ export const PlacesList = (props) => {
           return <PlaceCard
             key={offer.id}
             activeCard={activeCard}
-            handleCardHover={setActiveCard}
+            handleCardHover={memoizedCard}
             handleTitleClick={handleTitleClick}
             offer={offer}
           />;

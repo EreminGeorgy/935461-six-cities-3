@@ -6,34 +6,22 @@ import {Property} from "../property/property.jsx";
 
 export const App = (props) => {
 
-  const [activeOffer, setActiveOffer] = useState(null);
   const {proposalsNumber, offers} = props;
+  const [activeOffer, setActiveOffer] = useState(offers[0]);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {() => {
-            if (activeOffer) {
-              return (
-                <Property
-                  offer={activeOffer}
-                />
-              );
-            }
-            return (
-              <Main
-                proposalsNumber={proposalsNumber}
-                handleTitleClick={setActiveOffer}
-                activeOffer={activeOffer}
-                offers={offers}
-              />
-            );
-          }}
+          <Main
+            proposalsNumber={proposalsNumber}
+            handleTitleClick={setActiveOffer}
+            offers={offers}
+          />
         </Route>
-        <Route exact path="/dev-proprty">
+        <Route exact path="/dev-property">
           <Property
-            offer={offers[0]}
+            offer={activeOffer}
           />
         </Route>
       </Switch>

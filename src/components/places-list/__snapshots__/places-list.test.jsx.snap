@@ -163,7 +163,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="#"
+            href="/dev-property"
             onClick={[Function]}
           >
             _
@@ -261,7 +261,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="#"
+            href="/dev-property"
             onClick={[Function]}
           >
             Wood and stone place
@@ -365,7 +365,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="#"
+            href="/dev-property"
             onClick={[Function]}
           >
             Canal View Prinsengracht
@@ -463,7 +463,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="#"
+            href="/dev-property"
             onClick={[Function]}
           >
             Nice, cozy, warm big bed apartment
