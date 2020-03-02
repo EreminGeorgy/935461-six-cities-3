@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {App} from "./components/app/app.jsx";
-import {offers} from "./mocks/offers.js";
+import App from "./components/app/app.jsx";
 
-const settings = {
-  proposalsNumber: 312,
-};
+import {Provider} from 'react-redux';
+import {reducer} from './reducer/reducer.js';
+import {createStore} from 'redux';
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
-    <App
-      proposalsNumber={settings.proposalsNumber}
-      offers={offers}
-    />,
-    document.querySelector(`#root`)
+  <Provider store={store}>
+    <App />
+  </Provider>, document.querySelector(`#root`)
 );

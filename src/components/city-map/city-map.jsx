@@ -3,7 +3,6 @@ import leaflet from "leaflet";
 import PropTypes from 'prop-types';
 
 const MAP_CONFIG = {
-  center: [52.38333, 4.9],
   zoom: 12,
   zoomControl: false,
   marker: true
@@ -17,16 +16,18 @@ const ICON_CONFIG = {
 export const CityMap = (props) => {
 
   const mapRef = useRef(null);
-  const {offers} = props;
+  const {offers, city} = props;
+
+  const mapConfig = Object.assign({}, MAP_CONFIG, {center: city.location})
 
   useEffect(() => {
     if (!mapRef.current) {
       return;
     }
 
-    window.map = leaflet.map(mapRef.current, MAP_CONFIG);
+    window.map = leaflet.map(mapRef.current, mapConfig);
 
-    window.map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
+    window.map.setView(mapConfig.center, mapConfig.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -50,7 +51,7 @@ export const CityMap = (props) => {
     };
 
     for (let i = 0; i < offers.length; i++) {
-      handleAddPinOnMap(offers[i].location);
+      handleAddPinOnMap(offers[i].location[i]);
     }
   }, [offers]);
 

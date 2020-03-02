@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Main} from "../main/main.jsx";
 import {Property} from "../property/property.jsx";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/reducer.js";
 
 export const App = (props) => {
 
-  const {proposalsNumber, offers} = props;
+  const {offers, city, proposalsNumber} = props;
   const [activeOffer, setActiveOffer] = useState(offers[0]);
 
   return (
@@ -17,6 +19,7 @@ export const App = (props) => {
             proposalsNumber={proposalsNumber}
             handleTitleClick={setActiveOffer}
             offers={offers}
+            city={city}
           />
         </Route>
         <Route exact path="/dev-property">
@@ -29,9 +32,15 @@ export const App = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offersInActiveCity,
+  city: state.activeCity,
+  proposalNumber: state.proposalNumber
+});
+
+export default connect(mapStateToProps)(App);
+
 App.propTypes = {
-  handleTitleClick: PropTypes.func,
-  proposalsNumber: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -40,4 +49,8 @@ App.propTypes = {
     type: PropTypes.string,
     isPremium: PropTypes.bool,
   })).isRequired,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.arrayOf(PropTypes.number).isRequired,
+  })
 };
