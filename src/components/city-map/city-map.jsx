@@ -15,39 +15,37 @@ const ICON_CONFIG = {
 
 export const CityMap = (props) => {
 
-  const mapRef = useRef(null);
   const {offers, city} = props;
+  console.log('offers',offers, city)
 
   const mapConfig = Object.assign({}, MAP_CONFIG, {center: city.location})
+
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (!mapRef.current) {
       return;
     }
 
-    window.map = leaflet.map(mapRef.current, mapConfig);
+    mapRef.current = leaflet.map('map', mapConfig);
 
-    window.map.setView(mapConfig.center, mapConfig.zoom);
+    mapRef.current.setView(mapConfig.center, mapConfig.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       detectRetina: true,
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }).addTo(window.map);
+    }).addTo(mapRef.current);
+  }),[];
 
-    // return () => {
-    //   map = null;
-    // };
-  });
 
   useEffect(() => {
-
     const handleAddPinOnMap = (offerCords) => {
       const icon = leaflet.icon(ICON_CONFIG);
 
       leaflet
         .marker(offerCords, {icon})
-        .addTo(window.map);
+        .addTo(mapRef.current);
     };
 
     for (let i = 0; i < offers.length; i++) {
@@ -57,7 +55,7 @@ export const CityMap = (props) => {
 
   return (
     <section className="cities__map">
-      <div id="map" ref={mapRef} style={{height: `800px`}}></div>
+      <div id="map"  style={{height: `800px`}}></div>
     </section>
   );
 };
