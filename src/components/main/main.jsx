@@ -5,7 +5,7 @@ import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
 
 export const Main = (props) => {
-  const {proposalsNumber, offers, handleTitleClick, city} = props;
+  const {offers, handleTitleClick, city} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -20,9 +20,9 @@ export const Main = (props) => {
       <div className="cities">
         <div className="cities__places-container container">
           <PlacesList
-            proposalsNumber={proposalsNumber}
             offers={offers}
             handleTitleClick={handleTitleClick}
+            city={city}
           />
           <div className="cities__right-section">
             <CityMap
@@ -37,7 +37,10 @@ export const Main = (props) => {
 };
 
 Main.propTypes = {
-  proposalsNumber: PropTypes.number,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,

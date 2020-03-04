@@ -6,12 +6,12 @@ import {PlaceCard} from "../place-card/place-card.jsx";
 export const PlacesList = (props) => {
   const [activeCard, setActiveCard] = useState(null);
   const memoizedCard = useCallback(setActiveCard, []);
-  const {proposalsNumber, handleTitleClick, offers} = props;
+  const {handleTitleClick, offers, city} = props;
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{proposalsNumber} places to stay in Amsterdam</b>
+      <b className="places__found">{offers.length} places to stay in {city.name}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0">
@@ -43,7 +43,10 @@ export const PlacesList = (props) => {
 };
 
 PlacesList.propTypes = {
-  proposalsNumber: PropTypes.number,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,

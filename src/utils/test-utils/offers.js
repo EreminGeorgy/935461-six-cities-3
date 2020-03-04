@@ -3,6 +3,10 @@ const shortid = require(`shortid`);
 const offers = [
   {
     id: shortid.generate(),
+    city: {
+      name: `Paris`,
+      location: [48.859335, 2.350730],
+    },
     imagesSrc: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -33,6 +37,10 @@ const offers = [
   },
   {
     id: shortid.generate(),
+    city: {
+      name: `Paris`,
+      location: [48.859335, 2.350730],
+    },
     imagesSrc: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -63,6 +71,10 @@ const offers = [
   },
   {
     id: shortid.generate(),
+    city: {
+      name: `Paris`,
+      location: [48.859335, 2.350730],
+    },
     imagesSrc: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -93,6 +105,10 @@ const offers = [
   },
   {
     id: shortid.generate(),
+    city: {
+      name: `Paris`,
+      location: [48.859335, 2.350730],
+    },
     imagesSrc: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -157,4 +173,18 @@ const offer = {
   }
 };
 
-export {offer, offers};
+const city = {
+  name: `Paris`,
+  location: [48.859335, 2.350730],
+};
+
+const cities = [{
+  name: `Paris`,
+  location: [48.859335, 2.350730],
+},
+{
+  name: `Paris`,
+  location: [48.859335, 2.350730],
+}];
+
+export {offer, offers, city, cities};

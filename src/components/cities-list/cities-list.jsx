@@ -10,10 +10,12 @@ export const CitiesList = (props) => {
     <ul className="locations__list tabs__list">
       {cities.map((city, i) => {
         return <li key={`city-${i}`} className="locations__item">
-          <a onClick={(city) => handleCityClick(city)} className={`locations__item-link tabs__item ${city.name === activeCity.name ? ` tabs__item--active` : ``}`} href="#">
+          <a
+            onClick={() => handleCityClick(city)}
+            className={`locations__item-link tabs__item ${city.name === activeCity.name ? ` tabs__item--active` : ``}`} href="#">
             <span>{city.name}</span>
           </a>
-        </li>
+        </li>;
       })}
     </ul>
   );
@@ -25,16 +27,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleCityClick: (city) => {
+  handleCityClick(city) {
     dispatch(ActionCreator.newCity(city));
-    dispatch(ActionCreator.getOffers(city.name));
+    dispatch(ActionCreator.getOffers(city));
   },
 });
 
-export default connect(mapStateToProps)(CitiesList);
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
 
 CitiesList.propTypes = {
+  activeCity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
   })).isRequired,
+  handleCityClick: PropTypes.func,
 };

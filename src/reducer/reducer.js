@@ -1,5 +1,4 @@
 import {offers} from '../mocks/offers';
-// import {citiesData} from '../mocks/cities-data';
 import {extend, getCities, getOffersByCity} from '../utils/utils.js';
 
 const citiesList = getCities(offers);
@@ -9,7 +8,6 @@ const initialState = {
   activeCity: citiesList[0],
   offersInActiveCity: initialOffers,
   cities: citiesList,
-  proposalNumber: initialOffers.length,
 };
 
 const ActionCreator = {
@@ -17,9 +15,9 @@ const ActionCreator = {
     type: `NEW_CITY`,
     payload: newCity,
   }),
-  getOffers: (offers) => ({
+  getOffers: (newCity) => ({
     type: `GET_OFFERS`,
-    payload: offers,
+    payload: newCity,
   }),
 };
 

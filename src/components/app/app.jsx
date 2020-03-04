@@ -4,11 +4,10 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Main} from "../main/main.jsx";
 import {Property} from "../property/property.jsx";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/reducer.js";
 
 export const App = (props) => {
 
-  const {offers, city, proposalsNumber} = props;
+  const {offers, city} = props;
   const [activeOffer, setActiveOffer] = useState(offers[0]);
 
   return (
@@ -16,7 +15,6 @@ export const App = (props) => {
       <Switch>
         <Route exact path="/">
           <Main
-            proposalsNumber={proposalsNumber}
             handleTitleClick={setActiveOffer}
             offers={offers}
             city={city}
@@ -35,7 +33,6 @@ export const App = (props) => {
 const mapStateToProps = (state) => ({
   offers: state.offersInActiveCity,
   city: state.activeCity,
-  proposalNumber: state.proposalNumber
 });
 
 export default connect(mapStateToProps)(App);

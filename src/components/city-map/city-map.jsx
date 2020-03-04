@@ -5,7 +5,13 @@ import PropTypes from 'prop-types';
 const MAP_CONFIG = {
   zoom: 12,
   zoomControl: false,
-  marker: true
+  marker: true,
+  layers: [
+    leaflet.tileLayer(`http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+      detectRetina: true,
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+    }),
+  ]
 };
 
 const ICON_CONFIG = {
@@ -16,28 +22,17 @@ const ICON_CONFIG = {
 export const CityMap = (props) => {
 
   const {offers, city} = props;
-  console.log('offers',offers, city)
+  let mapRef = useRef(null);
 
-  const mapConfig = Object.assign({}, MAP_CONFIG, {center: city.location})
-
-  const mapRef = useRef(null);
+  const mapConfig = Object.assign({}, MAP_CONFIG, {center: city.location});
 
   useEffect(() => {
     if (!mapRef.current) {
-      return;
+      mapRef.current = leaflet.map(`mapId`, mapConfig);
     }
-
-    mapRef.current = leaflet.map('map', mapConfig);
-
     mapRef.current.setView(mapConfig.center, mapConfig.zoom);
 
-    leaflet
-    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-      detectRetina: true,
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }).addTo(mapRef.current);
-  }),[];
-
+  }, [mapConfig.center]);
 
   useEffect(() => {
     const handleAddPinOnMap = (offerCords) => {
@@ -49,18 +44,20 @@ export const CityMap = (props) => {
     };
 
     for (let i = 0; i < offers.length; i++) {
-      handleAddPinOnMap(offers[i].location[i]);
+      handleAddPinOnMap(offers[i].location);
     }
   }, [offers]);
 
-  return (
-    <section className="cities__map">
-      <div id="map"  style={{height: `800px`}}></div>
-    </section>
-  );
+  return <section className="cities__map">
+    <div id="mapId" style={{height: `800px`}}></div>
+  </section>;
 };
 
 CityMap.propTypes = {
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   offers: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.array.isRequired,
   })).isRequired,
