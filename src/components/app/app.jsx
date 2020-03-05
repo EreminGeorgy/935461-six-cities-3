@@ -20,7 +20,7 @@ export const App = (props) => {
             city={city}
           />
         </Route>
-        <Route exact path="/dev-property">
+        <Route path="/dev-property">
           <Property
             offer={activeOffer}
           />

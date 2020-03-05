@@ -40,10 +40,10 @@ const shortid = require(`shortid`);
 //   `img/avatar-angelina.jpg`,
 //   `img/avatar-max.jpg`,
 // ];
-// const DESCRIPTION_TEXT = [
-//   `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-//   `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
-// ];
+const DESCRIPTION_TEXT = [
+  `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+  `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
+];
 
 // const randomBoolean = () => Boolean(Math.round(Math.random()));
 // const randomNumber = ({min = 0, max = 1}) => {
@@ -106,6 +106,7 @@ const offers = [
     isPremium: true,
     bedrooms: 3,
     guests: 2,
+    description: DESCRIPTION_TEXT,
     householdItems: new Set([
       `Wi-Fi`,
       `Washing machine`,
@@ -140,6 +141,7 @@ const offers = [
     isPremium: false,
     bedrooms: 3,
     guests: 2,
+    description: DESCRIPTION_TEXT,
     householdItems: new Set([
       `Wi-Fi`,
       `Washing machine`,
@@ -174,6 +176,7 @@ const offers = [
     isPremium: true,
     bedrooms: 3,
     guests: 2,
+    description: DESCRIPTION_TEXT,
     householdItems: new Set([
       `Wi-Fi`,
       `Washing machine`,
@@ -208,6 +211,7 @@ const offers = [
     isPremium: false,
     bedrooms: 3,
     guests: 2,
+    description: DESCRIPTION_TEXT,
     householdItems: new Set([
       `Wi-Fi`,
       `Washing machine`,
@@ -242,6 +246,7 @@ const offers = [
     isPremium: false,
     bedrooms: 3,
     guests: 2,
+    description: DESCRIPTION_TEXT,
     householdItems: new Set([
       `Wi-Fi`,
       `Washing machine`,

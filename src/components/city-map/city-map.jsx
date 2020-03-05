@@ -24,7 +24,7 @@ export const CityMap = (props) => {
   const {offers, city} = props;
   let mapRef = useRef(null);
 
-  const mapConfig = Object.assign({}, MAP_CONFIG, {center: city.location});
+  const mapConfig = {...MAP_CONFIG, center: city.location};
 
   useEffect(() => {
     if (!mapRef.current) {
