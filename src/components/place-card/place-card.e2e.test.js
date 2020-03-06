@@ -36,7 +36,7 @@ it(`simulates click on card title`, () => {
     handleTitleClick={onClick}
   />);
 
-  const title = placeCard.find(`.place-card__name a`);
+  const title = placeCard.find(`.place-card__name Link`);
 
 
   title.simulate(`click`, onClick);

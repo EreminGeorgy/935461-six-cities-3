@@ -18,77 +18,62 @@ exports[`<Main /> should render Main 1`] = `
       <ul
         className="locations__list tabs__list"
       >
-        <li
-          className="locations__item"
+        <ul
+          className="locations__list tabs__list"
         >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
+          <li
+            className="locations__item"
           >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
+            <a
+              className="locations__item-link tabs__item  tabs__item--active"
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Cologne
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
           >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
+            <a
+              className="locations__item-link tabs__item "
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Paris
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
           >
-            <span>
-              Brussels
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item tabs__item--active"
+            <a
+              className="locations__item-link tabs__item "
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Brussels
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
           >
-            <span>
-              Amsterdam
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Hamburg
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Dusseldorf
-            </span>
-          </a>
-        </li>
+            <a
+              className="locations__item-link tabs__item "
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Amsterdam
+              </span>
+            </a>
+          </li>
+        </ul>
       </ul>
     </section>
   </div>
@@ -109,7 +94,9 @@ exports[`<Main /> should render Main 1`] = `
         <b
           className="places__found"
         >
-           places to stay in Amsterdam
+          4
+           places to stay in 
+          Paris
         </b>
         <form
           action="#"
@@ -581,7 +568,7 @@ exports[`<Main /> should render Main 1`] = `
           className="cities__map"
         >
           <div
-            id="map"
+            id="mapId"
             style={
               Object {
                 "height": "800px",

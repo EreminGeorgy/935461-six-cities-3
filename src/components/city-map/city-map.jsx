@@ -3,10 +3,15 @@ import leaflet from "leaflet";
 import PropTypes from 'prop-types';
 
 const MAP_CONFIG = {
-  center: [52.38333, 4.9],
   zoom: 12,
   zoomControl: false,
-  marker: true
+  marker: true,
+  layers: [
+    leaflet.tileLayer(`http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+      detectRetina: true,
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+    }),
+  ]
 };
 
 const ICON_CONFIG = {
@@ -16,37 +21,26 @@ const ICON_CONFIG = {
 
 export const CityMap = (props) => {
 
-  const mapRef = useRef(null);
-  const {offers} = props;
+  const {offers, city} = props;
+  let mapRef = useRef(null);
+
+  const mapConfig = {...MAP_CONFIG, center: city.location};
 
   useEffect(() => {
     if (!mapRef.current) {
-      return;
+      mapRef.current = leaflet.map(`mapId`, mapConfig);
     }
+    mapRef.current.setView(mapConfig.center, mapConfig.zoom);
 
-    window.map = leaflet.map(mapRef.current, MAP_CONFIG);
-
-    window.map.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
-
-    leaflet
-    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-      detectRetina: true,
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }).addTo(window.map);
-
-    // return () => {
-    //   map = null;
-    // };
-  });
+  }, [mapConfig.center]);
 
   useEffect(() => {
-
     const handleAddPinOnMap = (offerCords) => {
       const icon = leaflet.icon(ICON_CONFIG);
 
       leaflet
         .marker(offerCords, {icon})
-        .addTo(window.map);
+        .addTo(mapRef.current);
     };
 
     for (let i = 0; i < offers.length; i++) {
@@ -54,14 +48,16 @@ export const CityMap = (props) => {
     }
   }, [offers]);
 
-  return (
-    <section className="cities__map">
-      <div id="map" ref={mapRef} style={{height: `800px`}}></div>
-    </section>
-  );
+  return <section className="cities__map">
+    <div id="mapId" style={{height: `800px`}}></div>
+  </section>;
 };
 
 CityMap.propTypes = {
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   offers: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.array.isRequired,
   })).isRequired,

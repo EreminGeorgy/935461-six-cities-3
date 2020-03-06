@@ -5,7 +5,7 @@ exports[`<CityMap /> should render CityMap 1`] = `
   className="cities__map"
 >
   <div
-    id="map"
+    id="mapId"
     style={
       Object {
         "height": "800px",

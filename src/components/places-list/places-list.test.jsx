@@ -1,16 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {PlacesList} from "./places-list.jsx";
-import {offers} from "../../utils/test-utils/offers.js";
-
-const proposalsNumber = 312;
-
+import {offers, city} from "../../utils/test-utils/offers.js";
 
 it(`<PlacesList /> should render PlacesList`, () => {
   const tree = renderer
     .create(<PlacesList
-      proposalsNumber={proposalsNumber}
       offers={offers}
+      city={city}
       handleTitleClick={() => {}}
     />)
     .toJSON();

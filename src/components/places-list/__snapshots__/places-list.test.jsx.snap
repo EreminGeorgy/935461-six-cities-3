@@ -12,8 +12,9 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
   <b
     className="places__found"
   >
-    312
-     places to stay in Amsterdam
+    4
+     places to stay in 
+    Paris
   </b>
   <form
     action="#"

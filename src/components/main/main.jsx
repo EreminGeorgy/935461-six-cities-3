@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
 
-
 export const Main = (props) => {
-  const {proposalsNumber, handleTitleClick, offers} = props;
+  const {offers, handleTitleClick, city} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -13,49 +13,21 @@ export const Main = (props) => {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            <CitiesList />
           </ul>
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <PlacesList
-            proposalsNumber={proposalsNumber}
-            handleTitleClick={handleTitleClick}
             offers={offers}
+            handleTitleClick={handleTitleClick}
+            city={city}
           />
           <div className="cities__right-section">
             <CityMap
               offers={offers}
+              city={city}
             />
           </div>
         </div>
@@ -65,7 +37,10 @@ export const Main = (props) => {
 };
 
 Main.propTypes = {
-  proposalsNumber: PropTypes.number,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+  }),
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
