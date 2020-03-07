@@ -6,14 +6,14 @@ import {ActionCreator} from "../../reducer/reducer.js";
 export const CitiesList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
 
-  const memoizedCityClickFunction = useCallback(handleCityClick, []);
+  const memoCityClick = useCallback(handleCityClick, []);
 
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, i) => {
         return <li key={`city-${i}`} className="locations__item">
           <a
-            onClick={() => memoizedCityClickFunction(city)}
+            onClick={() => memoCityClick(city)}
             className={`locations__item-link tabs__item ${city.name === activeCity.name ? ` tabs__item--active` : ``}`} href="#">
             <span>{city.name}</span>
           </a>
