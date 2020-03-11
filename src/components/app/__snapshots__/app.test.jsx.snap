@@ -18,36 +18,9 @@ exports[`<App /> should render App 1`] = `
       <ul
         className="locations__list tabs__list"
       >
-        <ul
-          className="locations__list tabs__list"
-        >
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item  tabs__item--active"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item  tabs__item--active"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-        </ul>
+        <p>
+          No data loaded
+        </p>
       </ul>
     </section>
   </div>

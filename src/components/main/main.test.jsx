@@ -4,7 +4,7 @@ import {Main} from "./main.jsx";
 import {offers} from "../../utils/test-utils/offers.js";
 import {getCities, getOffersByCity} from '../../utils/utils.js';
 import {Provider} from 'react-redux';
-import {reducer} from '../../reducer/reducer.js';
+import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
 
 const citiesList = getCities(offers);

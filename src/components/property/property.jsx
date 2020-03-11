@@ -120,7 +120,7 @@ Property.propTypes = {
   offer: PropTypes.shape({
     imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,
     type: PropTypes.string,
