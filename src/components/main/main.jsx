@@ -3,9 +3,16 @@ import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
+import {connect} from "react-redux";
+import {getSelectedCity, getSelectedOffers} from "../../reducer/data/selectors";
 
 export const Main = (props) => {
-  const {offers, handleTitleClick, city} = props;
+
+  const {offersInActiveCity, handleTitleClick, city} = props;
+
+  if (!offersInActiveCity.length) {
+    return <p>No data loaded</p>;
+  }
 
   return (
     <main className="page__main page__main--index">
@@ -20,13 +27,13 @@ export const Main = (props) => {
       <div className="cities">
         <div className="cities__places-container container">
           <PlacesList
-            offers={offers}
+            offers={offersInActiveCity}
             handleTitleClick={handleTitleClick}
             city={city}
           />
           <div className="cities__right-section">
             <CityMap
-              offers={offers}
+              offers={offersInActiveCity}
               city={city}
             />
           </div>
@@ -36,18 +43,25 @@ export const Main = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offersInActiveCity: getSelectedOffers(state),
+  city: getSelectedCity(state),
+});
+
+export default connect(mapStateToProps)(Main);
+
 Main.propTypes = {
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    location: PropTypes.array.isRequired,
-  }),
-  handleTitleClick: PropTypes.func,
-  offers: PropTypes.arrayOf(PropTypes.shape({
+  offersInActiveCity: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
-  })).isRequired,
+  })),
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }),
+  handleTitleClick: PropTypes.func,
 };

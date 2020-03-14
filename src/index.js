@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app/app.jsx";
+import {App} from "./components/app/app.jsx";
 import thunk from "redux-thunk";
 
 import {Provider} from 'react-redux';
@@ -8,7 +8,7 @@ import reducer from './reducer/reducer.js';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {createAPI} from "./api.js";
 
-import {Operation as DataOperation} from "./reducer/data/data.js";
+import {Operation} from "./reducer/data/data.js";
 
 const api = createAPI(() => {});
 
@@ -20,7 +20,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataOperation.loadOffers());
+store.dispatch(Operation.loadOffers());
 // store.dispatch(UserOperation.checkAuth());
 ReactDOM.render(
     <Provider store={store}>

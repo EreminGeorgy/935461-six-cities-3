@@ -26,7 +26,7 @@ it(`Should each title be pressed`, () => {
   const main = mount(
       <Provider store={store}>
         <Main
-          offers={offersInCity}
+          offersInActiveCity={offersInCity}
           handleTitleClick={handleTitleClick}
           city={activeCity}
         />

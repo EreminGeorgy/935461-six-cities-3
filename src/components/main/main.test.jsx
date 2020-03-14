@@ -20,7 +20,7 @@ const store = createStore(
 it(`<Main /> should render Main`, () => {
   const tree = renderer
     .create(<Provider store={store}><Main
-      offers={offersInCity}
+      offersInActiveCity={offersInCity}
       handleTitleClick={() => {}}
       city={activeCity}
     /></Provider>)

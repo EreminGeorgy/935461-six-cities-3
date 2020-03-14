@@ -11,7 +11,7 @@ import {getCities} from "../../reducer/data/selectors";
 export const CitiesList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
 
-  if (cities.length < 1) {
+  if (!cities.length) {
     return <p>No data loaded</p>;
   }
 

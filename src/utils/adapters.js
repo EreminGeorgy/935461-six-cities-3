@@ -30,7 +30,7 @@ export class ModelOffer {
     return new ModelOffer(data);
   }
 
-  static parseOffers(data) {
-    return data.map(ModelOffer.parseOffer);
+  static parseOffers(response) {
+    return response.data.map(ModelOffer.parseOffer);
   }
 }

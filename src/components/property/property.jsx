@@ -133,5 +133,5 @@ Property.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
       isPro: PropTypes.bool
     })
-  }).isRequired,
+  }),
 };
