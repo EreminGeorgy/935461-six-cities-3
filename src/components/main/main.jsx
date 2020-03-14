@@ -3,15 +3,22 @@ import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
+import {MainEmpty} from "../main-empty/main-empty.jsx";
+
 import {connect} from "react-redux";
 import {getSelectedCity, getSelectedOffers} from "../../reducer/data/selectors";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 
 export const Main = (props) => {
 
   const {offersInActiveCity, handleTitleClick, city} = props;
 
   if (!offersInActiveCity.length) {
-    return <p>No data loaded</p>;
+    return (
+        <MainEmpty
+          city={city}
+        />
+    )
   }
 
   return (
@@ -46,6 +53,7 @@ export const Main = (props) => {
 const mapStateToProps = (state) => ({
   offersInActiveCity: getSelectedOffers(state),
   city: getSelectedCity(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export default connect(mapStateToProps)(Main);
