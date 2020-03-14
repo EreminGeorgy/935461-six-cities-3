@@ -1,38 +1,9 @@
-import {offers} from '../mocks/offers';
-import {extend, getCities, getOffersByCity} from '../utils/utils.js';
+import {combineReducers} from "redux";
+import {reducer as data} from "./data/data.js";
+import {reducer as application} from "./application/application.js";
+import NameSpace from "./name-space.js";
 
-const citiesList = getCities(offers);
-const initialOffers = getOffersByCity(offers, citiesList[0]);
-
-const initialState = {
-  activeCity: citiesList[0],
-  offersInActiveCity: initialOffers,
-  cities: citiesList,
-};
-
-const ActionCreator = {
-  newCity: (newCity) => ({
-    type: `NEW_CITY`,
-    payload: newCity,
-  }),
-  getOffers: (newCity) => ({
-    type: `GET_OFFERS`,
-    payload: newCity,
-  }),
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case `NEW_CITY`:
-      return extend(state, {
-        activeCity: action.payload,
-      });
-    case `GET_OFFERS`:
-      return extend(state, {
-        offersInActiveCity: getOffersByCity(offers, action.payload),
-      });
-  }
-  return state;
-};
-
-export {reducer, ActionCreator};
+export default combineReducers({
+  [NameSpace.DATA]: data,
+  [NameSpace.APPLICATION]: application,
+});

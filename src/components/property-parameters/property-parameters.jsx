@@ -86,11 +86,7 @@ export const PropertyParameters = (props) => {
               </span>
             </div>
             <div className="property__description">
-              {description.map((descriptionText, i) => {
-                return (<p className="property__text" key={`description-${i}`}>
-                  {descriptionText}
-                </p>);
-              })}
+              <p className="property__text" >{description}</p>;
             </div>
           </div>
           <section className="property__reviews reviews">
@@ -177,7 +173,7 @@ PropertyParameters.propTypes = {
   offer: PropTypes.shape({
     imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
     price: PropTypes.number.isRequired,
     raiting: PropTypes.number.isRequired,
     type: PropTypes.string,

@@ -1,8 +1,6 @@
-const shortid = require(`shortid`);
-
 const offers = [
   {
-    id: shortid.generate(),
+    id: 1,
     city: {
       name: `Paris`,
       location: [48.859335, 2.350730],
@@ -36,7 +34,7 @@ const offers = [
     location: [52.3909553943508, 4.85309666406198],
   },
   {
-    id: shortid.generate(),
+    id: 2,
     city: {
       name: `Paris`,
       location: [48.859335, 2.350730],
@@ -70,7 +68,7 @@ const offers = [
     location: [52.369553943508, 4.85309666406198],
   },
   {
-    id: shortid.generate(),
+    id: 3,
     city: {
       name: `Paris`,
       location: [48.859335, 2.350730],
@@ -104,7 +102,7 @@ const offers = [
     location: [52.3909553943508, 4.929309666406198]
   },
   {
-    id: shortid.generate(),
+    id: 4,
     city: {
       name: `Paris`,
       location: [48.859335, 2.350730],
@@ -140,7 +138,7 @@ const offers = [
 ];
 
 const offer = {
-  id: shortid.generate(),
+  id: 5,
   previewSrc: `img/apartment-01.jpg`,
   imagesSrc: [
     `img/apartment-01.jpg`,
@@ -151,10 +149,7 @@ const offer = {
     `img/room.jpg`
   ],
   title: `title`,
-  description: [
-    `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
-  ],
+  description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
   price: 0,
   raiting: 10,
   type: `Apartment`,

@@ -1,10 +1,19 @@
 import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/reducer.js";
+import {ActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator as AppActionCreator} from "../../reducer/application/application.js";
+import {getSelectedCity} from "../../reducer/application/selectors";
+import {getSelectedCity as getSelectedCityFromData} from "../../reducer/data/selectors";
+
+import {getCities} from "../../reducer/data/selectors";
 
 export const CitiesList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
+
+  if (!cities.length) {
+    return <p>No data loaded</p>;
+  }
 
   const memoCityClick = useCallback(handleCityClick, []);
 
@@ -23,15 +32,17 @@ export const CitiesList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity
-});
+const mapStateToProps = (state) => {
+  return {
+    cities: getCities(state),
+    activeCity: getSelectedCity(state) === null ? getSelectedCityFromData(state) : getSelectedCity(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   handleCityClick(city) {
-    dispatch(ActionCreator.newCity(city));
-    dispatch(ActionCreator.getOffers(city));
+    dispatch(AppActionCreator.newCity(city));
+    dispatch(ActionCreator.updateCity(city));
   },
 });
 
