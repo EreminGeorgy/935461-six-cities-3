@@ -1,7 +1,7 @@
 import {reducer} from "./data.js";
-import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from '../../api';
-import {Operation} from './data';
+// import MockAdapter from 'axios-mock-adapter';
+// import {createAPI} from '../../api';
+// import {Operation} from './data';
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     offers: [],
