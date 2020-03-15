@@ -1,3 +1,5 @@
+import {extend} from '../../utils/utils.js';
+
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -23,7 +25,7 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
-      return Object.assign({}, state, {
+      return extend(state, {
         authorizationStatus: action.payload,
       });
   }

@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
+
 
 export const MainEmpty = (props) => {
 
@@ -53,4 +55,11 @@ export const MainEmpty = (props) => {
       </main>
     </div>
   );
+};
+
+MainEmpty.propTypes = {
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.arrayOf(PropTypes.number),
+  }),
 };

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> should render App 1`] = `
+exports[`<MainEmpty /> should render MainEmpty 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -100,7 +100,7 @@ exports[`<App /> should render App 1`] = `
               className="cities__status-description"
             >
               We could not find any property availbale at the moment in 
-              nowhere
+              Paris
             </p>
           </div>
         </section>

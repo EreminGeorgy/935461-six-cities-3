@@ -1,8 +1,26 @@
-import React from "react";
+import React, {useRef} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getSelectedCity} from "../../reducer/data/selectors";
 
 export const SignIn = (props) => {
-  const {} = props;
+  const {city, onSubmit} = props
+  console.log(city);
+
+  const mailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  let handleSubmit = (evt) => {
+
+    evt.preventDefault();
+
+    onSubmit({
+      login: mailRef.current.value,
+      password: passwordRef.current.value,
+    });
+  }
+
+  handleSubmit = handleSubmit.bind(this);
 
   return (
     <div className="page page--gray page--login">
@@ -33,14 +51,14 @@ export const SignIn = (props) => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required=""/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={mailRef}/>
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required=""/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" ref={passwordRef}/>
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
@@ -48,7 +66,9 @@ export const SignIn = (props) => {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+                <span>
+                  {/* {city.name} */}
+                </span>
               </a>
             </div>
           </section>
@@ -58,22 +78,23 @@ export const SignIn = (props) => {
   );
 };
 
-Property.propTypes = {
-  offer: PropTypes.shape({
-    imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string),
-    price: PropTypes.number.isRequired,
-    raiting: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    householdItems: PropTypes.objectOf(PropTypes.string),
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool
-    })
-  }).isRequired,
-};
+const mapStateToProps = (state) => ({
+  city: getSelectedCity(state),
+});
+
+export default connect(mapStateToProps)(SignIn);
+
+// SignIn.propTypes = {
+//   offer: PropTypes.shape({
+//     description: PropTypes.arrayOf(PropTypes.string),
+//     type: PropTypes.string,
+//     isPremium: PropTypes.bool,
+//     guests: PropTypes.number.isRequired,
+//     householdItems: PropTypes.objectOf(PropTypes.string),
+//     host: PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       avatarUrl: PropTypes.string.isRequired,
+//       isPro: PropTypes.bool
+//     })
+//   }).isRequired,
+// };

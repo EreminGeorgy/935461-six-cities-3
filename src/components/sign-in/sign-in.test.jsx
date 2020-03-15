@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {SignIn} from "./main-empty.jsx";
+import {SignIn} from "./sign-in.jsx";
 
 it(`<SignIn /> should render SignIn`, () => {
   const tree = renderer
