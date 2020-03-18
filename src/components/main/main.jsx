@@ -11,7 +11,7 @@ import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/dat
 
 export const Main = (props) => {
 
-  const {offersInActiveCity, handleTitleClick, city, appState} = props;
+  const {offersInActiveCity, handleTitleClick, city} = props;
 
   if (!offersInActiveCity.length) {
     return (
