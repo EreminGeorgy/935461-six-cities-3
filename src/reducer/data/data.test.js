@@ -42,7 +42,7 @@ it(`Reducer should update appState by request`, () => {
   expect(reducer({
     appState: ``,
   },
-  ActionCreator.loadOffersRequest(`REQUEST`)
+  ActionCreator.loadOffersRequest()
   )).toEqual({
     appState: `REQUEST`,
   });
@@ -52,7 +52,7 @@ it(`Reducer should update appState by error`, () => {
   expect(reducer({
     appState: ``,
   },
-  ActionCreator.loadOffersFailure(`ERROR`)
+  ActionCreator.loadOffersFailure()
   )).toEqual({
     appState: `ERROR`,
   });
@@ -62,7 +62,7 @@ it(`Reducer should update appState by error success`, () => {
   expect(reducer({
     appState: ``,
   },
-  ActionCreator.loadOffersSuccess(`SUCCESS`)
+  ActionCreator.loadOffersSuccess()
   )).toEqual({
     appState: `SUCCESS`,
   });
@@ -70,24 +70,21 @@ it(`Reducer should update appState by error success`, () => {
 
 describe(`Action creators`, () => {
   it(`load request returns correct action`, () => {
-    expect(ActionCreator.loadOffersRequest(`REQUEST`)).toEqual({
+    expect(ActionCreator.loadOffersRequest()).toEqual({
       type: `LOAD_OFFERS_REQUEST`,
       payload: `REQUEST`,
     });
   });
   it(`load failure returns correct action`, () => {
-    expect(ActionCreator.loadOffersFailure(`FAILURE`)).toEqual({
+    expect(ActionCreator.loadOffersFailure()).toEqual({
       type: `LOAD_OFFERS_FAILURE`,
-      payload: `FAILURE`,
+      payload: `ERROR`,
     });
   });
   it(`load success returns correct action`, () => {
-    expect(ActionCreator.loadOffersSuccess(`SUCCESS`)).toEqual({
+    expect(ActionCreator.loadOffersSuccess()).toEqual({
       type: `LOAD_OFFERS_SUCCESS`,
       payload: `SUCCESS`,
     });
   });
 });
-
-  // LOAD_OFFERS_FAILURE: `LOAD_OFFERS_FAILURE`,
-  // LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,

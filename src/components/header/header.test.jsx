@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {MainEmpty} from "./main-empty.jsx";
-import {city} from "../../utils/test-utils/offers.js";
+import {Header} from "./header.jsx";
 
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
@@ -11,13 +10,11 @@ const store = createStore(
     reducer
 );
 
-it(`<MainEmpty /> should render MainEmpty`, () => {
+it(`<Header /> should render Header`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MainEmpty
-            city={city}
-          />
+          <Header />
         </Provider>
     )
     .toJSON();

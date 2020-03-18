@@ -15,6 +15,10 @@ export const getSelectedCity = (state) => {
   return state[NAME_SPACE].activeCity;
 };
 
+export const getAppState = (state) => {
+  return state[NAME_SPACE].appState;
+};
+
 export const getSelectedOffers = createSelector(
     [getOffers, getSelectedCity],
     (offers, activeCity) => offers.filter((offer) => offer.city.name === activeCity.name)

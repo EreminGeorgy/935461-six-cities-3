@@ -31,22 +31,22 @@ const ActionCreator = {
       payload: offers,
     };
   },
-  loadOffersRequest: (status) => {
+  loadOffersRequest: () => {
     return {
       type: OffersActions.LOAD_OFFERS_REQUEST,
-      payload: status,
+      payload: LoadOffersStatus.REQUEST,
     };
   },
-  loadOffersFailure: (status) => {
+  loadOffersFailure: () => {
     return {
       type: OffersActions.LOAD_OFFERS_FAILURE,
-      payload: status,
+      payload: LoadOffersStatus.ERROR,
     };
   },
-  loadOffersSuccess: (status) => {
+  loadOffersSuccess: () => {
     return {
       type: OffersActions.LOAD_OFFERS_SUCCESS,
-      payload: status,
+      payload: LoadOffersStatus.SUCCESS,
     };
   },
   updateCity: (newCity) => {
@@ -68,8 +68,8 @@ const Operation = {
     })
     .then(dispatch(ActionCreator.loadOffersSuccess()))
     .catch((err) => {
-      dispatch(ActionCreator.loadOffersFailure(err));
-      console.log(err);
+      dispatch(ActionCreator.loadOffersFailure());
+      throw err;
     });
   },
 };

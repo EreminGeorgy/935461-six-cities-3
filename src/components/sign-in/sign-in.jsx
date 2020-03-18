@@ -1,11 +1,15 @@
 import React, {useRef} from "react";
 import PropTypes from "prop-types";
+import Header from "../header/header.jsx";
 import {connect} from "react-redux";
 import {getSelectedCity} from "../../reducer/data/selectors";
 
 export const SignIn = (props) => {
-  const {city, onSubmit} = props
-  console.log(city);
+  const {city, onSubmit} = props;
+
+  if (!city) {
+    return <p>No data loaded</p>;
+  }
 
   const mailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -18,35 +22,11 @@ export const SignIn = (props) => {
       login: mailRef.current.value,
       password: passwordRef.current.value,
     });
-  }
-
-  handleSubmit = handleSubmit.bind(this);
+  };
 
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -67,7 +47,7 @@ export const SignIn = (props) => {
             <div className="locations__item">
               <a className="locations__item-link" href="#">
                 <span>
-                  {/* {city.name} */}
+                  {city.name}
                 </span>
               </a>
             </div>
@@ -84,17 +64,9 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(SignIn);
 
-// SignIn.propTypes = {
-//   offer: PropTypes.shape({
-//     description: PropTypes.arrayOf(PropTypes.string),
-//     type: PropTypes.string,
-//     isPremium: PropTypes.bool,
-//     guests: PropTypes.number.isRequired,
-//     householdItems: PropTypes.objectOf(PropTypes.string),
-//     host: PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       avatarUrl: PropTypes.string.isRequired,
-//       isPro: PropTypes.bool
-//     })
-//   }).isRequired,
-// };
+SignIn.propTypes = {
+  city: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func,
+};
