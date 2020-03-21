@@ -4,9 +4,7 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import Header from "../header/header.jsx";
 
 
-export const MainEmpty = (props) => {
-
-  const {city} = props;
+export const MainEmpty = ({city}) => {
 
   return (
     <div className="page page--gray page--main">

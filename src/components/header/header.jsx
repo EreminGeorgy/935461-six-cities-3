@@ -4,8 +4,7 @@ import {connect} from "react-redux";
 import {getUser, getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus} from "../../reducer/user/user";
 
-export const Header = (props) => {
-  const {user, authorizationStatus} = props;
+export const Header = ({user, authorizationStatus}) => {
 
   return (
     <header className="header">

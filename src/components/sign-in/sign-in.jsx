@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useCallback} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import {connect} from "react-redux";
@@ -14,7 +14,7 @@ export const SignIn = (props) => {
   const mailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  let handleSubmit = (evt) => {
+  const handleSubmit = (evt) => {
 
     evt.preventDefault();
 
@@ -24,6 +24,8 @@ export const SignIn = (props) => {
     });
   };
 
+  const memoSubmit = useCallback(handleSubmit, []);
+
   return (
     <div className="page page--gray page--login">
       <Header />
@@ -31,7 +33,7 @@ export const SignIn = (props) => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
+            <form className="login__form form" action="#" method="post" onSubmit={memoSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={mailRef}/>
