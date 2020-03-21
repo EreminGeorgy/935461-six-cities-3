@@ -34,3 +34,14 @@ export class ModelOffer {
     return response.data.map(ModelOffer.parseOffer);
   }
 }
+
+export const ModelUser = (response) => {
+  const data = response.data;
+  return {
+    id: data[`id`],
+    email: data[`email`],
+    name: data[`name`],
+    avatarUrl: data[`avatar_url`],
+    isPro: Boolean(data[`is_pro`]),
+  };
+};

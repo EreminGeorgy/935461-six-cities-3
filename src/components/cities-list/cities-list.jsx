@@ -50,8 +50,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
 
 CitiesList.propTypes = {
   activeCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    location: PropTypes.array.isRequired,
+    name: PropTypes.string,
+    location: PropTypes.array,
   }),
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,

@@ -3,54 +3,66 @@ import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
+import {MainEmpty} from "../main-empty/main-empty.jsx";
+import Header from "../header/header.jsx";
+
 import {connect} from "react-redux";
-import {getSelectedCity, getSelectedOffers} from "../../reducer/data/selectors";
+import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/data/selectors";
 
 export const Main = (props) => {
 
   const {offersInActiveCity, handleTitleClick, city} = props;
 
   if (!offersInActiveCity.length) {
-    return <p>No data loaded</p>;
+    return (
+      <MainEmpty
+        city={city}
+      />
+    );
   }
 
   return (
-    <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <CitiesList />
-          </ul>
-        </section>
-      </div>
-      <div className="cities">
-        <div className="cities__places-container container">
-          <PlacesList
-            offers={offersInActiveCity}
-            handleTitleClick={handleTitleClick}
-            city={city}
-          />
-          <div className="cities__right-section">
-            <CityMap
+    <div className="page page--gray page--main">
+      <Header />
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <ul className="locations__list tabs__list">
+              <CitiesList />
+            </ul>
+          </section>
+        </div>
+        <div className="cities">
+          <div className="cities__places-container container">
+            <PlacesList
               offers={offersInActiveCity}
+              handleTitleClick={handleTitleClick}
               city={city}
             />
+            <div className="cities__right-section">
+              <CityMap
+                offers={offersInActiveCity}
+                city={city}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   offersInActiveCity: getSelectedOffers(state),
   city: getSelectedCity(state),
+  appState: getAppState(state),
 });
 
 export default connect(mapStateToProps)(Main);
 
 Main.propTypes = {
+  appState: PropTypes.string,
   offersInActiveCity: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

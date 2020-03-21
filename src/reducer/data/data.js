@@ -1,7 +1,12 @@
 import {getCities, extend} from "../../utils/utils.js";
 import {ModelOffer} from "../../utils/adapters.js";
 import {ApplicationApi} from "../../application-api.js";
-// const ApplicationApi = require('../../application-api.js')
+
+const LoadOffersStatus = {
+  ERROR: `ERROR`,
+  REQUEST: `REQUEST`,
+  SUCCESS: `SUCCESS`,
+};
 
 const initialState = {
   offers: [],
@@ -14,7 +19,9 @@ const initialState = {
 const OffersActions = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   UPDATE_CITY: `UPDATE_CITY`,
-  LOAD_FAILURE: `LOAD_FAILURE`
+  LOAD_OFFERS_REQUEST: `LOAD_OFFERS_REQUEST`,
+  LOAD_OFFERS_FAILURE: `LOAD_OFFERS_FAILURE`,
+  LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
 };
 
 const ActionCreator = {
@@ -24,10 +31,22 @@ const ActionCreator = {
       payload: offers,
     };
   },
-  loadFailure: (error) => {
+  loadOffersRequest: () => {
     return {
-      type: OffersActions.LOAD_FAILURE,
-      payload: error,
+      type: OffersActions.LOAD_OFFERS_REQUEST,
+      payload: LoadOffersStatus.REQUEST,
+    };
+  },
+  loadOffersFailure: () => {
+    return {
+      type: OffersActions.LOAD_OFFERS_FAILURE,
+      payload: LoadOffersStatus.ERROR,
+    };
+  },
+  loadOffersSuccess: () => {
+    return {
+      type: OffersActions.LOAD_OFFERS_SUCCESS,
+      payload: LoadOffersStatus.SUCCESS,
     };
   },
   updateCity: (newCity) => {
@@ -40,15 +59,17 @@ const ActionCreator = {
 /*eslint-disable */
 const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadOffersRequest());
     return ApplicationApi.getOffers()
     .then(ModelOffer.parseOffers)
     .then((response) => {
       dispatch(ActionCreator.updateCity(response[0]));
       dispatch(ActionCreator.loadOffers(response));
     })
+    .then(dispatch(ActionCreator.loadOffersSuccess()))
     .catch((err) => {
-      dispatch(ActionCreator.loadFailure(err));
-      console.log(err);
+      dispatch(ActionCreator.loadOffersFailure());
+      throw err;
     });
   },
 };
@@ -68,7 +89,15 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload,
       });
-    case OffersActions.LOAD_FAILURE:
+    case OffersActions.LOAD_OFFERS_REQUEST:
+      return extend(state, {
+        appState: action.payload,
+      });
+    case OffersActions.LOAD_OFFERS_FAILURE:
+      return extend(state, {
+        appState: action.payload,
+      });
+    case OffersActions.LOAD_OFFERS_SUCCESS:
       return extend(state, {
         appState: action.payload,
       });
