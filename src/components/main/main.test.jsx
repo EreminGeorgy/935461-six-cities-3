@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
 
+import {BrowserRouter} from 'react-router-dom';
+
 const citiesList = getCities(offers);
 const initialOffers = getOffersByCity(offers, citiesList[0]);
 
@@ -19,11 +21,15 @@ const store = createStore(
 
 it(`<Main /> should render Main`, () => {
   const tree = renderer
-    .create(<Provider store={store}><Main
-      offersInActiveCity={offersInCity}
-      handleTitleClick={() => {}}
-      city={activeCity}
-    /></Provider>)
+    .create(<Provider store={store}>
+      <BrowserRouter>
+        <Main
+          offersInActiveCity={offersInCity}
+          handleTitleClick={() => {}}
+          city={activeCity}
+        />
+      </BrowserRouter>
+    </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

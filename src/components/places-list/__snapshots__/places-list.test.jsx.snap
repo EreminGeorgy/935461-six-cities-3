@@ -100,7 +100,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
         </a>
       </div>
       <div
-        className="place-card__info"
+        className=" place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -121,7 +121,8 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             </span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -164,7 +165,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="/dev-property"
+            href="/property/1"
             onClick={[Function]}
           >
             _
@@ -198,7 +199,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
         </a>
       </div>
       <div
-        className="place-card__info"
+        className=" place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -219,7 +220,8 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             </span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -262,7 +264,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="/dev-property"
+            href="/property/2"
             onClick={[Function]}
           >
             Wood and stone place
@@ -302,7 +304,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
         </a>
       </div>
       <div
-        className="place-card__info"
+        className=" place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -323,7 +325,8 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             </span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -366,7 +369,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="/dev-property"
+            href="/property/3"
             onClick={[Function]}
           >
             Canal View Prinsengracht
@@ -400,7 +403,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
         </a>
       </div>
       <div
-        className="place-card__info"
+        className=" place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -421,7 +424,8 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
             </span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -464,7 +468,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
           className="place-card__name"
         >
           <a
-            href="/dev-property"
+            href="/property/4"
             onClick={[Function]}
           >
             Nice, cozy, warm big bed apartment

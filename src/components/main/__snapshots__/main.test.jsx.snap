@@ -39,7 +39,8 @@ exports[`<Main /> should render Main 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/auth"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -184,7 +185,7 @@ exports[`<Main /> should render Main 1`] = `
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className=" place-card__info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -205,7 +206,8 @@ exports[`<Main /> should render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -248,7 +250,7 @@ exports[`<Main /> should render Main 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/dev-property"
+                    href="/property/1"
                     onClick={[Function]}
                   >
                     _
@@ -282,7 +284,7 @@ exports[`<Main /> should render Main 1`] = `
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className=" place-card__info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -303,7 +305,8 @@ exports[`<Main /> should render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -346,7 +349,7 @@ exports[`<Main /> should render Main 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/dev-property"
+                    href="/property/2"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -386,7 +389,7 @@ exports[`<Main /> should render Main 1`] = `
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className=" place-card__info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -407,7 +410,8 @@ exports[`<Main /> should render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -450,7 +454,7 @@ exports[`<Main /> should render Main 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/dev-property"
+                    href="/property/3"
                     onClick={[Function]}
                   >
                     Canal View Prinsengracht
@@ -484,7 +488,7 @@ exports[`<Main /> should render Main 1`] = `
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className=" place-card__info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -505,7 +509,8 @@ exports[`<Main /> should render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -548,7 +553,7 @@ exports[`<Main /> should render Main 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/dev-property"
+                    href="/property/4"
                     onClick={[Function]}
                   >
                     Nice, cozy, warm big bed apartment

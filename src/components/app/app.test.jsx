@@ -13,12 +13,6 @@ const store = createStore(
 
 const activeCity = cities[0];
 const offersInActiveCity = offers;
-// const mockStore = configureStore([]);
-// const store = mockStore({
-//   cities,
-//   activeCity: cities[0],
-//   offersInActiveCity: offers,
-// });
 
 it(`<App /> should render App`, () => {
   const tree = renderer

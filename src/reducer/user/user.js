@@ -79,13 +79,11 @@ const Operation = {
       .then(ModelUser)
       .then((response) => {
         if (response) {
-          console.log(response);
           dispatch(ActionCreator.signIn(response));
           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         }
       })
       .catch(() => {
-        console.log(authData);
         ApplicationApi.signIn({
           email: authData.login,
           password: authData.password,

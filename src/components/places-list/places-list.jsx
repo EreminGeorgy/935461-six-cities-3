@@ -1,12 +1,13 @@
 import React, {useState, useCallback} from "react";
 import PropTypes from "prop-types";
-import {PlaceCard} from "../place-card/place-card.jsx";
+import PlaceCard from "../place-card/place-card.jsx";
 
 
 export const PlacesList = (props) => {
   const [activeCard, setActiveCard] = useState(null);
   const memoizedCard = useCallback(setActiveCard, []);
   const {handleTitleClick, offers, city} = props;
+
 
   return (
     <section className="cities__places places">
@@ -52,7 +53,7 @@ PlacesList.propTypes = {
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    raiting: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
   })).isRequired,

@@ -15,3 +15,7 @@ export const getCities = (offers) => {
 export const getOffersByCity = (array, city) => {
   return array.filter((item) => item.city.name === city.name);
 };
+
+export const getStars = (rating) => {
+  return `${Math.floor(rating) * 20}%`;
+};
