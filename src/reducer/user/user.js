@@ -5,8 +5,8 @@ import {ApplicationApi} from "../../application-api.js";
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
-  ERROR: `ERROR`,
-  REQUEST: `REQUEST`,
+  ERROR: `AUTH_ERROR`,
+  REQUEST: `AUTH_REQUEST`,
 };
 
 const initialState = {
@@ -79,13 +79,11 @@ const Operation = {
       .then(ModelUser)
       .then((response) => {
         if (response) {
-          console.log(response);
           dispatch(ActionCreator.signIn(response));
           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         }
       })
       .catch(() => {
-        console.log(authData);
         ApplicationApi.signIn({
           email: authData.login,
           password: authData.password,

@@ -4,6 +4,9 @@ import {PropertyParameters} from "../property-parameters/property-parameters.jsx
 
 export const Property = (props) => {
   const {offer} = props;
+  // if (offer === null) {
+  //   return `wait`;
+  // }
 
   return (
     <main className="page__main page__main--property">
@@ -122,7 +125,7 @@ Property.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     price: PropTypes.number.isRequired,
-    raiting: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
     bedrooms: PropTypes.number.isRequired,

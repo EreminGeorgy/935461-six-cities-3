@@ -10,7 +10,7 @@ export class ModelOffer {
     this.price = data[`price`];
     this.imagesSrc = data[`images`];
     this.previewSrc = data[`images`][0];
-    this.raiting = parseFloat(data[`rating`]) || ``;
+    this.rating = parseFloat(data[`rating`]) || ``;
     this.type = data[`type`];
     this.isPremium = Boolean(data[`is_premium`]);
     this.isFavorite = Boolean(data[`is_favorite`]);
@@ -32,6 +32,10 @@ export class ModelOffer {
 
   static parseOffers(response) {
     return response.data.map(ModelOffer.parseOffer);
+  }
+
+  static parseSingleOffer(response) {
+    return ModelOffer.parseOffer(response.data);
   }
 }
 

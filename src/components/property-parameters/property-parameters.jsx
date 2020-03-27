@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getStars} from "../../utils/utils.js";
+import {Review} from "../review/review.jsx";
+import {COMMENTS} from "../../utils/test-utils/comments.js";
 
 export const PropertyParameters = (props) => {
   const {offer} = props;
@@ -8,7 +11,7 @@ export const PropertyParameters = (props) => {
     title,
     description,
     price,
-    raiting,
+    rating,
     type,
     isPremium,
     bedrooms,
@@ -17,7 +20,7 @@ export const PropertyParameters = (props) => {
     host,
   } = offer;
 
-  const width = `${Math.round(raiting) * 20}%`;
+  const width = getStars(rating);
   const availableItems = Array.from(householdItems);
 
   return (
@@ -48,7 +51,7 @@ export const PropertyParameters = (props) => {
               <span style={{width}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
-            <span className="property__rating-value rating__value">{raiting}</span>
+            <span className="property__rating-value rating__value">{rating}</span>
           </div>
           <ul className="property__features">
             <li className="property__feature property__feature--entire">
@@ -74,7 +77,7 @@ export const PropertyParameters = (props) => {
                 </li>);
               })}
             </ul>
-          </div>
+          </div>April 2019
           <div className="property__host">
             <h2 className="property__host-title">Meet the host</h2>
             <div className="property__host-user user">
@@ -92,28 +95,12 @@ export const PropertyParameters = (props) => {
           <section className="property__reviews reviews">
             <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
             <ul className="reviews__list">
-              <li className="reviews__item">
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                  </div>
-                  <span className="reviews__user-name">
-                    Max
-                  </span>
-                </div>
-                <div className="reviews__info">
-                  <div className="reviews__rating rating">
-                    <div className="reviews__stars rating__stars">
-                      <span style={{width}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <p className="reviews__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                </div>
-              </li>
+              {COMMENTS.map((commentData) => {
+                return <Review
+                  key={commentData.id}
+                  commentData={commentData}
+                />;
+              })}
             </ul>
             <form className="reviews__form form" action="#" method="post">
               <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -175,7 +162,7 @@ PropertyParameters.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     price: PropTypes.number.isRequired,
-    raiting: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
     bedrooms: PropTypes.number.isRequired,

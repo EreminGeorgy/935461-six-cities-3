@@ -8,6 +8,8 @@ import {Provider} from 'react-redux';
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
 
+import {BrowserRouter} from 'react-router-dom';
+
 const store = createStore(
     reducer
 );
@@ -24,13 +26,15 @@ it(`Should each title be pressed`, () => {
   const handleTitleClick = jest.fn();
 
   const main = mount(
-      <Provider store={store}>
-        <Main
-          offersInActiveCity={offersInCity}
-          handleTitleClick={handleTitleClick}
-          city={activeCity}
-        />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Main
+            offersInActiveCity={offersInCity}
+            handleTitleClick={handleTitleClick}
+            city={activeCity}
+          />
+        </Provider>
+      </BrowserRouter>
   );
 
   main.find(`.place-card__name a`).forEach((node) => node.simulate(`click`));

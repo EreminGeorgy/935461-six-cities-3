@@ -5,6 +5,7 @@ import {Header} from "./header.jsx";
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
 
 const store = createStore(
     reducer
@@ -13,9 +14,11 @@ const store = createStore(
 it(`<Header /> should render Header`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Header />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Header />
+          </Provider>
+        </BrowserRouter>
     )
     .toJSON();
 

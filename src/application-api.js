@@ -3,12 +3,17 @@ import {createAPI} from "./api.js";
 const RouteMap = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
+  FAVORITE: `/favorite`,
 };
 
 const axios = createAPI(() => {});
 
 function getOffers() {
   return axios.get(RouteMap.OFFERS);
+}
+
+function getFavorites() {
+  return axios.get(RouteMap.FAVORITE);
 }
 
 function login() {
@@ -19,4 +24,8 @@ function signIn(loginData) {
   return axios.post(RouteMap.LOGIN, loginData);
 }
 
-export const ApplicationApi = {getOffers, login, signIn};
+function addToFavorite(cardData) {
+  return axios.post(`${RouteMap.FAVORITE}/${cardData.id}/${cardData.status}`, cardData.status);
+}
+
+export const ApplicationApi = {getOffers, getFavorites, login, signIn, addToFavorite};

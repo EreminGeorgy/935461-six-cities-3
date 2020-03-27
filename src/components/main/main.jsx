@@ -67,7 +67,7 @@ Main.propTypes = {
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    raiting: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
   })),
