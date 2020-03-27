@@ -5,8 +5,8 @@ import {ApplicationApi} from "../../application-api.js";
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
-  ERROR: `ERROR`,
-  REQUEST: `REQUEST`,
+  ERROR: `AUTH_ERROR`,
+  REQUEST: `AUTH_REQUEST`,
 };
 
 const initialState = {

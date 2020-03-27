@@ -16,9 +16,9 @@ const FavoriteOperationStatus = {
 };
 
 const FavoriteActions = {
-  SUCCESS: `SUCCESS`,
-  REQUEST: `REQUEST`,
-  FAILURE: `FAILURE`,
+  SUCCESS: `FAVORITES_SUCCESS`,
+  REQUEST: `FAVORITES_REQUEST`,
+  FAILURE: `FAVORITES_FAILURE`,
 };
 
 const initialState = {

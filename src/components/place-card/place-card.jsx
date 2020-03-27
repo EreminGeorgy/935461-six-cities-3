@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {getStars} from "../../utils/utils.js";
@@ -6,14 +6,8 @@ import {Operation} from "../../reducer/favorites/favorites.js";
 import {AppRoute} from "../../utils/const.js";
 import {connect} from "react-redux";
 
-const CARD_SETTINGS_DEFAULT = {
-  placeCardType: `cities__place-card`,
-  imageWrapperType: `cities__image-wrapper`,
-  cardInfoType: ``,
-};
-
 export const PlaceCard = (props) => {
-  const {handleTitleClick, handleCardHover, offer, cardSettings = CARD_SETTINGS_DEFAULT, changeCard} = props;
+  const {handleTitleClick, handleCardHover, offer, cardSettings, changeCard} = props;
   const {
     id,
     previewSrc,
@@ -36,19 +30,18 @@ export const PlaceCard = (props) => {
     });
   };
 
-  // const memoClick = useCallback(handleFavoriteClick, []); // Этоработает странно, если подключить
-
+  const memoClick = useCallback(handleFavoriteClick, [isFavorite]);
   const width = getStars(rating);
 
   return (
-    <article className={`${placeCardType ? placeCardType : ``} place-card`} onMouseOver={() => handleCardHover(id)}>
+    <article className={`${placeCardType} place-card`} onMouseOver={() => handleCardHover(id)}>
       {isPremium ? (<div className="place-card__mark"><span>Premium</span></div>) : (``)}
-      <div className={`${imageWrapperType ? imageWrapperType : ``} place-card__image-wrapper`}>
+      <div className={`${imageWrapperType} place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={previewSrc} width="260" height="200" alt="Place image"/>
         </a>
       </div>
-      <div className={`${cardInfoType ? cardInfoType : ``} place-card__info`}>
+      <div className={`${cardInfoType} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -56,7 +49,7 @@ export const PlaceCard = (props) => {
           </div>
           <button
             className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`}
-            onClick={handleFavoriteClick}
+            onClick={memoClick}
             type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -77,6 +70,14 @@ export const PlaceCard = (props) => {
       </div>
     </article>
   );
+};
+
+PlaceCard.defaultProps = {
+  cardSettings: {
+    placeCardType: `cities__place-card`,
+    imageWrapperType: `cities__image-wrapper`,
+    cardInfoType: ``,
+  }
 };
 
 const mapDispatchToProps = (dispatch) => ({

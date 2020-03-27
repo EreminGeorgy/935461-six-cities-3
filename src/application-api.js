@@ -12,6 +12,10 @@ function getOffers() {
   return axios.get(RouteMap.OFFERS);
 }
 
+function getFavorites() {
+  return axios.get(RouteMap.FAVORITE);
+}
+
 function login() {
   return axios.get(RouteMap.LOGIN);
 }
@@ -24,4 +28,4 @@ function addToFavorite(cardData) {
   return axios.post(`${RouteMap.FAVORITE}/${cardData.id}/${cardData.status}`, cardData.status);
 }
 
-export const ApplicationApi = {getOffers, login, signIn, addToFavorite};
+export const ApplicationApi = {getOffers, getFavorites, login, signIn, addToFavorite};
