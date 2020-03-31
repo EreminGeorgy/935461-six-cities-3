@@ -4,6 +4,7 @@ const RouteMap = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
 };
 
 const axios = createAPI(() => {});
@@ -28,4 +29,20 @@ function addToFavorite(cardData) {
   return axios.post(`${RouteMap.FAVORITE}/${cardData.id}/${cardData.status}`, cardData.status);
 }
 
-export const ApplicationApi = {getOffers, getFavorites, login, signIn, addToFavorite};
+function getClosestOffers(id) {
+  return axios.get(`${RouteMap.OFFERS}/${id}/nearby`);
+}
+
+function sendComment(commentData) {
+  return axios.post(`${RouteMap.COMMENTS}/${commentData.id}`, {comment: commentData.comment, rating: commentData.rating});
+}
+
+export const ApplicationApi = {
+  getOffers,
+  getClosestOffers,
+  getFavorites,
+  login,
+  signIn,
+  addToFavorite,
+  sendComment,
+};

@@ -578,7 +578,7 @@ exports[`<Main /> should render Main 1`] = `
               id="mapId"
               style={
                 Object {
-                  "height": "800px",
+                  "height": "580px",
                 }
               }
             />

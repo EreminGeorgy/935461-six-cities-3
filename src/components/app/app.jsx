@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Main from "../main/main.jsx";
-import {Property} from "../property/property.jsx";
+import Property from "../property/property.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import {connect} from "react-redux";

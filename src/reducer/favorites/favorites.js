@@ -5,7 +5,6 @@ import {ModelOffer} from "../../utils/adapters.js";
 import {ActionCreator as OffersCreator} from "../data/data.js";
 import {getOffers} from "../data/selectors";
 import {ApplicationApi} from "../../application-api.js";
-// import {ApplicationApi} from "../../application-api.js";
 
 const UNAUTHORIZED = 401;
 
@@ -39,19 +38,19 @@ const applyEditedOffer = (offer, dispatch, getState) => {
 };
 
 const ActionCreator = {
-  Success: () => {
+  success: () => {
     return {
       type: FavoriteActions.SUCCESS,
       payload: FavoriteOperationStatus.SUCCESS,
     };
   },
-  Request: () => {
+  request: () => {
     return {
       type: FavoriteActions.REQUEST,
       payload: FavoriteOperationStatus.REQUEST,
     };
   },
-  Failure: () => {
+  failure: () => {
     return {
       type: FavoriteActions.FAILURE,
       payload: FavoriteOperationStatus.ERROR,
@@ -81,15 +80,15 @@ const reducer = (state = initialState, action) => {
 /*eslint-disable */
 const Operation = {
   changeStatus: (cardData) => (dispatch, getState, api) => {
-    dispatch(ActionCreator.Request());
+    dispatch(ActionCreator.request());
     return ApplicationApi.addToFavorite(cardData)
       .then(ModelOffer.parseSingleOffer)
       .then((response) => {
-        dispatch(ActionCreator.Success());
+        dispatch(ActionCreator.success());
         applyEditedOffer(response, dispatch, getState);
       })
       .catch((err) => {
-        dispatch(ActionCreator.Failure());
+        dispatch(ActionCreator.failure());
         const {response} = err;
 
         if (response && response.status === UNAUTHORIZED) {
@@ -106,7 +105,6 @@ const Operation = {
 export {
   ActionCreator,
   FavoriteActions,
-  AuthorizationStatus,
   Operation,
   reducer,
 };

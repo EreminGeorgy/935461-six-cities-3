@@ -1,13 +1,13 @@
-import React, {useState, useCallback} from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 
 
 export const PlacesList = (props) => {
-  const [activeCard, setActiveCard] = useState(null);
-  const memoizedCard = useCallback(setActiveCard, []);
-  const {handleTitleClick, offers, city} = props;
 
+  const {handleTitleClick, offers, city, setActiveCard} = props;
+
+  const memoizedCard = useCallback(setActiveCard, []);
 
   return (
     <section className="cities__places places">
@@ -32,7 +32,6 @@ export const PlacesList = (props) => {
         {offers.map((offer) => {
           return <PlaceCard
             key={offer.id}
-            activeCard={activeCard}
             handleCardHover={memoizedCard}
             handleTitleClick={handleTitleClick}
             offer={offer}
@@ -44,6 +43,7 @@ export const PlacesList = (props) => {
 };
 
 PlacesList.propTypes = {
+  setActiveCard: PropTypes.func,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     location: PropTypes.array.isRequired,

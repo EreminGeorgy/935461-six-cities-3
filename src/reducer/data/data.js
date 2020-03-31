@@ -14,9 +14,11 @@ const initialState = {
   activeCity: null,
   offersInActiveCity: [],
   appState: ``,
+  offersClosest: [],
 };
 
 const OffersActions = {
+  LOAD_OFFERS_CLOSEST: `LOAD_OFFERS_CLOSEST`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   UPDATE_CITY: `UPDATE_CITY`,
   LOAD_OFFERS_REQUEST: `LOAD_OFFERS_REQUEST`,
@@ -28,6 +30,12 @@ const ActionCreator = {
   loadOffers: (offers) => {
     return {
       type: OffersActions.LOAD_OFFERS,
+      payload: offers,
+    };
+  },
+  loadOffersClosest: (offers) => {
+    return {
+      type: OffersActions.LOAD_OFFERS_CLOSEST,
       payload: offers,
     };
   },
@@ -72,6 +80,21 @@ const Operation = {
       throw err;
     });
   },
+
+  loadOffersClosest: (id) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadOffersRequest());
+    return ApplicationApi.getClosestOffers(id)
+    .then(ModelOffer.parseOffers)
+    .then((response) => {
+      dispatch(ActionCreator.loadOffersClosest(response));
+      console.log(response);
+    })
+    .then(dispatch(ActionCreator.loadOffersSuccess()))
+    .catch((err) => {
+      dispatch(ActionCreator.loadOffersFailure());
+      throw err;
+    });
+  },
 };
 /*eslint-disable */
 
@@ -84,6 +107,10 @@ const reducer = (state = initialState, action) => {
         offers: action.payload,
         cities,
         activeCity,
+      });
+    case OffersActions.LOAD_OFFERS_CLOSEST:
+      return extend(state, {
+        offersClosest: action.payload,
       });
     case OffersActions.UPDATE_CITY:
       return extend(state, {

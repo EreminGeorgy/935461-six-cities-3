@@ -8,7 +8,7 @@ exports[`<CityMap /> should render CityMap 1`] = `
     id="mapId"
     style={
       Object {
-        "height": "800px",
+        "height": "580px",
       }
     }
   />

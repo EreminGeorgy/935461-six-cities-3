@@ -7,7 +7,7 @@ import {AppRoute} from "../../utils/const.js";
 import {Link} from 'react-router-dom';
 
 
-export const Header = ({user, authorizationStatus}) => {
+export const Header = ({user, authorizationStatus, path}) => {
 
   return (
     <header className="header">
@@ -15,7 +15,7 @@ export const Header = ({user, authorizationStatus}) => {
         <div className="header__wrapper">
           <div className="header__left">
             <a className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              <img className="header__logo" src={`${path ? path : ``}img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
             </a>
           </div>
           <nav className="header__nav">
@@ -45,6 +45,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
+  path: PropTypes.string,
   authorizationStatus: PropTypes.string,
   user: PropTypes.shape({
     id: PropTypes.number,
