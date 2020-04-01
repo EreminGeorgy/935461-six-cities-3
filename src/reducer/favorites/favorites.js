@@ -18,10 +18,12 @@ const FavoriteActions = {
   SUCCESS: `FAVORITES_SUCCESS`,
   REQUEST: `FAVORITES_REQUEST`,
   FAILURE: `FAVORITES_FAILURE`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
 };
 
 const initialState = {
   favoriteOperationStatus: ``,
+  favorites: [],
 };
 
 const replaceOffer = (editedOffer, offers) => {
@@ -29,7 +31,6 @@ const replaceOffer = (editedOffer, offers) => {
   const newOffers = [...offers];
   newOffers[index] = editedOffer;
   return newOffers;
-  // return [].concat(offers.slice(0, index), editedOffer, offers.slice(index + 1, offers.length));
 };
 
 const applyEditedOffer = (offer, dispatch, getState) => {
@@ -38,6 +39,12 @@ const applyEditedOffer = (offer, dispatch, getState) => {
 };
 
 const ActionCreator = {
+  loadFavorites: (offers) => {
+    return {
+      type: FavoriteActions.LOAD_FAVORITES,
+      payload: offers,
+    };
+  },
   success: () => {
     return {
       type: FavoriteActions.SUCCESS,
@@ -60,6 +67,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FavoriteActions.LOAD_FAVORITES:
+      return extend(state, {
+        favorites: action.payload,
+      });
     case FavoriteActions.SUCCESS:
       return extend(state, {
         favoriteOperationStatus: action.payload,
@@ -97,6 +108,20 @@ const Operation = {
         }
         throw err;
       });
+  },
+
+  loadFavorites: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.request());
+    return ApplicationApi.getFavorites()
+    .then(ModelOffer.parseOffers)
+    .then((response) => {
+      dispatch(ActionCreator.loadFavorites(response));
+    })
+    .then(dispatch(ActionCreator.success()))
+    .catch((err) => {
+      dispatch(ActionCreator.failure());
+      throw err;
+    });
   },
   /*eslint-disable */
 };

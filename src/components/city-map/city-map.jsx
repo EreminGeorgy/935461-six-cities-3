@@ -21,7 +21,7 @@ const NEIGHBOURS = 3;
 
 export const CityMap = (props) => {
 
-  const {offers, city, activeCard, path} = props;
+  const {offers, city, activeCard, path, currentOfferCoords} = props;
   let mapRef = useRef(null);
 
   const mapConfig = {
@@ -46,7 +46,6 @@ export const CityMap = (props) => {
   useEffect(() => {
     const handleAddPinOnMap = (offerCords, id) => {
       const icon = leaflet.icon({...ICON_CONFIG, iconUrl: `${path ? path : ``}${activeCard === id ? PIN_TYPE.ACTIVE : PIN_TYPE.DISABLED}`});
-
       leaflet
         .marker(offerCords, {icon})
         .addTo(mapRef.current);
@@ -54,6 +53,14 @@ export const CityMap = (props) => {
 
     for (let i = 0; i < offers.length; i++) {
       handleAddPinOnMap(offers[i].location, offers[i].id);
+    }
+
+    if (currentOfferCoords) {
+      const iconCurrent = leaflet.icon({...ICON_CONFIG, iconUrl: `${path}${PIN_TYPE.ACTIVE}`});
+
+      leaflet
+        .marker(currentOfferCoords, {iconCurrent})
+        .addTo(mapRef.current);
     }
   }, [offers, activeCard]);
 
@@ -73,4 +80,5 @@ CityMap.propTypes = {
     id: PropTypes.number,
     location: PropTypes.array.isRequired,
   })).isRequired,
+  currentOfferCoords: PropTypes.array,
 };

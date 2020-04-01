@@ -87,7 +87,6 @@ const Operation = {
     .then(ModelOffer.parseOffers)
     .then((response) => {
       dispatch(ActionCreator.loadOffersClosest(response));
-      console.log(response);
     })
     .then(dispatch(ActionCreator.loadOffersSuccess()))
     .catch((err) => {

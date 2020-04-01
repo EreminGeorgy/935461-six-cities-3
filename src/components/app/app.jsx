@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/user/user.js";
@@ -27,6 +28,7 @@ export const App = (props) => {
         <Route path={`${AppRoute.PROPERTY}/:id`} render={() => {
           return <Property
             offer={activeOffer}
+            handleTitleClick={setActiveOffer}
           />;
         }} />
         <Route exact path={AppRoute.AUTH}>
@@ -41,9 +43,9 @@ export const App = (props) => {
           exact
           path={AppRoute.FAVORITES}
           render={() => {
-            return (
-              <p>favorites will be here</p>
-            );
+            return (<Favorites
+              handleTitleClick={setActiveOffer}
+            />);
           }}
         />
       </Switch>

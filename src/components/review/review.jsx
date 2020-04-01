@@ -4,7 +4,7 @@ import {getStars} from "../../utils/utils.js";
 
 export const Review = ({commentData}) => {
   const {user, rating, comment, dateString} = commentData;
-  const date = new Date(dateString);
+  const date = dateString;
   const reviewDate = `${date.toLocaleString(`en-US`, {month: `long`, year: `numeric`})}`;
   const dateTime = date.toISOString().slice(0, 10);
   const width = getStars(rating);
@@ -37,7 +37,7 @@ export const Review = ({commentData}) => {
 Review.propTypes = {
   commentData: PropTypes.shape({
     comment: PropTypes.string,
-    dateString: PropTypes.string,
+    dateString: PropTypes.date,
     id: PropTypes.number,
     rating: PropTypes.number,
     user: PropTypes.shape({

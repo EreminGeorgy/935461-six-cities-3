@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
 import {BrowserRouter} from 'react-router-dom';
+import {COMMENTS} from "../../utils/test-utils/comments.js";
 
 const closestOffers = offers;
 
@@ -21,6 +22,7 @@ it(`<Property /> should render Property`, () => {
           offer={offer}
           closestOffers={closestOffers}
           loadClosestOffers={() => {}}
+          comments={COMMENTS}
         />
       </Provider>
     </BrowserRouter>)

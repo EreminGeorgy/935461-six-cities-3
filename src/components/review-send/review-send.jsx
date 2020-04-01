@@ -10,7 +10,7 @@ import {CommentsOperationStatus} from "../../reducer/comments/comments";
 const MAX_LENGHT = `300`;
 const MIN_LENGTH = `50`;
 
-export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, id}) => {
+export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, id, updateComments}) => {
 
   const commentRef = useRef(null);
   const submitRef = useRef(null);
@@ -32,8 +32,8 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
   };
 
   const changeRatingHandler = (evt) => {
-    hotelRating = parseInt(evt.target.value, 10);
     onInput();
+    hotelRating = parseInt(evt.target.value, 10);
   };
 
   const onSubmit = (evt) => {
@@ -47,6 +47,8 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
       id,
     });
     evt.target.reset();
+    blockSubmit();
+    updateComments(id);
   };
 
   useEffect(() => {
@@ -63,7 +65,7 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
     }
   }, [sendReviewStatus]);
 
-  const memoSubmit = useCallback(onSubmit, []);
+  const memoSubmit = useCallback(onSubmit, [submitRef.current]);
 
   return (authorizationStatus === AuthorizationStatus.AUTH) ? (
     <form className="reviews__form form" action="#" method="post" onSubmit={memoSubmit}>
@@ -104,14 +106,14 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" onChange={onInput} id="review" name="review" maxLength={MAX_LENGHT} minLength={MIN_LENGTH} placeholder="Tell how was your stay, what you like and what can be improved" ref={commentRef}></textarea>
+      <textarea className="reviews__textarea form__textarea" onChange={onInput} id="review" name="review" maxLength={MAX_LENGHT} minLength={MIN_LENGTH} required placeholder="Tell how was your stay, what you like and what can be improved" ref={commentRef}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" ref={submitRef} disabled={sendReviewStatus === CommentsOperationStatus.SUCCESS ? false : true}>Submit</button>
       </div>
-      <p>{(sendReviewStatus === CommentsOperationStatus.ERROR) ? `что-то пошло не так` : ``}</p>
+      <p style={{color: `red`}}>{(sendReviewStatus === CommentsOperationStatus.ERROR) ? `Oooops, something went wrong!` : ``}</p>
     </form>) : ``;
 };
 
@@ -129,6 +131,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewSend);
 
 ReviewSend.propTypes = {
+  updateComments: PropTypes.func,
   sendReview: PropTypes.func,
   authorizationStatus: PropTypes.string,
   sendReviewStatus: PropTypes.string,

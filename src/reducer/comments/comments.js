@@ -1,5 +1,6 @@
 import {extend} from '../../utils/utils.js';
 import {ApplicationApi} from "../../application-api.js";
+import {ModelComment} from "../../utils/adapters.js";
 
 const CommentsOperationStatus = {
   SUCCESS: `SUCCESS`,
@@ -11,13 +12,21 @@ const CommentsActions = {
   SUCCESS: `COMMENTS_SUCCESS`,
   REQUEST: `COMMENTS_REQUEST`,
   FAILURE: `COMMENTS_FAILURE`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const initialState = {
   commentsOperationStatus: CommentsOperationStatus.SUCCESS,
+  comments: [],
 };
 
 const ActionCreator = {
+  loadComments: (comments) => {
+    return {
+      type: CommentsActions.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
   success: () => {
     return {
       type: CommentsActions.SUCCESS,
@@ -52,6 +61,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         commentsOperationStatus: action.payload,
       });
+    case CommentsActions.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
+      });
   }
 
   return state;
@@ -60,6 +73,7 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   sendComment: (commentData) => (dispatch, getState, api) => {
     dispatch(ActionCreator.request());
+    console.log(commentData);
     return ApplicationApi.sendComment(commentData)
       .then((response) => {
         dispatch(ActionCreator.success());
@@ -74,6 +88,20 @@ const Operation = {
         // }
         throw err;
       });
+  },
+
+  loadComments: (id) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.request());
+    return ApplicationApi.getComments(id)
+    .then(ModelComment.parseComments)
+    .then((response) => {
+      dispatch(ActionCreator.loadComments(response));
+    })
+    .then(dispatch(ActionCreator.success()))
+    .catch((err) => {
+      dispatch(ActionCreator.failure());
+      throw err;
+    });
   },
   /*eslint-disable */
 };

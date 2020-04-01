@@ -5,6 +5,7 @@ import {offer, offers} from "../../utils/test-utils/offers.js";
 import {Provider} from 'react-redux';
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';
+import {COMMENTS} from "../../utils/test-utils/comments.js";
 
 const store = createStore(
     reducer
@@ -19,6 +20,7 @@ it(`<PropertyParameters /> should render PropertyParameters`, () => {
         offer={offer}
         closestOffers={closestOffers}
         activeCard={1}
+        comments={COMMENTS}
       />
     </Provider>)
     .toJSON();

@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import {getStars} from "../../utils/utils.js";
 import {Review} from "../review/review.jsx";
 import ReviewSend from "../review-send/review-send.jsx";
-import {COMMENTS} from "../../utils/test-utils/comments.js";
 import {CityMap} from "../city-map/city-map.jsx";
 
 export const PropertyParameters = (props) => {
-  const {offer, closestOffers, path, activeCard} = props;
+  const {offer, closestOffers, path, activeCard, comments, updateComments} = props;
   const {
     imagesSrc,
     title,
@@ -25,6 +24,10 @@ export const PropertyParameters = (props) => {
 
   const width = getStars(rating);
   const availableItems = Array.from(householdItems);
+
+  const activeComments = comments.sort((a, b) => {
+    return parseInt((b.dateString - a.dateString), 10);
+  }).slice(-10);
 
   return (
     <section className="property">
@@ -96,9 +99,9 @@ export const PropertyParameters = (props) => {
             </div>
           </div>
           <section className="property__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
             <ul className="reviews__list">
-              {COMMENTS.map((commentData) => {
+              {activeComments.map((commentData) => {
                 return <Review
                   key={commentData.id}
                   commentData={commentData}
@@ -107,6 +110,7 @@ export const PropertyParameters = (props) => {
             </ul>
             <ReviewSend
               id={offer.id}
+              updateComments={updateComments}
             />
           </section>
         </div>
@@ -116,12 +120,26 @@ export const PropertyParameters = (props) => {
         city={city}
         path={path}
         activeCard={activeCard}
+        currentOfferCoords={offer.location}
       />
     </section>
   );
 };
 
 PropertyParameters.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    comment: PropTypes.string,
+    dateString: PropTypes.date,
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      isPro: PropTypes.bool,
+      id: PropTypes.number.isRequired,
+    }),
+  })),
+  updateComments: PropTypes.func,
   closestOffers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -149,6 +167,7 @@ PropertyParameters.propTypes = {
       name: PropTypes.string.isRequired,
       avatarUrl: PropTypes.string.isRequired,
       isPro: PropTypes.bool
-    })
+    }),
+    location: PropTypes.array,
   }).isRequired,
 };

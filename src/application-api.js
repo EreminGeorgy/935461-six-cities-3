@@ -37,6 +37,10 @@ function sendComment(commentData) {
   return axios.post(`${RouteMap.COMMENTS}/${commentData.id}`, {comment: commentData.comment, rating: commentData.rating});
 }
 
+function getComments(id) {
+  return axios.get(`${RouteMap.COMMENTS}/${id}`);
+}
+
 export const ApplicationApi = {
   getOffers,
   getClosestOffers,
@@ -45,4 +49,5 @@ export const ApplicationApi = {
   signIn,
   addToFavorite,
   sendComment,
+  getComments,
 };
