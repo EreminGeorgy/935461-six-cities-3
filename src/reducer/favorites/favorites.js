@@ -5,7 +5,6 @@ import {ModelOffer} from "../../utils/adapters.js";
 import {ActionCreator as OffersCreator} from "../data/data.js";
 import {getOffers} from "../data/selectors";
 import {ApplicationApi} from "../../application-api.js";
-// import {ApplicationApi} from "../../application-api.js";
 
 const UNAUTHORIZED = 401;
 
@@ -19,10 +18,12 @@ const FavoriteActions = {
   SUCCESS: `FAVORITES_SUCCESS`,
   REQUEST: `FAVORITES_REQUEST`,
   FAILURE: `FAVORITES_FAILURE`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
 };
 
 const initialState = {
   favoriteOperationStatus: ``,
+  favorites: [],
 };
 
 const replaceOffer = (editedOffer, offers) => {
@@ -30,7 +31,6 @@ const replaceOffer = (editedOffer, offers) => {
   const newOffers = [...offers];
   newOffers[index] = editedOffer;
   return newOffers;
-  // return [].concat(offers.slice(0, index), editedOffer, offers.slice(index + 1, offers.length));
 };
 
 const applyEditedOffer = (offer, dispatch, getState) => {
@@ -39,19 +39,25 @@ const applyEditedOffer = (offer, dispatch, getState) => {
 };
 
 const ActionCreator = {
-  Success: () => {
+  loadFavorites: (offers) => {
+    return {
+      type: FavoriteActions.LOAD_FAVORITES,
+      payload: offers,
+    };
+  },
+  success: () => {
     return {
       type: FavoriteActions.SUCCESS,
       payload: FavoriteOperationStatus.SUCCESS,
     };
   },
-  Request: () => {
+  request: () => {
     return {
       type: FavoriteActions.REQUEST,
       payload: FavoriteOperationStatus.REQUEST,
     };
   },
-  Failure: () => {
+  failure: () => {
     return {
       type: FavoriteActions.FAILURE,
       payload: FavoriteOperationStatus.ERROR,
@@ -61,6 +67,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FavoriteActions.LOAD_FAVORITES:
+      return extend(state, {
+        favorites: action.payload,
+      });
     case FavoriteActions.SUCCESS:
       return extend(state, {
         favoriteOperationStatus: action.payload,
@@ -81,15 +91,15 @@ const reducer = (state = initialState, action) => {
 /*eslint-disable */
 const Operation = {
   changeStatus: (cardData) => (dispatch, getState, api) => {
-    dispatch(ActionCreator.Request());
+    dispatch(ActionCreator.request());
     return ApplicationApi.addToFavorite(cardData)
       .then(ModelOffer.parseSingleOffer)
       .then((response) => {
-        dispatch(ActionCreator.Success());
+        dispatch(ActionCreator.success());
         applyEditedOffer(response, dispatch, getState);
       })
       .catch((err) => {
-        dispatch(ActionCreator.Failure());
+        dispatch(ActionCreator.failure());
         const {response} = err;
 
         if (response && response.status === UNAUTHORIZED) {
@@ -99,6 +109,20 @@ const Operation = {
         throw err;
       });
   },
+
+  loadFavorites: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.request());
+    return ApplicationApi.getFavorites()
+    .then(ModelOffer.parseOffers)
+    .then((response) => {
+      dispatch(ActionCreator.loadFavorites(response));
+    })
+    .then(dispatch(ActionCreator.success()))
+    .catch((err) => {
+      dispatch(ActionCreator.failure());
+      throw err;
+    });
+  },
   /*eslint-disable */
 };
 
@@ -106,7 +130,6 @@ const Operation = {
 export {
   ActionCreator,
   FavoriteActions,
-  AuthorizationStatus,
   Operation,
   reducer,
 };

@@ -6,25 +6,34 @@ const MAP_CONFIG = {
   zoom: 12,
   zoomControl: false,
   marker: true,
-  layers: [
-    leaflet.tileLayer(`http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-      detectRetina: true,
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }),
-  ]
 };
 
 const ICON_CONFIG = {
-  iconUrl: `img/pin.svg`,
-  iconSize: [30, 40]
+  iconSize: [30, 40],
 };
+
+const PIN_TYPE = {
+  ACTIVE: `img/pin-active.svg`,
+  DISABLED: `img/pin.svg`,
+};
+
+const NEIGHBOURS = 3;
 
 export const CityMap = (props) => {
 
-  const {offers, city} = props;
+  const {offers, city, activeCard, path, currentOfferCoords} = props;
   let mapRef = useRef(null);
 
-  const mapConfig = {...MAP_CONFIG, center: city.location};
+  const mapConfig = {
+    ...MAP_CONFIG,
+    center: city.location,
+    layers: [
+      leaflet.tileLayer(`http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        detectRetina: true,
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      }),
+    ]
+  };
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -32,33 +41,44 @@ export const CityMap = (props) => {
     }
     mapRef.current.setView(mapConfig.center, mapConfig.zoom);
 
-  }, [mapConfig.center]);
+  }, []);
 
   useEffect(() => {
-    const handleAddPinOnMap = (offerCords) => {
-      const icon = leaflet.icon(ICON_CONFIG);
-
+    const handleAddPinOnMap = (offerCords, id) => {
+      const icon = leaflet.icon({...ICON_CONFIG, iconUrl: `${path ? path : ``}${activeCard === id ? PIN_TYPE.ACTIVE : PIN_TYPE.DISABLED}`});
       leaflet
         .marker(offerCords, {icon})
         .addTo(mapRef.current);
     };
 
     for (let i = 0; i < offers.length; i++) {
-      handleAddPinOnMap(offers[i].location);
+      handleAddPinOnMap(offers[i].location, offers[i].id);
     }
-  }, [offers]);
 
-  return <section className="cities__map">
-    <div id="mapId" style={{height: `800px`}}></div>
+    if (currentOfferCoords) {
+      const iconCurrent = leaflet.icon({...ICON_CONFIG, iconUrl: `${path}${PIN_TYPE.ACTIVE}`});
+
+      leaflet
+        .marker(currentOfferCoords, {iconCurrent})
+        .addTo(mapRef.current);
+    }
+  }, [offers, activeCard]);
+
+  return <section className={offers.length > NEIGHBOURS ? `cities__map` : `property__map`}>
+    <div id="mapId" style={{height: `580px`}}></div>
   </section>;
 };
 
 CityMap.propTypes = {
+  activeCard: PropTypes.number,
+  path: PropTypes.string,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     location: PropTypes.array.isRequired,
   }),
   offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     location: PropTypes.array.isRequired,
   })).isRequired,
+  currentOfferCoords: PropTypes.array,
 };

@@ -1,126 +1,97 @@
-import React from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import {PropertyParameters} from "../property-parameters/property-parameters.jsx";
+import {connect} from "react-redux";
+import {Operation as OffersOperation} from "../../reducer/data/data.js";
+import {Operation as CommentsOperation} from "../../reducer/comments/comments.js";
+import {getNearOffers} from "../../reducer/data/selectors";
+import {getComments} from "../../reducer/comments/selectors";
+import PlaceCard from "../place-card/place-card.jsx";
+
+import Header from "../header/header.jsx";
+
+const ROOT = `../../`;
+
+const propertyCardSettings = {
+  placeCardType: `near-places__card`,
+  imageWrapperType: `near-places__image-wrapper`,
+  cardInfoType: ``,
+};
 
 export const Property = (props) => {
-  const {offer} = props;
-  // if (offer === null) {
-  //   return `wait`;
-  // }
+  const {offer, closestOffers, loadClosestOffers, comments, loadComments, handleTitleClick} = props;
+
+  const [activeCard, setActiveCard] = useState(null);
+  const memoizedCard = useCallback(setActiveCard, []);
+
+  useEffect(() => {
+    loadClosestOffers(offer.id);
+    loadComments(offer.id);
+  }, [offer]);
 
   return (
-    <main className="page__main page__main--property">
-      <PropertyParameters
-        offer={offer}
-      />;
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;80</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">In bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Wood and stone place</a>
-                </h2>
-                <p className="place-card__type">Private room</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;132</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Canal View Prinsengracht</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href="#">
-                  <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;180</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                  <button className="place-card__bookmark-button button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{width: `80%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href="#">Nice, cozy, warm big bed apartment</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
-          </div>
-        </section>
-      </div>
-    </main>
+    <div className="page">
+      <Header
+        path={ROOT}
+      />
+      <main className="page__main page__main--property">
+        <PropertyParameters
+          offer={offer}
+          closestOffers={closestOffers}
+          path={ROOT}
+          comments={comments}
+          updateComments={loadComments}
+        />;
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              {closestOffers.map((closestOffer) => {
+                return <PlaceCard
+                  key={closestOffer.id}
+                  activeCard={activeCard}
+                  handleCardHover={memoizedCard}
+                  handleTitleClick={handleTitleClick}
+                  offer={closestOffer}
+                  cardSettings={propertyCardSettings}
+                />;
+              })}
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
   );
 };
 
+const mapStateToProps = (state) => ({
+  closestOffers: getNearOffers(state),
+  comments: getComments(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadClosestOffers(id) {
+    dispatch(OffersOperation.loadOffersClosest(id));
+  },
+  loadComments(id) {
+    dispatch(CommentsOperation.loadComments(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Property);
+
 Property.propTypes = {
+  closestOffers: PropTypes.arrayOf(PropTypes.shape({
+    previewSrc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string,
+    isPremium: PropTypes.bool,
+  })),
+  loadClosestOffers: PropTypes.func,
   offer: PropTypes.shape({
+    id: PropTypes.number,
     imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -137,4 +108,7 @@ Property.propTypes = {
       isPro: PropTypes.bool
     })
   }),
+  comments: PropTypes.array,
+  loadComments: PropTypes.func,
+  handleTitleClick: PropTypes.func,
 };

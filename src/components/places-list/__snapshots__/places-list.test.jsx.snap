@@ -28,6 +28,7 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
     </span>
     <span
       className="places__sorting-type"
+      onClick={[Function]}
       tabIndex="0"
     >
       Popular
@@ -42,28 +43,36 @@ exports[`<PlacesList /> should render PlacesList 1`] = `
       </svg>
     </span>
     <ul
-      className="places__options places__options--custom places__options--opened"
+      className="places__options places__options--custom places__options--closed"
     >
       <li
-        className="places__option places__option--active"
+        className="places__option"
+        id="default"
+        onClick={[Function]}
         tabIndex="0"
       >
         Popular
       </li>
       <li
         className="places__option"
+        id="lowToHigh"
+        onClick={[Function]}
         tabIndex="0"
       >
         Price: low to high
       </li>
       <li
         className="places__option"
+        id="highToLow"
+        onClick={[Function]}
         tabIndex="0"
       >
         Price: high to low
       </li>
       <li
         className="places__option"
+        id="topRated"
+        onClick={[Function]}
         tabIndex="0"
       >
         Top rated first

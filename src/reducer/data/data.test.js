@@ -10,6 +10,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     activeCity: null,
     offersInActiveCity: [],
     appState: ``,
+    offersClosest: [],
   });
 });
 

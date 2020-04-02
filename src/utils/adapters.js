@@ -49,3 +49,27 @@ export const ModelUser = (response) => {
     isPro: Boolean(data[`is_pro`]),
   };
 };
+
+export class ModelComment {
+  constructor(data) {
+    this.id = data[`id`];
+    this.comment = data[`comment`] || ``;
+    this.dateString = new Date(data[`date`]);
+    this.rating = parseFloat(data[`rating`]) || ``;
+
+    this.user = {
+      name: data[`user`][`name`],
+      isPro: Boolean(data[`user`][`is_pro`]),
+      avatarUrl: data[`user`][`avatar_url`],
+      id: data[`user`][`id`],
+    };
+  }
+
+  static parseComment(data) {
+    return new ModelComment(data);
+  }
+
+  static parseComments(response) {
+    return response.data.map(ModelComment.parseComment);
+  }
+}

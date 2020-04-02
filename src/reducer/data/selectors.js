@@ -7,6 +7,10 @@ export const getOffers = (state) => {
   return state[NAME_SPACE].offers;
 };
 
+export const getNearOffers = (state) => {
+  return state[NAME_SPACE].offersClosest;
+};
+
 export const getCities = (state) => {
   return state[NAME_SPACE].cities;
 };

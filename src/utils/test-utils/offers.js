@@ -139,6 +139,10 @@ const offers = [
 
 const offer = {
   id: 5,
+  city: {
+    name: `Paris`,
+    location: [48.859335, 2.350730],
+  },
   previewSrc: `img/apartment-01.jpg`,
   imagesSrc: [
     `img/apartment-01.jpg`,

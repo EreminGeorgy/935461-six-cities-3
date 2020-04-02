@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
@@ -12,6 +12,8 @@ import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/dat
 export const Main = (props) => {
 
   const {offersInActiveCity, handleTitleClick, city} = props;
+
+  const [activeCard, setActiveCard] = useState(null);
 
   if (!offersInActiveCity.length) {
     return (
@@ -29,7 +31,7 @@ export const Main = (props) => {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <CitiesList />
+              <CitiesList/>
             </ul>
           </section>
         </div>
@@ -39,11 +41,13 @@ export const Main = (props) => {
               offers={offersInActiveCity}
               handleTitleClick={handleTitleClick}
               city={city}
+              setActiveCard={setActiveCard}
             />
             <div className="cities__right-section">
               <CityMap
                 offers={offersInActiveCity}
                 city={city}
+                activeCard={activeCard}
               />
             </div>
           </div>
