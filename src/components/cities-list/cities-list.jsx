@@ -11,7 +11,7 @@ import {getCities} from "../../reducer/data/selectors";
 export const CitiesList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
 
-  if (!cities.length) {
+  if (!cities.length || !activeCity) {
     return <p>No data loaded</p>;
   }
 
@@ -51,7 +51,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
 CitiesList.propTypes = {
   activeCity: PropTypes.shape({
     name: PropTypes.string,
-    location: PropTypes.array,
+    locations: PropTypes.array,
   }),
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,

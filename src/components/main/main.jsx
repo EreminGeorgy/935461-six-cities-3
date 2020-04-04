@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {PlacesList} from "../places-list/places-list.jsx";
@@ -10,6 +10,8 @@ import {connect} from "react-redux";
 import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/data/selectors";
 
 export const Main = (props) => {
+
+  useEffect(() => {}, []);
 
   const {offersInActiveCity, handleTitleClick, city} = props;
 
@@ -77,7 +79,7 @@ Main.propTypes = {
   })),
   city: PropTypes.shape({
     name: PropTypes.string,
-    location: PropTypes.arrayOf(PropTypes.number).isRequired,
+    locations: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   handleTitleClick: PropTypes.func,
 };

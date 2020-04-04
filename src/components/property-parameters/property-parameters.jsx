@@ -7,14 +7,8 @@ import {CityMap} from "../city-map/city-map.jsx";
 
 export const PropertyParameters = (props) => {
   const {offer, closestOffers, path, activeCard, comments, updateComments} = props;
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     if (document.querySelector('img[src="https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png"]')) {
-  //     console.log('work')
-  //     document.querySelector('img[src="https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png"]').setAttribute('src','../../img/pin-active.svg')
-  //     }
-  //   },200)
-  // })
+
+
   const {
     imagesSrc,
     title,
@@ -128,7 +122,7 @@ export const PropertyParameters = (props) => {
         city={city}
         path={path}
         activeCard={activeCard}
-        currentOfferCoords={offer.location}
+        currentOfferCoords={offer.locations}
       />
     </section>
   );
@@ -176,6 +170,6 @@ PropertyParameters.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
       isPro: PropTypes.bool
     }),
-    location: PropTypes.array,
+    locations: PropTypes.array,
   }).isRequired,
 };

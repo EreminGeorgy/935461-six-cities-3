@@ -37,6 +37,6 @@ export const MainEmpty = ({city}) => {
 MainEmpty.propTypes = {
   city: PropTypes.shape({
     name: PropTypes.string,
-    location: PropTypes.arrayOf(PropTypes.number),
+    locations: PropTypes.arrayOf(PropTypes.number),
   }),
 };

@@ -1,12 +1,15 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
-import {PlaceCard} from "../place-card/place-card.jsx";
+import PlaceCard from "../place-card/place-card.jsx";
 import {getCities} from "../../utils/utils.js";
 import {connect} from "react-redux";
 import {getFavorites} from "../../reducer/favorites/selectors";
 import {Operation} from "../../reducer/favorites/favorites.js";
 import {FavoritesEmpty} from "../favorites-empty/favorites-empty.jsx";
+import {AppRoute} from "../../utils/const.js";
+import {Link} from 'react-router-dom';
+
 
 const CARD_SETTINGS = {
   placeCardType: `favorites__card`,
@@ -65,9 +68,9 @@ export const Favorites = (props) => {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link to={AppRoute.ROOT} className="footer__logo-link" href="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+        </Link>
       </footer>
     </div>
   );

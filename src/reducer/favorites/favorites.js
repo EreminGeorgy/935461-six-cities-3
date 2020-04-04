@@ -4,6 +4,7 @@ import {AppRoute} from "../../utils/const.js";
 import {ModelOffer} from "../../utils/adapters.js";
 import {ActionCreator as OffersCreator} from "../data/data.js";
 import {getOffers, getNearOffers} from "../data/selectors";
+import {getFavorites} from "../favorites/selectors";
 import {ApplicationApi} from "../../application-api.js";
 
 const UNAUTHORIZED = 401;
@@ -41,6 +42,11 @@ const applyEditedOffer = (offer, dispatch, getState) => {
 const applyEditedOfferToClosest = (offer, dispatch, getState) => {
   const offers = getNearOffers(getState());
   dispatch(OffersCreator.loadOffersClosest(replaceOffer(offer, offers)));
+};
+
+const applyEditedOfferToFavorites = (offer, dispatch, getState) => {
+  const offers = getFavorites(getState());
+  dispatch(ActionCreator.loadFavorites(replaceOffer(offer, offers)));
 };
 
 const ActionCreator = {
@@ -104,6 +110,7 @@ const Operation = {
           dispatch(ActionCreator.success());
           applyEditedOffer(response, dispatch, getState);
           applyEditedOfferToClosest(response, dispatch, getState);
+          applyEditedOfferToFavorites(response, dispatch, getState);
         }
       })
       .catch((err) => {

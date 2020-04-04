@@ -73,7 +73,6 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   sendComment: (commentData) => (dispatch, getState, api) => {
     dispatch(ActionCreator.request());
-    console.log(commentData);
     return ApplicationApi.sendComment(commentData)
       .then(ModelComment.parseComments)
       .then((response) => {
@@ -83,11 +82,6 @@ const Operation = {
       .catch((err) => {
         dispatch(ActionCreator.failure());
         const {response} = err;
-
-        // if (response && response.status === UNAUTHORIZED) {
-        //   dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
-        //   window.location.pathname = AppRoute.AUTH;
-        // }
         throw err;
       });
   },

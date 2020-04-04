@@ -3,7 +3,7 @@ const offers = [
     id: 1,
     city: {
       name: `Paris`,
-      location: [48.859335, 2.350730],
+      locations: [48.859335, 2.350730],
     },
     imagesSrc: [
       `img/apartment-01.jpg`,
@@ -31,13 +31,13 @@ const offers = [
       isPro: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    location: [52.3909553943508, 4.85309666406198],
+    locations: [52.3909553943508, 4.85309666406198],
   },
   {
     id: 2,
     city: {
       name: `Paris`,
-      location: [48.859335, 2.350730],
+      locations: [48.859335, 2.350730],
     },
     imagesSrc: [
       `img/apartment-01.jpg`,
@@ -65,13 +65,13 @@ const offers = [
       isPro: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    location: [52.369553943508, 4.85309666406198],
+    locations: [52.369553943508, 4.85309666406198],
   },
   {
     id: 3,
     city: {
       name: `Paris`,
-      location: [48.859335, 2.350730],
+      locations: [48.859335, 2.350730],
     },
     imagesSrc: [
       `img/apartment-01.jpg`,
@@ -99,13 +99,13 @@ const offers = [
       isPro: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    location: [52.3909553943508, 4.929309666406198]
+    locations: [52.3909553943508, 4.929309666406198]
   },
   {
     id: 4,
     city: {
       name: `Paris`,
-      location: [48.859335, 2.350730],
+      locations: [48.859335, 2.350730],
     },
     imagesSrc: [
       `img/apartment-01.jpg`,
@@ -133,7 +133,7 @@ const offers = [
       isPro: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    location: [52.3809553943508, 4.939309666406198]
+    locations: [52.3809553943508, 4.939309666406198]
   },
 ];
 
@@ -141,7 +141,7 @@ const offer = {
   id: 5,
   city: {
     name: `Paris`,
-    location: [48.859335, 2.350730],
+    locations: [48.859335, 2.350730],
   },
   previewSrc: `img/apartment-01.jpg`,
   imagesSrc: [
@@ -174,16 +174,16 @@ const offer = {
 
 const city = {
   name: `Paris`,
-  location: [48.859335, 2.350730],
+  locations: [48.859335, 2.350730],
 };
 
 const cities = [{
   name: `Paris`,
-  location: [48.859335, 2.350730],
+  locations: [48.859335, 2.350730],
 },
 {
   name: `Paris`,
-  location: [48.859335, 2.350730],
+  locations: [48.859335, 2.350730],
 }];
 
 export {offer, offers, city, cities};

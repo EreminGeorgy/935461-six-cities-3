@@ -8,7 +8,6 @@ export const getCities = (offers) => {
   const filtered = cities.filter((city) => {
     return city.name in used ? 0 : (used[city.name] = 1);
   });
-
   return filtered;
 };
 

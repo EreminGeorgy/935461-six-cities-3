@@ -8,9 +8,12 @@ import {Link} from 'react-router-dom';
 
 export const Header = ({user, authorizationStatus, path, applyUserData}) => {
 
+  console.log(user)
+
   useState(() => {
-    applyUserData();
-  }, [authorizationStatus, user]);
+    // applyUserData();
+    console.log('rerender',user)
+  }, [user]);
 
   return (
     <header className="header">

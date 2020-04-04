@@ -73,7 +73,7 @@ PlacesList.propTypes = {
   setActiveCard: PropTypes.func,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    location: PropTypes.array.isRequired,
+    locations: PropTypes.array.isRequired,
   }),
   handleTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({

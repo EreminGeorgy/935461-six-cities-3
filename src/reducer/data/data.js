@@ -21,6 +21,7 @@ const OffersActions = {
   LOAD_OFFERS_CLOSEST: `LOAD_OFFERS_CLOSEST`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   UPDATE_CITY: `UPDATE_CITY`,
+  GET_CITIES: `GET_CITIES`,
   LOAD_OFFERS_REQUEST: `LOAD_OFFERS_REQUEST`,
   LOAD_OFFERS_FAILURE: `LOAD_OFFERS_FAILURE`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
@@ -31,6 +32,12 @@ const ActionCreator = {
     return {
       type: OffersActions.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+  getCities: (cities) => {
+    return {
+      type: OffersActions.GET_CITIES,
+      payload: cities,
     };
   },
   loadOffersClosest: (offers) => {
@@ -71,8 +78,10 @@ const Operation = {
     return ApplicationApi.getOffers()
     .then(ModelOffer.parseOffers)
     .then((response) => {
-      dispatch(ActionCreator.updateCity(response[0]));
       dispatch(ActionCreator.loadOffers(response));
+      let cities = getCities(response);
+      dispatch(ActionCreator.getCities(cities));
+      dispatch(ActionCreator.updateCity(cities[0]));
     })
     .then(dispatch(ActionCreator.loadOffersSuccess()))
     .catch((err) => {
@@ -100,12 +109,12 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case OffersActions.LOAD_OFFERS:
-      let cities = getCities(action.payload);
-      let activeCity = cities[0];
       return extend(state, {
         offers: action.payload,
-        cities,
-        activeCity,
+      });
+    case OffersActions.GET_CITIES:
+      return extend(state, {
+        cities: action.payload,
       });
     case OffersActions.LOAD_OFFERS_CLOSEST:
       return extend(state, {

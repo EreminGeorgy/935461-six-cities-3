@@ -26,7 +26,7 @@ export const CityMap = (props) => {
 
   const mapConfig = {
     ...MAP_CONFIG,
-    center: city.location,
+    center: city.locations,
     layers: [
       leaflet.tileLayer(`http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         detectRetina: true,
@@ -41,7 +41,7 @@ export const CityMap = (props) => {
     }
     mapRef.current.setView(mapConfig.center, mapConfig.zoom);
 
-  }, []);
+  }, [city]);
 
   useEffect(() => {
     const handleAddPinOnMap = (offerCords, id) => {
@@ -52,7 +52,7 @@ export const CityMap = (props) => {
     };
 
     for (let i = 0; i < offers.length; i++) {
-      handleAddPinOnMap(offers[i].location, offers[i].id);
+      handleAddPinOnMap(offers[i].locations, offers[i].id);
     }
   }, [offers, activeCard]);
 
@@ -76,11 +76,11 @@ CityMap.propTypes = {
   path: PropTypes.string,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    location: PropTypes.array.isRequired,
+    locations: PropTypes.array.isRequired,
   }),
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    location: PropTypes.array.isRequired,
+    locations: PropTypes.array.isRequired,
   })).isRequired,
   currentOfferCoords: PropTypes.array,
 };

@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/comments/comments.js";
@@ -14,6 +14,7 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
 
   const commentRef = useRef(null);
   const submitRef = useRef(null);
+  const formRef = useRef(null);
   let hotelRating = null;
 
   const blockSubmit = () => {
@@ -25,19 +26,19 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
   };
 
   const onInput = () => {
-
-    if (hotelRating) {
+    if (hotelRating && commentRef.current.value) {
       unblockSubmit();
     }
   };
 
   const changeRatingHandler = (evt) => {
-    onInput();
+    if (commentRef.current.value) {
+      unblockSubmit();
+    }
     hotelRating = parseInt(evt.target.value, 10);
   };
 
   const onSubmit = (evt) => {
-
     evt.preventDefault();
     blockSubmit();
 
@@ -46,29 +47,19 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
       rating: hotelRating,
       id,
     });
-    evt.target.reset();
-    blockSubmit();
-    updateComments(id);
   };
-
-  useEffect(() => {
-    if (!submitRef.current) {
-      return;
-    }
-    blockSubmit();
-  }, []);
-
 
   useEffect(() => {
     if (sendReviewStatus === CommentsOperationStatus.ERROR) {
       unblockSubmit();
     }
+    if (sendReviewStatus === CommentsOperationStatus.SUCCESS) {
+      formRef.current && formRef.current.reset();
+    }
   }, [sendReviewStatus]);
 
-  const memoSubmit = useCallback(onSubmit, [submitRef.current]);
-
   return (authorizationStatus === AuthorizationStatus.AUTH) ? (
-    <form className="reviews__form form" action="#" method="post" onSubmit={memoSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={onSubmit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" onClick={changeRatingHandler} />
@@ -111,7 +102,7 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" ref={submitRef} disabled={sendReviewStatus === CommentsOperationStatus.SUCCESS ? false : true}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" ref={submitRef} disabled>Submit</button>
       </div>
       <p style={{color: `red`}}>{(sendReviewStatus === CommentsOperationStatus.ERROR) ? `Oooops, something went wrong!` : ``}</p>
     </form>) : ``;

@@ -1,6 +1,8 @@
 import {extend} from '../../utils/utils.js';
 import {ModelUser} from "../../utils/adapters.js";
 import {ApplicationApi} from "../../application-api.js";
+import {getUser} from "./selectors";
+
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -19,6 +21,10 @@ const UserActions = {
   LOAD_USER_DATA: `LOAD_USER_DATA`,
   LOGIN_REQUEST: `LOGIN_REQUEST`,
   LOGIN_FAILURE: `LOGIN_FAILURE`,
+};
+
+const applyEditedUser = (userData, dispatch, getState) => {
+  dispatch(ActionCreator.signIn(userData));
 };
 
 const ActionCreator = {
@@ -81,6 +87,7 @@ const Operation = {
         if (response) {
           dispatch(ActionCreator.signIn(response));
           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+          applyEditedUser(response, dispatch, getState);
         }
       })
       .catch(() => {
