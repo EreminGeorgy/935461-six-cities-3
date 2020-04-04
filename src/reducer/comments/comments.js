@@ -75,7 +75,9 @@ const Operation = {
     dispatch(ActionCreator.request());
     console.log(commentData);
     return ApplicationApi.sendComment(commentData)
+      .then(ModelComment.parseComments)
       .then((response) => {
+        dispatch(ActionCreator.loadComments(response));
         dispatch(ActionCreator.success());
       })
       .catch((err) => {

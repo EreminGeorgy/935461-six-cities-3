@@ -84,10 +84,12 @@ const Operation = {
         }
       })
       .catch(() => {
-        ApplicationApi.signIn({
-          email: authData.login,
-          password: authData.password,
-        });
+        // if (authData) {
+          ApplicationApi.signIn({
+            email: authData.login,
+            password: authData.password,
+          });
+        // }
       })
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {getStars} from "../../utils/utils.js";
 import {Review} from "../review/review.jsx";
@@ -7,6 +7,14 @@ import {CityMap} from "../city-map/city-map.jsx";
 
 export const PropertyParameters = (props) => {
   const {offer, closestOffers, path, activeCard, comments, updateComments} = props;
+  // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     if (document.querySelector('img[src="https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png"]')) {
+  //     console.log('work')
+  //     document.querySelector('img[src="https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png"]').setAttribute('src','../../img/pin-active.svg')
+  //     }
+  //   },200)
+  // })
   const {
     imagesSrc,
     title,
@@ -95,7 +103,7 @@ export const PropertyParameters = (props) => {
               </span>
             </div>
             <div className="property__description">
-              <p className="property__text" >{description}</p>;
+              <p className="property__text" >{description}</p>
             </div>
           </div>
           <section className="property__reviews reviews">

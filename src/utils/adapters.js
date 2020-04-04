@@ -21,7 +21,7 @@ export class ModelOffer {
     this.host = {
       name: data[`host`][`name`],
       isPro: Boolean(data[`host`][`is_pro`]),
-      avatarUrl: data[`host`][`avatar_url`],
+      avatarUrl: `../../${data[`host`][`avatar_url`]}`,
     };
     this.location = [data[`location`][`latitude`], data[`location`][`longitude`]];
   }

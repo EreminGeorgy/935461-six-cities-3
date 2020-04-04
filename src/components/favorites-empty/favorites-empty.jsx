@@ -5,7 +5,7 @@ import Header from "../header/header.jsx";
 export const FavoritesEmpty = () => {
 
   return (
-    <div classNameName="page">
+    <div className="page">
       <Header />
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">

@@ -3,7 +3,7 @@ import {ActionCreator as UserActionCreator, AuthorizationStatus} from "../../red
 import {AppRoute} from "../../utils/const.js";
 import {ModelOffer} from "../../utils/adapters.js";
 import {ActionCreator as OffersCreator} from "../data/data.js";
-import {getOffers} from "../data/selectors";
+import {getOffers, getNearOffers} from "../data/selectors";
 import {ApplicationApi} from "../../application-api.js";
 
 const UNAUTHORIZED = 401;
@@ -36,6 +36,11 @@ const replaceOffer = (editedOffer, offers) => {
 const applyEditedOffer = (offer, dispatch, getState) => {
   const offers = getOffers(getState());
   dispatch(OffersCreator.loadOffers(replaceOffer(offer, offers)));
+};
+
+const applyEditedOfferToClosest = (offer, dispatch, getState) => {
+  const offers = getNearOffers(getState());
+  dispatch(OffersCreator.loadOffersClosest(replaceOffer(offer, offers)));
 };
 
 const ActionCreator = {
@@ -95,8 +100,11 @@ const Operation = {
     return ApplicationApi.addToFavorite(cardData)
       .then(ModelOffer.parseSingleOffer)
       .then((response) => {
-        dispatch(ActionCreator.success());
-        applyEditedOffer(response, dispatch, getState);
+        if (response.status !== UNAUTHORIZED) {
+          dispatch(ActionCreator.success());
+          applyEditedOffer(response, dispatch, getState);
+          applyEditedOfferToClosest(response, dispatch, getState);
+        }
       })
       .catch((err) => {
         dispatch(ActionCreator.failure());
