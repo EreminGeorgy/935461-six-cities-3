@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUser, getAuthorizationStatus} from '../../reducer/user/selectors';
@@ -6,13 +6,11 @@ import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/use
 import {AppRoute} from "../../utils/const.js";
 import {Link} from 'react-router-dom';
 
-export const Header = ({user, authorizationStatus, path, applyUserData}) => {
+export const Header = ({user, authorizationStatus, path}) => {
 
-  console.log(user)
 
-  useState(() => {
-    // applyUserData();
-    console.log('rerender',user)
+  useEffect(() => {
+
   }, [user]);
 
   return (
@@ -31,7 +29,7 @@ export const Header = ({user, authorizationStatus, path, applyUserData}) => {
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">
-                    {(authorizationStatus === AuthorizationStatus.AUTH) ? user.email : `Sign in`}
+                    {(authorizationStatus === AuthorizationStatus.AUTH) ? user && user.email : `Sign in`}
                   </span>
                 </Link>
               </li>

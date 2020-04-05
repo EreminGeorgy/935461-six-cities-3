@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {getStars} from "../../utils/utils.js";
 import {Review} from "../review/review.jsx";

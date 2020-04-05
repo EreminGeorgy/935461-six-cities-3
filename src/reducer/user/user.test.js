@@ -4,53 +4,53 @@ import {reducer, ActionCreator, UserActions, AuthorizationStatus} from "./user.j
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
+    userData: null,
   });
 });
 
 it(`Reducer should change authorizationStatus by a given value`, () => {
   expect(reducer({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
+    userData: null,
   }, {
     type: UserActions.REQUIRED_AUTHORIZATION,
     payload: AuthorizationStatus.AUTH,
   })).toEqual({
     authorizationStatus: AuthorizationStatus.AUTH,
-    userData: {},
+    userData: null,
   });
 
   expect(reducer({
     authorizationStatus: AuthorizationStatus.AUTH,
-    userData: {},
+    userData: null,
   }, {
     type: UserActions.REQUIRED_AUTHORIZATION,
     payload: AuthorizationStatus.NO_AUTH,
   })).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
+    userData: null,
   });
 
   expect(reducer({
     authorizationStatus: AuthorizationStatus.AUTH,
-    userData: {},
+    userData: null,
   }, {
     type: UserActions.REQUIRED_AUTHORIZATION,
     payload: AuthorizationStatus.AUTH,
   })).toEqual({
     authorizationStatus: AuthorizationStatus.AUTH,
-    userData: {},
+    userData: null,
   });
 
   expect(reducer({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
+    userData: null,
   }, {
     type: UserActions.REQUIRED_AUTHORIZATION,
     payload: AuthorizationStatus.NO_AUTH,
   })).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
+    userData: null,
   });
 });
 

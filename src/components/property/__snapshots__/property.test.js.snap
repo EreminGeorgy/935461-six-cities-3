@@ -18,6 +18,8 @@ exports[`<Property /> should render Property 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -39,7 +41,7 @@ exports[`<Property /> should render Property 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/auth"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -293,7 +295,6 @@ exports[`<Property /> should render Property 1`] = `
               >
                 A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
               </p>
-              ;
             </div>
           </div>
           <section

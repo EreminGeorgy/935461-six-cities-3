@@ -9,7 +9,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {createAPI} from "./api.js";
 
 import {Operation} from "./reducer/data/data.js";
-import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user";
+import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));

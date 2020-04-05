@@ -2,7 +2,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {offers, cities} from "../../utils/test-utils/offers.js";
-// import configureStore from "redux-mock-store";
 import {Provider} from 'react-redux';
 import reducer from '../../reducer/reducer.js';
 import {createStore} from 'redux';

@@ -10,7 +10,7 @@ import {CommentsOperationStatus} from "../../reducer/comments/comments";
 const MAX_LENGHT = `300`;
 const MIN_LENGTH = `50`;
 
-export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, id, updateComments}) => {
+export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, id}) => {
 
   const commentRef = useRef(null);
   const submitRef = useRef(null);
@@ -54,7 +54,9 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
       unblockSubmit();
     }
     if (sendReviewStatus === CommentsOperationStatus.SUCCESS) {
-      formRef.current && formRef.current.reset();
+      if (formRef.current) {
+        formRef.current.reset();
+      }
     }
   }, [sendReviewStatus]);
 
@@ -122,7 +124,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewSend);
 
 ReviewSend.propTypes = {
-  updateComments: PropTypes.func,
   sendReview: PropTypes.func,
   authorizationStatus: PropTypes.string,
   sendReviewStatus: PropTypes.string,

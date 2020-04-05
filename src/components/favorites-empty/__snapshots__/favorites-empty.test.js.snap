@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> should render App 1`] = `
+exports[`<FavoritesEmpty /> should render FavoritesEmpty 1`] = `
 <div
-  className="page page--gray page--main"
+  className="page"
 >
   <header
     className="header"
@@ -18,6 +18,8 @@ exports[`<App /> should render App 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -39,7 +41,7 @@ exports[`<App /> should render App 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/auth"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -58,58 +60,51 @@ exports[`<App /> should render App 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index page__main--index-empty"
+    className="page__main page__main--favorites page__main--favorites-empty"
   >
-    <h1
-      className="visually-hidden"
-    >
-      Cities
-    </h1>
     <div
-      className="tabs"
+      className="page__favorites-container container"
     >
       <section
-        className="locations container"
+        className="favorites favorites--empty"
       >
-        <ul
-          className="locations__list tabs__list"
+        <h1
+          className="visually-hidden"
         >
-          <p>
-            No data loaded
+          Favorites (empty)
+        </h1>
+        <div
+          className="favorites__status-wrapper"
+        >
+          <b
+            className="favorites__status"
+          >
+            Nothing yet saved.
+          </b>
+          <p
+            className="favorites__status-description"
+          >
+            Save properties to narrow down search or plan yor future trips.
           </p>
-        </ul>
+        </div>
       </section>
     </div>
-    <div
-      className="cities"
-    >
-      <div
-        className="cities__places-container cities__places-container--empty container"
-      >
-        <section
-          className="cities__no-places"
-        >
-          <div
-            className="cities__status-wrapper tabs__content"
-          >
-            <b
-              className="cities__status"
-            >
-              No places to stay available
-            </b>
-            <p
-              className="cities__status-description"
-            >
-              We could not find any property availbale at the moment in 
-              nowhere
-            </p>
-          </div>
-        </section>
-        <div
-          className="cities__right-section"
-        />
-      </div>
-    </div>
   </main>
+  <footer
+    className="footer"
+  >
+    <a
+      className="footer__logo-link"
+      href="main.html"
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
 </div>
 `;

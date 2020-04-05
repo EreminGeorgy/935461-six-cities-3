@@ -1,7 +1,6 @@
 import {extend} from '../../utils/utils.js';
 import {ModelUser} from "../../utils/adapters.js";
 import {ApplicationApi} from "../../application-api.js";
-import {getUser} from "./selectors";
 
 
 const AuthorizationStatus = {
@@ -13,7 +12,7 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  userData: {},
+  userData: null,
 };
 
 const UserActions = {
@@ -23,7 +22,7 @@ const UserActions = {
   LOGIN_FAILURE: `LOGIN_FAILURE`,
 };
 
-const applyEditedUser = (userData, dispatch, getState) => {
+const applyEditedUser = (userData, dispatch) => {
   dispatch(ActionCreator.signIn(userData));
 };
 
@@ -87,23 +86,28 @@ const Operation = {
         if (response) {
           dispatch(ActionCreator.signIn(response));
           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-          applyEditedUser(response, dispatch, getState);
+          applyEditedUser(response, dispatch);
         }
       })
       .catch(() => {
-        // if (authData) {
-          ApplicationApi.signIn({
-            email: authData.login,
-            password: authData.password,
-          });
-        // }
+        ApplicationApi.signIn({
+          email: authData.login,
+          password: authData.password,
+        })
+        .then(ModelUser)
+        .then((response) => {
+          if (response) {
+            dispatch(ActionCreator.signIn(response));
+            dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+            applyEditedUser(response, dispatch);
+          }
+        })
       })
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
         dispatch(ActionCreator.loginFailure());
-        throw err;
       });
   },
   /*eslint-disable */

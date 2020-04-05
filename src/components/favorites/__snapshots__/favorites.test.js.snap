@@ -18,6 +18,8 @@ exports[`<Favorites /> should render Favorites 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -39,7 +41,7 @@ exports[`<Favorites /> should render Favorites 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/auth"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -515,7 +517,8 @@ exports[`<Favorites /> should render Favorites 1`] = `
   >
     <a
       className="footer__logo-link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="6 cities logo"

@@ -81,7 +81,7 @@ PlaceCard.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCard(cardData) {console.log(cardData);
+  changeCard(cardData) {
     dispatch(Operation.changeStatus(cardData));
   },
 });

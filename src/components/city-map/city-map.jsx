@@ -45,7 +45,7 @@ export const CityMap = (props) => {
 
   useEffect(() => {
     const handleAddPinOnMap = (offerCords, id) => {
-      const icon = leaflet.icon({...ICON_CONFIG, iconUrl: `${!!path ? path : ``}${activeCard === id ? PIN_TYPE.ACTIVE : PIN_TYPE.DISABLED}`});
+      const icon = leaflet.icon({...ICON_CONFIG, iconUrl: `${path ? path : ``}${activeCard === id ? PIN_TYPE.ACTIVE : PIN_TYPE.DISABLED}`});
       leaflet
         .marker(offerCords, {icon})
         .addTo(mapRef.current);
@@ -58,13 +58,13 @@ export const CityMap = (props) => {
 
   useEffect(() => {
 
-  if (currentOfferCoords) {
-    const iconCurrent = leaflet.icon({...ICON_CONFIG, iconUrl: `${path}${PIN_TYPE.ACTIVE}`});
-    leaflet
-      .marker(currentOfferCoords, {icon: iconCurrent})
-      .addTo(mapRef.current);
-  }
-}, [currentOfferCoords]);
+    if (currentOfferCoords) {
+      const iconCurrent = leaflet.icon({...ICON_CONFIG, iconUrl: `${path}${PIN_TYPE.ACTIVE}`});
+      leaflet
+        .marker(currentOfferCoords, {icon: iconCurrent})
+        .addTo(mapRef.current);
+    }
+  }, [currentOfferCoords]);
 
   return <section className={offers.length > NEIGHBOURS ? `cities__map` : `property__map`}>
     <div id="mapId" style={{height: `580px`}}></div>
