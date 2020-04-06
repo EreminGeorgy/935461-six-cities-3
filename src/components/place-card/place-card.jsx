@@ -7,7 +7,7 @@ import {AppRoute} from "../../utils/const.js";
 import {connect} from "react-redux";
 
 export const PlaceCard = (props) => {
-  const {handleTitleClick, handleCardHover, offer, cardSettings, changeCard} = props;
+  const {onTitleClick, onCardHover, offer, cardSettings, changeCard} = props;
   const {
     id,
     previewSrc,
@@ -34,7 +34,7 @@ export const PlaceCard = (props) => {
   const width = getStars(rating);
 
   return (
-    <article className={`${placeCardType} place-card`} onMouseOver={() => handleCardHover(id)}>
+    <article className={`${placeCardType} place-card`} onMouseOver={() => onCardHover(id)}>
       {isPremium ? (<div className="place-card__mark"><span>Premium</span></div>) : (``)}
       <div className={`${imageWrapperType} place-card__image-wrapper`}>
         <a href="#">
@@ -64,7 +64,7 @@ export const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.PROPERTY}/${id}`} onClick={() => handleTitleClick(offer)}>{title}</Link>
+          <Link to={`${AppRoute.PROPERTY}/${id}`} onClick={() => onTitleClick(offer)}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -80,17 +80,9 @@ PlaceCard.defaultProps = {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  changeCard(cardData) {
-    dispatch(Operation.changeStatus(cardData));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(PlaceCard);
-
 PlaceCard.propTypes = {
-  handleTitleClick: PropTypes.func,
-  handleCardHover: PropTypes.func,
+  onTitleClick: PropTypes.func,
+  onCardHover: PropTypes.func,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     previewSrc: PropTypes.string.isRequired,
@@ -108,3 +100,11 @@ PlaceCard.propTypes = {
   }),
   changeCard: PropTypes.func,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCard(cardData) {
+    dispatch(Operation.changeStatus(cardData));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(PlaceCard);

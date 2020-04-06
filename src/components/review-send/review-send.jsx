@@ -110,6 +110,14 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
     </form>) : ``;
 };
 
+ReviewSend.propTypes = {
+  sendReview: PropTypes.func,
+  authorizationStatus: PropTypes.string,
+  sendReviewStatus: PropTypes.string,
+  id: PropTypes.number,
+};
+
+
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   sendReviewStatus: getCommentState(state),
@@ -122,10 +130,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewSend);
-
-ReviewSend.propTypes = {
-  sendReview: PropTypes.func,
-  authorizationStatus: PropTypes.string,
-  sendReviewStatus: PropTypes.string,
-  id: PropTypes.number,
-};

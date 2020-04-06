@@ -14,8 +14,8 @@ it(`simulates card hover event to set card title`, () => {
 
   const placeCard = shallow(<PlaceCard
     offer={offer}
-    handleCardHover={onHover}
-    handleTitleClick={()=>{}}
+    onCardHover={onHover}
+    onTitleClick={()=>{}}
   />);
 
   const card = placeCard.find(`.cities__place-card`);
@@ -32,8 +32,8 @@ it(`simulates click on card title`, () => {
 
   const placeCard = shallow(<PlaceCard
     offer={offer}
-    handleCardHover={()=>{}}
-    handleTitleClick={onClick}
+    onCardHover={()=>{}}
+    onTitleClick={onClick}
   />);
 
   const title = placeCard.find(`.place-card__name Link`);

@@ -1,13 +1,14 @@
 import React, {useEffect, useState, useCallback} from "react";
 import PropTypes from "prop-types";
-import {PropertyParameters} from "../property-parameters/property-parameters.jsx";
+import PropertyParameters from "../property-parameters/property-parameters.jsx";
 import {connect} from "react-redux";
 import {Operation as OffersOperation} from "../../reducer/data/data.js";
 import {Operation as CommentsOperation} from "../../reducer/comments/comments.js";
-import {getNearOffers} from "../../reducer/data/selectors";
+import {getNearOffers, getActiveOffer} from "../../reducer/data/selectors";
 import {getComments} from "../../reducer/comments/selectors";
 import PlaceCard from "../place-card/place-card.jsx";
 
+import {ActionCreator} from "../../reducer/data/data.js";
 import Header from "../header/header.jsx";
 
 const ROOT = `../../`;
@@ -19,7 +20,7 @@ const propertyCardSettings = {
 };
 
 export const Property = (props) => {
-  const {offer, closestOffers, loadClosestOffers, comments, loadComments, handleTitleClick} = props;
+  const {offer, closestOffers, loadClosestOffers, comments, loadComments, changeCard} = props;
 
   const [activeCard, setActiveCard] = useState(null);
   const memoizedCard = useCallback(setActiveCard, []);
@@ -50,8 +51,8 @@ export const Property = (props) => {
                 return <PlaceCard
                   key={closestOffer.id}
                   activeCard={activeCard}
-                  handleCardHover={memoizedCard}
-                  handleTitleClick={handleTitleClick}
+                  onCardHover={memoizedCard}
+                  onTitleClick={changeCard}
                   offer={closestOffer}
                   cardSettings={propertyCardSettings}
                 />;
@@ -63,22 +64,6 @@ export const Property = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = (state) => ({
-  closestOffers: getNearOffers(state),
-  comments: getComments(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadClosestOffers(id) {
-    dispatch(OffersOperation.loadOffersClosest(id));
-  },
-  loadComments(id) {
-    dispatch(CommentsOperation.loadComments(id));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
 
 Property.propTypes = {
   closestOffers: PropTypes.arrayOf(PropTypes.shape({
@@ -110,5 +95,28 @@ Property.propTypes = {
   }),
   comments: PropTypes.array,
   loadComments: PropTypes.func,
-  handleTitleClick: PropTypes.func,
+  onTitleClick: PropTypes.func,
+  changeCard: PropTypes.func,
+
 };
+
+
+const mapStateToProps = (state) => ({
+  closestOffers: getNearOffers(state),
+  comments: getComments(state),
+  offer: getActiveOffer(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadClosestOffers(id) {
+    dispatch(OffersOperation.loadOffersClosest(id));
+  },
+  loadComments(id) {
+    dispatch(CommentsOperation.loadComments(id));
+  },
+  changeCard(offer) {
+    dispatch(ActionCreator.applyActiveOffer(offer));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

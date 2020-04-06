@@ -5,6 +5,8 @@ import {PlacesList} from "../places-list/places-list.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
 import {MainEmpty} from "../main-empty/main-empty.jsx";
 import Header from "../header/header.jsx";
+import {ActionCreator} from "../../reducer/data/data.js";
+
 
 import {connect} from "react-redux";
 import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/data/selectors";
@@ -13,7 +15,7 @@ export const Main = (props) => {
 
   useEffect(() => {}, []);
 
-  const {offersInActiveCity, handleTitleClick, city} = props;
+  const {offersInActiveCity, changeCard, city} = props;
 
   const [activeCard, setActiveCard] = useState(null);
 
@@ -41,7 +43,7 @@ export const Main = (props) => {
           <div className="cities__places-container container">
             <PlacesList
               offers={offersInActiveCity}
-              handleTitleClick={handleTitleClick}
+              onTitleClick={changeCard}
               city={city}
               setActiveCard={setActiveCard}
             />
@@ -59,14 +61,6 @@ export const Main = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  offersInActiveCity: getSelectedOffers(state),
-  city: getSelectedCity(state),
-  appState: getAppState(state),
-});
-
-export default connect(mapStateToProps)(Main);
-
 Main.propTypes = {
   appState: PropTypes.string,
   offersInActiveCity: PropTypes.arrayOf(PropTypes.shape({
@@ -81,5 +75,20 @@ Main.propTypes = {
     name: PropTypes.string,
     locations: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
-  handleTitleClick: PropTypes.func,
+  changeCard: PropTypes.func,
+  onTitleClick: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  offersInActiveCity: getSelectedOffers(state),
+  city: getSelectedCity(state),
+  appState: getAppState(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCard(offer) {
+    dispatch(ActionCreator.applyActiveOffer(offer));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

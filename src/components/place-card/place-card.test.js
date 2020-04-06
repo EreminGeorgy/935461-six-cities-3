@@ -11,8 +11,8 @@ it(`<PlaceCard /> should render PlaceCard`, () => {
           <PlaceCard
             key={offer.id}
             offer={offer}
-            handleCardHover={() => {}}
-            handleTitleClick={() => {}}
+            onCardHover={() => {}}
+            onTitleClick={() => {}}
           />
         </BrowserRouter>
     )

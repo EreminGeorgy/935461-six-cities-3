@@ -49,6 +49,10 @@ const applyEditedOfferToFavorites = (offer, dispatch, getState) => {
   dispatch(ActionCreator.loadFavorites(replaceOffer(offer, offers)));
 };
 
+const applyEditedOfferToProperty = (activeOffer, dispatch) => {
+  dispatch(OffersCreator.applyActiveOffer(activeOffer));
+};
+
 const ActionCreator = {
   loadFavorites: (offers) => {
     return {
@@ -111,6 +115,7 @@ const Operation = {
           applyEditedOffer(response, dispatch, getState);
           applyEditedOfferToClosest(response, dispatch, getState);
           applyEditedOfferToFavorites(response, dispatch, getState);
+          applyEditedOfferToProperty(response, dispatch, getState);
         }
       })
       .catch((err) => {

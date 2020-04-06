@@ -19,7 +19,7 @@ it(`<PlacesList /> should render PlacesList`, () => {
         <PlacesList
           offers={offers}
           city={city}
-          handleTitleClick={() => {}}
+          onTitleClick={() => {}}
         />
       </BrowserRouter>
     </Provider>

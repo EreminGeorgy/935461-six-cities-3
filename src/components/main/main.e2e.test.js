@@ -23,14 +23,14 @@ Enzyme.configure({
 });
 
 it(`Should each title be pressed`, () => {
-  const handleTitleClick = jest.fn();
+  const onTitleClick = jest.fn();
 
   const main = mount(
       <BrowserRouter>
         <Provider store={store}>
           <Main
             offersInActiveCity={offersInCity}
-            handleTitleClick={handleTitleClick}
+            changeCard={onTitleClick}
             city={activeCity}
           />
         </Provider>
@@ -39,5 +39,5 @@ it(`Should each title be pressed`, () => {
 
   main.find(`.place-card__name a`).forEach((node) => node.simulate(`click`));
 
-  expect(handleTitleClick).toHaveBeenCalledTimes(4);
+  expect(onTitleClick).toHaveBeenCalledTimes(4);
 });

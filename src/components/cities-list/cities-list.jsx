@@ -32,6 +32,17 @@ export const CitiesList = (props) => {
   );
 };
 
+CitiesList.propTypes = {
+  activeCity: PropTypes.shape({
+    name: PropTypes.string,
+    locations: PropTypes.array,
+  }),
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+  handleCityClick: PropTypes.func,
+};
+
 const mapStateToProps = (state) => {
   return {
     cities: getCities(state),
@@ -47,14 +58,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
-
-CitiesList.propTypes = {
-  activeCity: PropTypes.shape({
-    name: PropTypes.string,
-    locations: PropTypes.array,
-  }),
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })).isRequired,
-  handleCityClick: PropTypes.func,
-};

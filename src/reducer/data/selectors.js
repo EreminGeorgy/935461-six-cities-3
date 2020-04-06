@@ -7,6 +7,10 @@ export const getOffers = (state) => {
   return state[NAME_SPACE].offers;
 };
 
+export const getActiveOffer = (state) => {
+  return state[NAME_SPACE].activeOffer;
+};
+
 export const getNearOffers = (state) => {
   return state[NAME_SPACE].offersClosest;
 };

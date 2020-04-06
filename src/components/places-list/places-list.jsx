@@ -3,9 +3,15 @@ import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 import {Sort} from "../sort/sort.jsx";
 
+const SORT_TYPE = {
+  LOW_TO_HIGH: `lowToHigh`,
+  HIGHT_TO_LOW: `highToLow`,
+  TOP_RATED: `topRated`,
+};
+
 export const PlacesList = (props) => {
 
-  const {handleTitleClick, offers, city, setActiveCard} = props;
+  const {onTitleClick, offers, city, setActiveCard} = props;
 
   const memoizedCard = useCallback(setActiveCard, []);
 
@@ -35,11 +41,11 @@ export const PlacesList = (props) => {
       return elements;
     } else {
       switch (item.id) {
-        case `lowToHigh`:
+        case SORT_TYPE.LOW_TO_HIGH:
           return sortLowToHigh(elements);
-        case `highToLow`:
+        case SORT_TYPE.HIGHT_TO_LOW:
           return sortHighToLow(elements);
-        case `topRated`:
+        case SORT_TYPE.TOP_RATED:
           return sortTopRatedFirst(elements);
         default: return elements;
       }
@@ -59,8 +65,8 @@ export const PlacesList = (props) => {
         {sortedOffers.map((offer) => {
           return <PlaceCard
             key={offer.id}
-            handleCardHover={memoizedCard}
-            handleTitleClick={handleTitleClick}
+            onCardHover={memoizedCard}
+            onTitleClick={onTitleClick}
             offer={offer}
           />;
         })}
@@ -75,7 +81,7 @@ PlacesList.propTypes = {
     name: PropTypes.string.isRequired,
     locations: PropTypes.array.isRequired,
   }),
-  handleTitleClick: PropTypes.func,
+  onTitleClick: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

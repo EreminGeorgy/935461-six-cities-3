@@ -1,15 +1,19 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {getStars} from "../../utils/utils.js";
 import {Review} from "../review/review.jsx";
 import ReviewSend from "../review-send/review-send.jsx";
 import {CityMap} from "../city-map/city-map.jsx";
+import {Operation} from "../../reducer/favorites/favorites.js";
+import {connect} from "react-redux";
+
+const COMMENTS_TO_SHOW = 10;
 
 export const PropertyParameters = (props) => {
-  const {offer, closestOffers, path, activeCard, comments, updateComments} = props;
-
+  const {offer, closestOffers, path, activeCard, comments, updateComments, changeCard} = props;
 
   const {
+    id,
     imagesSrc,
     title,
     description,
@@ -17,6 +21,7 @@ export const PropertyParameters = (props) => {
     rating,
     type,
     isPremium,
+    isFavorite,
     bedrooms,
     guests,
     householdItems,
@@ -24,12 +29,24 @@ export const PropertyParameters = (props) => {
     city,
   } = offer;
 
+  const handleFavoriteClick = (evt) => {
+
+    evt.preventDefault();
+
+    changeCard({
+      id,
+      status: Number(!isFavorite),
+    });
+  };
+
+  const memoClick = useCallback(handleFavoriteClick, [isFavorite]);
+
   const width = getStars(rating);
   const availableItems = Array.from(householdItems);
 
   const activeComments = comments.sort((a, b) => {
-    return parseInt((b.dateString - a.dateString), 10);
-  }).slice(-10);
+    return parseInt((a.dateString - b.dateString), 10);
+  }).slice(-(COMMENTS_TO_SHOW));
 
   return (
     <section className="property">
@@ -47,8 +64,9 @@ export const PropertyParameters = (props) => {
           {isPremium ? (<div className="property__mark"><span>Premium</span></div>) : (``)}
           <div className="property__name-wrapper">
             <h1 className="property__name">{title}</h1>
-            <button className="property__bookmark-button button" type="button">
-              <svg className="property__bookmark-icon" width="31" height="33">
+            <button className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`}
+              onClick={memoClick} type="button">
+              <svg className="place-card__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
               <span className="visually-hidden">To bookmarks</span>
@@ -162,6 +180,7 @@ PropertyParameters.propTypes = {
     rating: PropTypes.number.isRequired,
     type: PropTypes.string,
     isPremium: PropTypes.bool,
+    isFavorite: PropTypes.bool,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     householdItems: PropTypes.objectOf(PropTypes.string),
@@ -172,4 +191,14 @@ PropertyParameters.propTypes = {
     }),
     locations: PropTypes.array,
   }).isRequired,
+  changeCard: PropTypes.func,
 };
+
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCard(cardData) {
+    dispatch(Operation.changeStatus(cardData));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(PropertyParameters);

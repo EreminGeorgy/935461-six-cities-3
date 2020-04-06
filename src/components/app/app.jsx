@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
@@ -15,21 +15,14 @@ import {AppRoute} from "../../utils/const.js";
 export const App = (props) => {
   const {login, authorizationStatus} = props;
 
-  const [activeOffer, setActiveOffer] = useState(null);
-
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main
-            handleTitleClick={setActiveOffer}
-          />
+          <Main />
         </Route>
         <Route path={`${AppRoute.PROPERTY}/:id`} render={() => {
-          return <Property
-            offer={activeOffer}
-            handleTitleClick={setActiveOffer}
-          />;
+          return <Property />;
         }} />
         <Route exact path={AppRoute.AUTH}>
           {(authorizationStatus === AuthorizationStatus.AUTH) ?
@@ -43,15 +36,19 @@ export const App = (props) => {
           exact
           path={AppRoute.FAVORITES}
           render={() => {
-            return (<Favorites
-              handleTitleClick={setActiveOffer}
-            />);
+            return (<Favorites />);
           }}
         />
       </Switch>
     </BrowserRouter>
   );
 };
+
+App.propTypes = {
+  login: PropTypes.func,
+  authorizationStatus: PropTypes.string,
+};
+
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
@@ -64,8 +61,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-App.propTypes = {
-  login: PropTypes.func,
-  authorizationStatus: PropTypes.string,
-};

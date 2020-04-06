@@ -60,15 +60,15 @@ export const SignIn = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  city: getSelectedCity(state),
-});
-
-export default connect(mapStateToProps)(SignIn);
-
 SignIn.propTypes = {
   city: PropTypes.shape({
     name: PropTypes.string,
   }),
   onSubmit: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  city: getSelectedCity(state),
+});
+
+export default connect(mapStateToProps)(SignIn);

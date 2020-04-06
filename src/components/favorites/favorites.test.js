@@ -20,7 +20,7 @@ it(`<Favorites /> should render Favorites`, () => {
         <Favorites
           favoriteOffers={offers}
           getFavorites={()=>{}}
-          handleTitleClick={()=>{}}
+          onTitleClick={()=>{}}
         />
       </BrowserRouter>
     </Provider>)

@@ -41,6 +41,19 @@ export const Header = ({user, authorizationStatus, path}) => {
   );
 };
 
+Header.propTypes = {
+  path: PropTypes.string,
+  authorizationStatus: PropTypes.string,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    isPro: PropTypes.bool,
+  }),
+};
+
+
 const mapStateToProps = (state) => ({
   user: getUser(state),
   authorizationStatus: getAuthorizationStatus(state),
@@ -53,15 +66,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-Header.propTypes = {
-  path: PropTypes.string,
-  authorizationStatus: PropTypes.string,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    isPro: PropTypes.bool,
-  }),
-};

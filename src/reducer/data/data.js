@@ -15,6 +15,7 @@ const initialState = {
   offersInActiveCity: [],
   appState: ``,
   offersClosest: [],
+  activeOffer: null,
 };
 
 const OffersActions = {
@@ -22,6 +23,7 @@ const OffersActions = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   UPDATE_CITY: `UPDATE_CITY`,
   GET_CITIES: `GET_CITIES`,
+  APPLY_ACTIVE_OFFER: `APPLY_ACTIVE_OFFER`,
   LOAD_OFFERS_REQUEST: `LOAD_OFFERS_REQUEST`,
   LOAD_OFFERS_FAILURE: `LOAD_OFFERS_FAILURE`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
@@ -32,6 +34,12 @@ const ActionCreator = {
     return {
       type: OffersActions.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+  applyActiveOffer: (offer) => {
+    return {
+      type: OffersActions.APPLY_ACTIVE_OFFER,
+      payload: offer,
     };
   },
   getCities: (cities) => {
@@ -123,6 +131,10 @@ const reducer = (state = initialState, action) => {
     case OffersActions.UPDATE_CITY:
       return extend(state, {
         activeCity: action.payload,
+      });
+    case OffersActions.APPLY_ACTIVE_OFFER:
+      return extend(state, {
+        activeOffer: action.payload,
       });
     case OffersActions.LOAD_OFFERS_REQUEST:
       return extend(state, {

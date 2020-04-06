@@ -25,7 +25,7 @@ it(`<Main /> should render Main`, () => {
       <BrowserRouter>
         <Main
           offersInActiveCity={offersInCity}
-          handleTitleClick={() => {}}
+          onTitleClick={() => {}}
           city={activeCity}
         />
       </BrowserRouter>

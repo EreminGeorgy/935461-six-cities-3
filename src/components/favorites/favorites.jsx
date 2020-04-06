@@ -9,6 +9,7 @@ import {Operation} from "../../reducer/favorites/favorites.js";
 import {FavoritesEmpty} from "../favorites-empty/favorites-empty.jsx";
 import {AppRoute} from "../../utils/const.js";
 import {Link} from 'react-router-dom';
+import {ActionCreator} from "../../reducer/data/data.js";
 
 
 const CARD_SETTINGS = {
@@ -18,7 +19,7 @@ const CARD_SETTINGS = {
 };
 
 export const Favorites = (props) => {
-  const {favoriteOffers, getFavoriteOffers, handleTitleClick} = props;
+  const {favoriteOffers, getFavoriteOffers, changeCard} = props;
 
   useEffect(() => {
     getFavoriteOffers();
@@ -54,8 +55,8 @@ export const Favorites = (props) => {
                       return <PlaceCard
                         key={offer.id}
                         activeCard={null}
-                        handleCardHover={() => {}}
-                        handleTitleClick={handleTitleClick}
+                        onCardHover={() => {}}
+                        onTitleClick={changeCard}
                         offer={offer}
                         cardSettings={CARD_SETTINGS}
                       />;
@@ -78,7 +79,7 @@ export const Favorites = (props) => {
 
 Favorites.propTypes = {
   getFavoriteOffers: PropTypes.func,
-  handleTitleClick: PropTypes.func,
+  onTitleClick: PropTypes.func,
   favoriteOffers: PropTypes.arrayOf(PropTypes.shape({
     previewSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -87,6 +88,7 @@ Favorites.propTypes = {
     type: PropTypes.string,
     isPremium: PropTypes.bool,
   })).isRequired,
+  changeCard: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -96,6 +98,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getFavoriteOffers() {
     dispatch(Operation.loadFavorites());
+  },
+  changeCard(offer) {
+    dispatch(ActionCreator.applyActiveOffer(offer));
   },
 });
 
