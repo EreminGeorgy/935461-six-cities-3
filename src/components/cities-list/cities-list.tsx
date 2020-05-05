@@ -1,14 +1,21 @@
-import React, {useCallback} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {useCallback} from "react";
+import {City} from "../../types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/data/data.js";
-import {ActionCreator as AppActionCreator} from "../../reducer/application/application.js";
+import {ActionCreator} from "../../reducer/data/data";
+import {ActionCreator as AppActionCreator} from "../../reducer/application/application";
 import {getSelectedCity} from "../../reducer/application/selectors";
 import {getSelectedCity as getSelectedCityFromData} from "../../reducer/data/selectors";
 
 import {getCities} from "../../reducer/data/selectors";
 
-export const CitiesList = (props) => {
+interface Props {
+  cities: City[];
+  activeCity: City;
+  handleCityClick: (city: City) => void;
+}
+
+export const CitiesList: React.FunctionComponent<Props> = (props: Props) => {
   const {cities, activeCity, handleCityClick} = props;
 
   if (!cities.length || !activeCity) {
@@ -30,17 +37,6 @@ export const CitiesList = (props) => {
       })}
     </ul>
   );
-};
-
-CitiesList.propTypes = {
-  activeCity: PropTypes.shape({
-    name: PropTypes.string,
-    locations: PropTypes.array,
-  }),
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })).isRequired,
-  handleCityClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

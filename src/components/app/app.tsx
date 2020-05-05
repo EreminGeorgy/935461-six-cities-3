@@ -1,16 +1,16 @@
-import React from "react";
+import * as React from "react";
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
-import Main from "../main/main.jsx";
-import Property from "../property/property.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
-import Favorites from "../favorites/favorites.jsx";
-import PrivateRoute from "../private-route/private-route.jsx";
+import Main from "../main/main";
+import Property from "../property/property";
+import SignIn from "../sign-in/sign-in";
+import Favorites from "../favorites/favorites";
+import PrivateRoute from "../private-route/private-route";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/user/user.js";
+import {Operation} from "../../reducer/user/user";
 import PropTypes from "prop-types";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {AppRoute} from "../../utils/const.js";
+import {AppRoute} from "../../utils/const";
 
 export const App = (props) => {
   const {login, authorizationStatus} = props;

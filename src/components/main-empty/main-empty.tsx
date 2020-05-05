@@ -1,11 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import CitiesList from "../cities-list/cities-list.jsx";
-import Header from "../header/header.jsx";
+import * as React from "react";
+import {City} from "../../types";
+import CitiesList from "../cities-list/cities-list";
+import Header from "../header/header";
 
+interface Props {
+  city: City;
+}
 
-export const MainEmpty = ({city}) => {
-
+export const MainEmpty: React.FunctionComponent<Props> = (props: Props) => {
+const {city} = props;
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -32,11 +35,4 @@ export const MainEmpty = ({city}) => {
       </main>
     </div>
   );
-};
-
-MainEmpty.propTypes = {
-  city: PropTypes.shape({
-    name: PropTypes.string,
-    locations: PropTypes.arrayOf(PropTypes.number),
-  }),
 };

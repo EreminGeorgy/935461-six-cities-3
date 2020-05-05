@@ -1,15 +1,16 @@
-import React, {useEffect, useState, useCallback} from "react";
-import PropTypes from "prop-types";
-import PropertyParameters from "../property-parameters/property-parameters.jsx";
+import * as React from "react";
+import {useEffect, useState, useCallback} from "react";
+import {CommentData, Offer} from "../../types";
+import PropertyParameters from "../property-parameters/property-parameters";
 import {connect} from "react-redux";
-import {Operation as OffersOperation} from "../../reducer/data/data.js";
-import {Operation as CommentsOperation} from "../../reducer/comments/comments.js";
+import {Operation as OffersOperation} from "../../reducer/data/data";
+import {Operation as CommentsOperation} from "../../reducer/comments/comments";
 import {getNearOffers, getActiveOffer} from "../../reducer/data/selectors";
 import {getComments} from "../../reducer/comments/selectors";
-import PlaceCard from "../place-card/place-card.jsx";
+import PlaceCard from "../place-card/place-card";
 
-import {ActionCreator} from "../../reducer/data/data.js";
-import Header from "../header/header.jsx";
+import {ActionCreator} from "../../reducer/data/data";
+import Header from "../header/header";
 
 const ROOT = `../../`;
 
@@ -19,7 +20,16 @@ const propertyCardSettings = {
   cardInfoType: ``,
 };
 
-export const Property = (props) => {
+interface Props {
+  offer: Offer;
+  closestOffers: Offer[];
+  comments: CommentData[];
+  loadClosestOffers: (id: number) => void;
+  changeCard: ({id, status}: {id: number; status: number}) => void;
+  loadComments: (id: number) => void;
+}
+
+export const Property: React.FunctionComponent<Props> = (props: Props) => {
   const {offer, closestOffers, loadClosestOffers, comments, loadComments, changeCard} = props;
 
   const [activeCard, setActiveCard] = useState(null);
@@ -63,41 +73,6 @@ export const Property = (props) => {
       </main>
     </div>
   );
-};
-
-Property.propTypes = {
-  closestOffers: PropTypes.arrayOf(PropTypes.shape({
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-  })),
-  loadClosestOffers: PropTypes.func,
-  offer: PropTypes.shape({
-    id: PropTypes.number,
-    imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    householdItems: PropTypes.objectOf(PropTypes.string),
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool
-    })
-  }),
-  comments: PropTypes.array,
-  loadComments: PropTypes.func,
-  onTitleClick: PropTypes.func,
-  changeCard: PropTypes.func,
-
 };
 
 

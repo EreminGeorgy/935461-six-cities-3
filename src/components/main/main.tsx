@@ -1,17 +1,22 @@
-import React, {useState, useEffect} from "react";
-import PropTypes from "prop-types";
-import CitiesList from "../cities-list/cities-list.jsx";
-import {PlacesList} from "../places-list/places-list.jsx";
-import {CityMap} from "../city-map/city-map.jsx";
-import {MainEmpty} from "../main-empty/main-empty.jsx";
-import Header from "../header/header.jsx";
-import {ActionCreator} from "../../reducer/data/data.js";
-
-
+import * as React from "react";
+import {useState, useEffect} from "react";
+import {Offer, City} from "../../types";
+import CitiesList from "../cities-list/cities-list";
+import {PlacesList} from "../places-list/places-list";
+import {CityMap} from "../city-map/city-map";
+import {MainEmpty} from "../main-empty/main-empty";
+import Header from "../header/header";
+import {ActionCreator} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {getSelectedCity, getSelectedOffers, getAppState} from "../../reducer/data/selectors";
 
-export const Main = (props) => {
+interface Props {
+  city: City;
+  offersInActiveCity: Offer[];
+  changeCard: (offer: Offer) => void;
+}
+
+export const Main: React.FunctionComponent<Props> = (props: Props) => {
 
   useEffect(() => {}, []);
 
@@ -59,24 +64,6 @@ export const Main = (props) => {
       </main>
     </div>
   );
-};
-
-Main.propTypes = {
-  appState: PropTypes.string,
-  offersInActiveCity: PropTypes.arrayOf(PropTypes.shape({
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-  })),
-  city: PropTypes.shape({
-    name: PropTypes.string,
-    locations: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }),
-  changeCard: PropTypes.func,
-  onTitleClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

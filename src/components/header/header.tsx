@@ -1,13 +1,21 @@
-import React, {useEffect} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {useEffect} from "react";
+import {User} from "../../types";
 import {connect} from "react-redux";
 import {getUser, getAuthorizationStatus} from '../../reducer/user/selectors';
 import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user";
-import {AppRoute} from "../../utils/const.js";
+import {AppRoute} from "../../utils/const";
 import {Link} from 'react-router-dom';
 
-export const Header = ({user, authorizationStatus, path}) => {
+interface Props {
+  user: User;
+  path: string;
+  authorizationStatus: string;
+}
 
+export const Header: React.FunctionComponent<Props> = (props: Props) => {
+
+  const {user, authorizationStatus, path} = props;
 
   useEffect(() => {
 
@@ -39,18 +47,6 @@ export const Header = ({user, authorizationStatus, path}) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  path: PropTypes.string,
-  authorizationStatus: PropTypes.string,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    isPro: PropTypes.bool,
-  }),
 };
 
 

@@ -1,10 +1,11 @@
-import React, {useRef, useEffect} from 'react';
+import * as React from 'react';
+import {useRef, useEffect} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/comments/comments.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation} from "../../reducer/comments/comments";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {getCommentState} from "../../reducer/comments/selectors.js";
+import {getCommentState} from "../../reducer/comments/selectors";
 import {CommentsOperationStatus} from "../../reducer/comments/comments";
 
 const MAX_LENGHT = `300`;

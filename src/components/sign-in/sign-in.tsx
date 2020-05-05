@@ -1,4 +1,5 @@
-import React, {useRef, useCallback} from "react";
+import * as React from "react";
+import {useRef, useCallback} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import {connect} from "react-redux";

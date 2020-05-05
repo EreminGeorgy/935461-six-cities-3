@@ -1,6 +1,8 @@
-import React, {useEffect, useRef} from "react";
+import * as React from "react";
+import {useEffect, useRef} from "react"
 import leaflet from "leaflet";
-import PropTypes from 'prop-types';
+import {Offer, City} from "../../types";
+
 
 const MAP_CONFIG = {
   zoom: 12,
@@ -19,7 +21,15 @@ const PIN_TYPE = {
 
 const NEIGHBOURS = 3;
 
-export const CityMap = (props) => {
+interface Props {
+  offers: Offer[];
+  city: City;
+  activeCard: number;
+  path: string;
+  currentOfferCoords: number[];
+}
+
+export const CityMap: React.FunctionComponent<Props> = (props: Props) => {
 
   const {offers, city, activeCard, path, currentOfferCoords} = props;
   let mapRef = useRef(null);
@@ -69,18 +79,4 @@ export const CityMap = (props) => {
   return <section className={offers.length > NEIGHBOURS ? `cities__map` : `property__map`}>
     <div id="mapId" style={{height: `580px`}}></div>
   </section>;
-};
-
-CityMap.propTypes = {
-  activeCard: PropTypes.number,
-  path: PropTypes.string,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    locations: PropTypes.array.isRequired,
-  }),
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    locations: PropTypes.array.isRequired,
-  })).isRequired,
-  currentOfferCoords: PropTypes.array,
 };

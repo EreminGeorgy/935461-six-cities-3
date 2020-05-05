@@ -1,12 +1,26 @@
-import React, {useCallback} from "react";
+import * as React from "react";
+import {useCallback} from "react";
 import {Link} from 'react-router-dom';
-import PropTypes from "prop-types";
-import {getStars} from "../../utils/utils.js";
-import {Operation} from "../../reducer/favorites/favorites.js";
-import {AppRoute} from "../../utils/const.js";
+import {Offer} from "../../types";
+import {getStars} from "../../utils/utils";
+import {Operation} from "../../reducer/favorites/favorites";
+import {AppRoute} from "../../utils/const";
 import {connect} from "react-redux";
 
-export const PlaceCard = (props) => {
+type cardSettings {
+  placeCardType: `cities__place-card`,
+  imageWrapperType: `cities__image-wrapper`,
+  cardInfoType: ``,
+}
+
+interface Props {
+  offer: Offer;
+  onTitleClick: (offer: Offer) => void;
+  changeCard: ({id, status}: {id: number; status: number}) => void;
+  onCardHover: (id: number) => void;
+}
+
+export const PlaceCard: React.FunctionComponent<Props> = (props: Props) => {
   const {onTitleClick, onCardHover, offer, cardSettings, changeCard} = props;
   const {
     id,

@@ -1,15 +1,26 @@
-import React, {useCallback} from "react";
-import PropTypes from "prop-types";
-import {getStars} from "../../utils/utils.js";
-import {Review} from "../review/review.jsx";
-import ReviewSend from "../review-send/review-send.jsx";
-import {CityMap} from "../city-map/city-map.jsx";
-import {Operation} from "../../reducer/favorites/favorites.js";
+import * as React from "react";
+import {useCallback} from "react";
+import {getStars} from "../../utils/utils";
+import {Review} from "../review/review";
+import ReviewSend from "../review-send/review-send";
+import {CityMap} from "../city-map/city-map";
+import {Operation} from "../../reducer/favorites/favorites";
+import {CommentData, Offer} from "../../types";
 import {connect} from "react-redux";
 
 const COMMENTS_TO_SHOW = 10;
 
-export const PropertyParameters = (props) => {
+interface Props {
+  offer: Offer;
+  closestOffers: Offer[];
+  path: string;
+  activeCard: number;
+  comments: CommentData[];
+  updateComments: (id: number) => void;
+  changeCard: ({id, status}: {id: number; status: number}) => void;
+}
+
+export const PropertyParameters: React.FunctionComponent<Props> = (props: Props) => {
   const {offer, closestOffers, path, activeCard, comments, updateComments, changeCard} = props;
 
   const {
@@ -44,7 +55,7 @@ export const PropertyParameters = (props) => {
   const width = getStars(rating);
   const availableItems = Array.from(householdItems);
 
-  const activeComments = comments.sort((a, b) => {
+  const activeComments = comments.sort((a: any, b: any) => {
     return parseInt((a.dateString - b.dateString), 10);
   }).slice(-(COMMENTS_TO_SHOW));
 
@@ -144,54 +155,6 @@ export const PropertyParameters = (props) => {
       />
     </section>
   );
-};
-
-PropertyParameters.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    comment: PropTypes.string,
-    dateString: PropTypes.date,
-    id: PropTypes.number,
-    rating: PropTypes.number,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool,
-      id: PropTypes.number.isRequired,
-    }),
-  })),
-  updateComments: PropTypes.func,
-  closestOffers: PropTypes.arrayOf(PropTypes.shape({
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-  })),
-  activeCard: PropTypes.number,
-  path: PropTypes.string,
-  offer: PropTypes.shape({
-    city: PropTypes.object,
-    id: PropTypes.number,
-    imagesSrc: PropTypes.arrayOf(PropTypes.string).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-    isFavorite: PropTypes.bool,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    householdItems: PropTypes.objectOf(PropTypes.string),
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool
-    }),
-    locations: PropTypes.array,
-  }).isRequired,
-  changeCard: PropTypes.func,
 };
 
 

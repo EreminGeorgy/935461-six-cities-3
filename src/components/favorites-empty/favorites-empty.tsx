@@ -1,8 +1,8 @@
-import React from "react";
-import Header from "../header/header.jsx";
+import * as React from "react";
+import Header from "../header/header";
 
 
-export const FavoritesEmpty = () => {
+export const FavoritesEmpty: React.FunctionComponent = () => {
 
   return (
     <div className="page">

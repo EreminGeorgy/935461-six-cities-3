@@ -1,8 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {getStars} from "../../utils/utils.js";
+import * as React from "react";
+import {CommentData} from "../../types";
+import {getStars} from "../../utils/utils";
 
-export const Review = ({commentData}) => {
+interface Props {
+  commentData: CommentData;
+}
+
+export const Review: React.FunctionComponent<Props> = (props: Props) => {
+  const {commentData} = props;
   const {user, rating, comment, dateString} = commentData;
   const date = dateString;
   const reviewDate = `${date.toLocaleString(`en-US`, {month: `long`, year: `numeric`})}`;
@@ -32,19 +37,4 @@ export const Review = ({commentData}) => {
       </div>
     </li>
   );
-};
-
-Review.propTypes = {
-  commentData: PropTypes.shape({
-    comment: PropTypes.string,
-    dateString: PropTypes.date,
-    id: PropTypes.number,
-    rating: PropTypes.number,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool,
-      id: PropTypes.number.isRequired,
-    }),
-  }),
 };

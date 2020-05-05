@@ -1,15 +1,16 @@
-import React, {useEffect} from "react";
-import PropTypes from "prop-types";
-import Header from "../header/header.jsx";
-import PlaceCard from "../place-card/place-card.jsx";
-import {getCities} from "../../utils/utils.js";
+import * as React from "react";
+import {useEffect} from "react";
+import {Offer} from "../../types";
+import Header from "../header/header";
+import PlaceCard from "../place-card/place-card";
+import {getCities} from "../../utils/utils";
 import {connect} from "react-redux";
 import {getFavorites} from "../../reducer/favorites/selectors";
-import {Operation} from "../../reducer/favorites/favorites.js";
-import {FavoritesEmpty} from "../favorites-empty/favorites-empty.jsx";
-import {AppRoute} from "../../utils/const.js";
+import {Operation} from "../../reducer/favorites/favorites";
+import {FavoritesEmpty} from "../favorites-empty/favorites-empty";
+import {AppRoute} from "../../utils/const";
 import {Link} from 'react-router-dom';
-import {ActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator} from "../../reducer/data/data";
 
 
 const CARD_SETTINGS = {
@@ -18,7 +19,13 @@ const CARD_SETTINGS = {
   cardInfoType: `favorites__card-info`,
 };
 
-export const Favorites = (props) => {
+interface Props {
+  favoriteOffers: Offer[];
+  getFavoriteOffers: () => void;
+  changeCard: (offer: Offer) => void;
+}
+
+export const Favorites: React.FunctionComponent<Props> = (props: Props) => {
   const {favoriteOffers, getFavoriteOffers, changeCard} = props;
 
   useEffect(() => {
@@ -75,20 +82,6 @@ export const Favorites = (props) => {
       </footer>
     </div>
   );
-};
-
-Favorites.propTypes = {
-  getFavoriteOffers: PropTypes.func,
-  onTitleClick: PropTypes.func,
-  favoriteOffers: PropTypes.arrayOf(PropTypes.shape({
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    raiting: PropTypes.number,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-  })).isRequired,
-  changeCard: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,8 @@
-import React, {useState, useCallback} from "react";
-import PropTypes from "prop-types";
-import PlaceCard from "../place-card/place-card.jsx";
-import {Sort} from "../sort/sort.jsx";
+import * as React from "react";
+import {useState, useCallback} from "react";
+import {City, Offer} from "../../types";
+import PlaceCard from "../place-card/place-card";
+import {Sort} from "../sort/sort";
 
 const SORT_TYPE = {
   LOW_TO_HIGH: `lowToHigh`,
@@ -9,7 +10,14 @@ const SORT_TYPE = {
   TOP_RATED: `topRated`,
 };
 
-export const PlacesList = (props) => {
+interface Props {
+  offers: Offer[];
+  setActiveCard: (id: number) => void;
+  city: City;
+  onTitleClick: (offer: Offer) => void;
+}
+
+export const PlacesList: React.FunctionComponent<Props> = (props: Props) => {
 
   const {onTitleClick, offers, city, setActiveCard} = props;
 
@@ -73,21 +81,4 @@ export const PlacesList = (props) => {
       </div>
     </section>
   );
-};
-
-PlacesList.propTypes = {
-  setActiveCard: PropTypes.func,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    locations: PropTypes.array.isRequired,
-  }),
-  onTitleClick: PropTypes.func,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-  })).isRequired,
 };
