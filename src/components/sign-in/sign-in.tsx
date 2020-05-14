@@ -1,11 +1,16 @@
 import * as React from "react";
 import {useRef, useCallback} from "react";
-import PropTypes from "prop-types";
-import Header from "../header/header.jsx";
+import {City} from "../../types";
+import Header from "../header/header";
 import {connect} from "react-redux";
 import {getSelectedCity} from "../../reducer/data/selectors";
 
-export const SignIn = (props) => {
+interface Props {
+  city: City;
+  onSubmit: ({login, password}: {login: string; password: string}) => void;
+}
+
+export const SignIn: React.FunctionComponent<Props> = (props: Props) => {
   const {city, onSubmit} = props;
 
   if (!city) {
@@ -37,11 +42,11 @@ export const SignIn = (props) => {
             <form className="login__form form" action="#" method="post" onSubmit={memoSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={mailRef}/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" required ref={mailRef}/>
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" ref={passwordRef}/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" required ref={passwordRef}/>
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
@@ -59,13 +64,6 @@ export const SignIn = (props) => {
       </main>
     </div>
   );
-};
-
-SignIn.propTypes = {
-  city: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-  onSubmit: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

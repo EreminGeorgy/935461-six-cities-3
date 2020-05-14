@@ -7,10 +7,10 @@ import {Operation} from "../../reducer/favorites/favorites";
 import {AppRoute} from "../../utils/const";
 import {connect} from "react-redux";
 
-type cardSettings {
-  placeCardType: `cities__place-card`,
-  imageWrapperType: `cities__image-wrapper`,
-  cardInfoType: ``,
+type cardSettings = {
+  placeCardType: string;
+  imageWrapperType: string,
+  cardInfoType: string,
 }
 
 interface Props {
@@ -18,6 +18,7 @@ interface Props {
   onTitleClick: (offer: Offer) => void;
   changeCard: ({id, status}: {id: number; status: number}) => void;
   onCardHover: (id: number) => void;
+  cardSettings: cardSettings;
 }
 
 export const PlaceCard: React.FunctionComponent<Props> = (props: Props) => {
@@ -92,27 +93,6 @@ PlaceCard.defaultProps = {
     imageWrapperType: `cities__image-wrapper`,
     cardInfoType: ``,
   }
-};
-
-PlaceCard.propTypes = {
-  onTitleClick: PropTypes.func,
-  onCardHover: PropTypes.func,
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    previewSrc: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string,
-    isPremium: PropTypes.bool,
-    isFavorite: PropTypes.bool,
-  }).isRequired,
-  cardSettings: PropTypes.shape({
-    placeCardType: PropTypes.string,
-    imageWrapperType: PropTypes.string,
-    cardInfoType: PropTypes.string,
-  }),
-  changeCard: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

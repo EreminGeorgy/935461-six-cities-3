@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useRef, useEffect} from 'react';
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/comments/comments";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
@@ -8,11 +7,18 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getCommentState} from "../../reducer/comments/selectors";
 import {CommentsOperationStatus} from "../../reducer/comments/comments";
 
-const MAX_LENGHT = `300`;
-const MIN_LENGTH = `50`;
+const MAX_LENGHT = 300;
+const MIN_LENGTH = 50;
 
-export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, id}) => {
+interface IProps {
+  sendReview?: ({comment, rating, id}: {comment: string; rating: number; id: number}) => void;
+  sendReviewStatus?: string;
+  authorizationStatus?: string;
+  id: number;
+}
 
+export const ReviewSend:React.FC<IProps> = (props) => {
+  const {sendReview, sendReviewStatus, authorizationStatus, id} = props;
   const commentRef = useRef(null);
   const submitRef = useRef(null);
   const formRef = useRef(null);
@@ -108,16 +114,8 @@ export const ReviewSend = ({sendReview, sendReviewStatus, authorizationStatus, i
         <button className="reviews__submit form__submit button" type="submit" ref={submitRef} disabled>Submit</button>
       </div>
       <p style={{color: `red`}}>{(sendReviewStatus === CommentsOperationStatus.ERROR) ? `Oooops, something went wrong!` : ``}</p>
-    </form>) : ``;
+    </form>) : <></>;
 };
-
-ReviewSend.propTypes = {
-  sendReview: PropTypes.func,
-  authorizationStatus: PropTypes.string,
-  sendReviewStatus: PropTypes.string,
-  id: PropTypes.number,
-};
-
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),

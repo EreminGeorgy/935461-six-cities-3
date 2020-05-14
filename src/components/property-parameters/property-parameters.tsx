@@ -56,7 +56,7 @@ export const PropertyParameters: React.FunctionComponent<Props> = (props: Props)
   const availableItems = Array.from(householdItems);
 
   const activeComments = comments.sort((a: any, b: any) => {
-    return parseInt((a.dateString - b.dateString), 10);
+    return parseInt(a.dateString, 10) - parseInt(b.dateString, 10);
   }).slice(-(COMMENTS_TO_SHOW));
 
   return (

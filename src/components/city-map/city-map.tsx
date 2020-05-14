@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useRef} from "react"
-import leaflet from "leaflet";
+import * as leaflet from "leaflet";
 import {Offer, City} from "../../types";
 
 
@@ -25,8 +25,8 @@ interface Props {
   offers: Offer[];
   city: City;
   activeCard: number;
-  path: string;
-  currentOfferCoords: number[];
+  path?: string;
+  currentOfferCoords?: number[];
 }
 
 export const CityMap: React.FunctionComponent<Props> = (props: Props) => {

@@ -7,12 +7,17 @@ import Favorites from "../favorites/favorites";
 import PrivateRoute from "../private-route/private-route";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/user/user";
-import PropTypes from "prop-types";
+import {Offer} from "../../types";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute} from "../../utils/const";
 
-export const App = (props) => {
+interface Props {
+  login: Offer[];
+  authorizationStatus: string;
+}
+
+export const App: React.FunctionComponent<Props> = (props: Props) => {
   const {login, authorizationStatus} = props;
 
   return (
@@ -43,12 +48,6 @@ export const App = (props) => {
     </BrowserRouter>
   );
 };
-
-App.propTypes = {
-  login: PropTypes.func,
-  authorizationStatus: PropTypes.string,
-};
-
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
