@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./components/app/app";
 import thunk from "redux-thunk";
+import createSagaMiddleware from 'redux-saga'
 
 import {Provider} from 'react-redux';
 import reducer from './reducer/reducer';
@@ -16,11 +17,13 @@ const onUnauthorized = () => {
 };
 
 const api = createAPI(onUnauthorized);
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     reducer,
     compose(
         applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(sagaMiddleware),
         // window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
     )
 );
