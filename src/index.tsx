@@ -9,7 +9,8 @@ import reducer from './reducer/reducer';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {createAPI} from "./api";
 
-import {Operation} from "./reducer/data/data";
+import {ActionCreator as offersActions} from "./reducer/data/data";
+import rootSaga from './sagas'
 import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
 
 const onUnauthorized = () => {
@@ -28,7 +29,9 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadOffers());
+sagaMiddleware.run(rootSaga);
+store.dispatch(offersActions.loadOffersRequest());
+
 ReactDOM.render(
     <Provider store={store}>
       <App />
