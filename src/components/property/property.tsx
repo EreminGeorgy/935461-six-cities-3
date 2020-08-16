@@ -3,7 +3,7 @@ import {useEffect, useState, useCallback} from "react";
 import {CommentData, Offer} from "../../types";
 import PropertyParameters from "../property-parameters/property-parameters";
 import {connect} from "react-redux";
-import {Operation as OffersOperation} from "../../reducer/data/data";
+import {ActionCreator as OffersActions} from "../../reducer/data/data";
 import {Operation as CommentsOperation} from "../../reducer/comments/comments";
 import {getNearOffers, getActiveOffer} from "../../reducer/data/selectors";
 import {getComments} from "../../reducer/comments/selectors";
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadClosestOffers(id) {
-    dispatch(OffersOperation.loadOffersClosest(id));
+    dispatch(OffersActions.loadOffersClosestRequest(id));
   },
   loadComments(id) {
     dispatch(CommentsOperation.loadComments(id));

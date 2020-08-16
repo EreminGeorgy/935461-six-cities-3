@@ -60,6 +60,12 @@ const ActionCreator = {
       payload: LoadOffersStatus.REQUEST,
     };
   },
+  loadOffersClosestRequest: (id) => {
+    return {
+      type: 'CLOSEST_REQUEST',
+      payload: id,
+    };
+  },
   loadOffersFailure: () => {
     return {
       type: OffersActions.LOAD_OFFERS_FAILURE,
@@ -81,6 +87,23 @@ const ActionCreator = {
 };
 /*eslint-disable */
 const Operation = {
+  loadOffers: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadOffersRequest());
+    return ApplicationApi.getOffers()
+    .then(ModelOffer.parseOffers)
+    .then((response) => {
+      dispatch(ActionCreator.loadOffers(response));
+      let cities = getCities(response);
+      dispatch(ActionCreator.getCities(cities));
+      dispatch(ActionCreator.updateCity(cities[0]));
+    })
+    .then(dispatch(ActionCreator.loadOffersSuccess()))
+    .catch((err) => {
+      dispatch(ActionCreator.loadOffersFailure());
+      throw err;
+    });
+  },
+
   loadOffersClosest: (id) => (dispatch, getState, api) => {
     dispatch(ActionCreator.loadOffersRequest());
     return ApplicationApi.getClosestOffers(id)
